@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<?import org.fxmisc.richtext.*?>
+<?scenebuilder-classpath-element richtextfx-fat-0.6.8.jar?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <Button id="btnSend" layoutX="1171.0" layoutY="533.0" mnemonicParsing="false" onAction="#btnSendOnClick" prefHeight="25.0" prefWidth="95.0" text="Send">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <AmbientLight color="CHARTREUSE" layoutX="425.0" layoutY="66.0" lightOn="true" />
+      <InlineCssTextArea fx:id="console" editable="false" layoutX="626.0" layoutY="13.0" prefHeight="520.0" prefWidth="640.0" />
+      <InlineCssTextArea fx:id="test" editable="false" layoutX="626.0" layoutY="13.0" prefHeight="520.0" prefWidth="640.0" visible="false" />
+      <TextField fx:id="input" layoutX="627.0" layoutY="534.0" prefHeight="25.0" prefWidth="543.0" />
+      <TableView layoutX="379.0" layoutY="14.0" prefHeight="545.0" prefWidth="247.0">
+        <columns>
+          <TableColumn prefWidth="245.0" text="Player" />
+        </columns>
+      </TableView>
+
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</AnchorPane>

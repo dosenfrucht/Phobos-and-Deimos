@@ -1,0 +1,65 @@
+.root {
+    /*-fx-background-image: url("dirt_bg.png");*/
+    -fx-background-image: url("../../../assets/dirt_console.png");
+}
+#text {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+#console {
+    -fx-background-color: rgba(0,0,0,0.60);
+    -fx-font-family: monospace;
+}
+
+/*MC Color Formats*/
+
+.black {
+    -fx-fill: #000000;
+}
+.dark_blue {
+    -fx-fill: #0000AA;
+}
+.dark_green {
+    -fx-fill: #00AA00;
+}
+.dark_aqua {
+    -fx-fill: #00AAAA;
+}
+.dark_red {
+    -fx-fill: #AA0000;
+}
+.dark_purple {
+    -fx-fill: #AA00AA;
+}
+.gold {
+    -fx-fill: #FFAA00;
+}
+.gray {
+    -fx-fill: #AAAAAA;
+}
+.dark_gray {
+    -fx-fill: #555555;
+}
+.blue {
+    -fx-fill: #000000;
+}
+.green {
+    -fx-fill: #55FF55;
+}
+.aqua {
+    -fx-fill: #55FFFF;
+}
+.red {
+    -fx-fill: #FF5555;
+}
+.light_purple {
+    -fx-fill: #FF55FF;
+}
+.yellow {
+    -fx-fill: #FFFF55;
+}
+.white {
+    -fx-fill: #FFFFFF;
+}

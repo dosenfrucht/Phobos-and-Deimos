@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="ServerMan">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/ServerMan.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/richtextfx-fat-0.6.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
