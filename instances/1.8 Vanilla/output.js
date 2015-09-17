@@ -4,28 +4,40 @@ function write(type, time, thread, loglvl, args) {
     var popo
 
     function convertTime() {
-        var strTime = time.toString()
-        strTime.split()
-        var convertedTime
-        convertedTime = strTime[5] + "." + strTime[1] + "." + strTime[2] + " " + strTime[3]
+        return time.getFullYear().toString() + "-" + toMaybeZeroPrefixNumberOrSomething((time.getMonth() + 1).toString()) + "-" + toMaybeZeroPrefixNumberOrSomething(time.getDate().toString()) + "|" + toMaybeZeroPrefixNumberOrSomething(time.getHours().toString()) + ":" + toMaybeZeroPrefixNumberOrSomething(time.getMinutes().toString()) + ":" + toMaybeZeroPrefixNumberOrSomething(time.getSeconds().toString())
+    }
 
-        return convertedTime
+    function toMaybeZeroPrefixNumberOrSomething(num) {
+        if (num < 10) {
+            return "0" + num
+        } else {
+            return num
+        }
     }
 
     popo = "[" + convertTime() + "] ["
-    if (thread != "Server thread" && thread != "User Authenticator #1" && thread != "Server Shutdown Thread") {
+    if (thread != "Server thread" && thread.indexOf("User Authenticator #") == -1 && thread != "Server Shutdown Thread") {
         popo += thread + "/"
     }
     popo += loglvl + "]: "
 
-    output.appendToConsole("#888888", popo)
-
-    popo = ""
-
-    for (var i = 0 ; i < args.length ; i++) {
-        popo += args[i] + " "
+    if (loglvl == "INFO") {
+        output.appendToConsole("#AAAAAA", popo)
+    } else if (loglvl == "WARN") {
+        output.appendToConsole("#FFFF55", popo)
+    } else if (loglvl == "ERROR") {
+        output.appendToConsole("#AA0000", popo)
+    } else {
+        output.appendToConsole("#FFFFFF", popo)
     }
-    popo += "\n"
 
-    output.appendToConsole("#CCCCCC", popo)
+    if (type == "joined" || type == "left") {
+        output.appendToConsole("#FFFF55", args[0] + " ")
+        output.appendToConsole("#55FF55", type + " the game")
+    } else if (type == "info") {
+        output.appendToConsole("#CCCCCC", args[0])
+    } else {
+        output.appendToConsole("#FFFFFF", args[0])
+    }
+    output.appendToConsole("#000000", "\n")
 }

@@ -15,14 +15,6 @@ public class Controller {
 
     public void btnSendOnClick() {
         InstancePool.get(0).getProcess().send(input.getText());
-
-        StyledDocument<String> stringStyledDocument = console.subDocument(0, console.getText().length());
-
-        test.replace(stringStyledDocument);
-
-        console.setVisible(false);
-        test.setVisible(true);
-
     }
 
 }
