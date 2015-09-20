@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
@@ -26,11 +27,14 @@ public class Main extends Application {
     ListView<String> playerDisplay;
     ObservableList<String> playerList = FXCollections.observableArrayList();
     ServerInstance instance;
+    ObservableList<GridPane> serverList = FXCollections.observableArrayList();
+    ListView<GridPane> serverDisplay;
 
 
     @Override
     public void start(Stage window) throws Exception{
-
+        window.minHeightProperty().set(600);
+        window.minWidthProperty().set(1024);
         Parent root = FXMLLoader.load(getClass().getResource("style.fxml"));
         window.setScene(new Scene(root));
         window.setTitle("Server GUI");
@@ -38,6 +42,9 @@ public class Main extends Application {
         playerDisplay = (ListView<String>)root.lookup("#playerdisplay");
         playerDisplay.setItems(playerList);
         addCellFactoryForPlayerDisplay();
+
+        serverDisplay = (ListView<GridPane>)root.lookup("#serverdisplay");
+        serverDisplay.setItems(serverList);
 
         Globals.init();
         Globals.getServerManConfig().load();
@@ -63,10 +70,8 @@ public class Main extends Application {
         });
 
         instance.loadInstance();
-
-
         instance.run();
-
+        addServerInstanceToList(instance);
         InstancePool.add(instance);
 
         window.show();
@@ -129,5 +134,14 @@ public class Main extends Application {
             });
             return cell;
         });
+    }
+
+    public void addServerInstanceToList(ServerInstance si) {
+        GridPane gp = new GridPane();
+        TextField tf = new TextField(Boolean.toString(si.isRunning()));
+        Label lb = new Label(si.getName());
+        gp.add(lb, 0, 0);
+        gp.add(tf, 0, 1);
+        serverList.add(gp);
     }
 }

@@ -1,6 +1,7 @@
 .root {
     /*-fx-background-image: url("dirt_bg.png");*/
     -fx-background-image: url("../../../assets/dirt_console.png");
+
 }
 #text {
     -fx-text-fill: white;
