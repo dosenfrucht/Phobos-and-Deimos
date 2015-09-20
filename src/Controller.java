@@ -15,7 +15,7 @@ public class Controller {
 
     public void btnSendOnClick() {
         InstancePool.get(0).getProcess().send(input.getText());
-        input.getText();
+        input.setText("");
     }
 
     public void onInputKeyPressed(KeyEvent ke) {

@@ -35,7 +35,7 @@ public class Main extends Application {
         window.setScene(new Scene(root));
         window.setTitle("Server GUI");
         console = (InlineCssTextArea)root.lookup("#console");
-        playerDisplay = (ListView<String>)root.lookup(("#playerdisplay"));
+        playerDisplay = (ListView<String>)root.lookup("#playerdisplay");
         playerDisplay.setItems(playerList);
         addCellFactoryForPlayerDisplay();
 
@@ -75,9 +75,10 @@ public class Main extends Application {
     @Override
     public void stop(){
         InstancePool.get(0).getProcess().stop();
-        System.exit(0);
+        while (InstancePool.get(0).getProcess().isRunning()) {
+            System.out.println("Im still running");
+        }
     }
-
 
     public static void main(String[] args) {
         launch(args);
