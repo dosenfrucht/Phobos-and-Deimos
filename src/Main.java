@@ -1,17 +1,15 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.paint.Color;
-import javafx.scene.text.*;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import net.demus_intergalactical.serverman.Globals;
-import net.demus_intergalactical.serverman.OutputHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
-import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.InlineCssTextArea;
 
 import javax.script.Invocable;
@@ -20,15 +18,15 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+
 
 public class Main extends Application {
 
-    StringBuilder consoleLog = new StringBuilder();
     InlineCssTextArea console;
-    InlineCssTextArea test;
+    ListView<String> playerDisplay;
+    ObservableList<String> playerList = FXCollections.observableArrayList();
+    ServerInstance instance;
+
 
     @Override
     public void start(Stage window) throws Exception{
@@ -37,8 +35,9 @@ public class Main extends Application {
         window.setScene(new Scene(root));
         window.setTitle("Server GUI");
         console = (InlineCssTextArea)root.lookup("#console");
-        test = (InlineCssTextArea)root.lookup("#test");
-        test.appendText("aegjijerioitoiklkooopeorpoepflogpaeotpoaptopotplaerüptopoerotgpopgodepogfpfdgpdepgpoüdpsoüpeatppaerüptpaertgpüaerptpüapotpüaetüeaütppüepgüaegüegü");
+        playerDisplay = (ListView<String>)root.lookup(("#playerdisplay"));
+        playerDisplay.setItems(playerList);
+        addCellFactoryForPlayerDisplay();
 
         Globals.init();
         Globals.getServerManConfig().load();
@@ -55,7 +54,7 @@ public class Main extends Application {
         se.put("output", this);
         se.eval(new FileReader(outputScriptFile));
 
-        ServerInstance instance = new ServerInstance("1.8 Vanilla", (type, time, thread, loglvl, args) -> {
+        instance = new ServerInstance("1.8 Vanilla", (type, time, thread, loglvl, args) -> {
             try {
                 ((Invocable)se).invokeFunction("write", type, time, thread, loglvl, args);
             } catch (ScriptException | NoSuchMethodException e) {
@@ -90,8 +89,44 @@ public class Main extends Application {
             int currlength = console.getText().length();
 
             console.appendText(s);
-            //codearea.setStyleClass(currlength, currlength + s.length(), "blue");
             console.setStyle(currlength, currlength + s.length(), "-fx-fill:" + color + ";");
+        });
+    }
+
+    public void managePlayerList(String player, String type) {
+
+        if (type.equals("joined")) {
+            playerList.add(player);
+        } else {
+            playerList.remove(player);
+        }
+    }
+
+    public void addCellFactoryForPlayerDisplay() {
+        playerDisplay.setCellFactory(lv -> {
+
+            ListCell<String> cell = new ListCell<>();
+            ContextMenu contextMenu = new ContextMenu();
+
+            MenuItem kickPlayer = new MenuItem();
+            kickPlayer.textProperty().bind(Bindings.format("Kick \"%s\"", cell.itemProperty()));
+            kickPlayer.setOnAction(e -> instance.send("kick " + cell.itemProperty().getValue()));
+
+            MenuItem opPlayer = new MenuItem();
+            opPlayer.textProperty().bind(Bindings.format("OP \"%s\"", cell.itemProperty()));
+            opPlayer.setOnAction(e -> instance.send("op " + cell.itemProperty().getValue()));
+
+            contextMenu.getItems().addAll(kickPlayer, opPlayer);
+            cell.textProperty().bind(cell.itemProperty());
+
+            cell.emptyProperty().addListener((obs, wasEmpty, isNowEmpty) -> {
+                if (isNowEmpty) {
+                    cell.setContextMenu(null);
+                } else {
+                    cell.setContextMenu(contextMenu);
+                }
+            });
+            return cell;
         });
     }
 }

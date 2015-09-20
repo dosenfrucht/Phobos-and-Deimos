@@ -1,7 +1,7 @@
 
 function write(type, time, thread, loglvl, args) {
 
-    var popo
+    var logPrefix
 
     function convertTime() {
         return time.getFullYear().toString() + "-" + toMaybeZeroPrefixNumberOrSomething((time.getMonth() + 1).toString()) + "-" + toMaybeZeroPrefixNumberOrSomething(time.getDate().toString()) + "|" + toMaybeZeroPrefixNumberOrSomething(time.getHours().toString()) + ":" + toMaybeZeroPrefixNumberOrSomething(time.getMinutes().toString()) + ":" + toMaybeZeroPrefixNumberOrSomething(time.getSeconds().toString())
@@ -15,24 +15,25 @@ function write(type, time, thread, loglvl, args) {
         }
     }
 
-    popo = "[" + convertTime() + "] ["
+    logPrefix = "[" + convertTime() + "] ["
     if (thread != "Server thread" && thread.indexOf("User Authenticator #") == -1 && thread != "Server Shutdown Thread") {
-        popo += thread + "/"
+        logPrefix += thread + "/"
     }
-    popo += loglvl + "]: "
+    logPrefix += loglvl + "]: "
 
     if (loglvl == "INFO") {
-        output.appendToConsole("#AAAAAA", popo)
+        output.appendToConsole("#AAAAAA", logPrefix)
     } else if (loglvl == "WARN") {
-        output.appendToConsole("#FFFF55", popo)
+        output.appendToConsole("#FFFF55", logPrefix)
     } else if (loglvl == "ERROR") {
-        output.appendToConsole("#AA0000", popo)
+        output.appendToConsole("#AA0000", logPrefix)
     } else {
-        output.appendToConsole("#FFFFFF", popo)
+        output.appendToConsole("#FFFFFF", logPrefix)
     }
 
     if (type == "joined" || type == "left") {
         output.appendToConsole("#FFFF55", args[0] + " ")
+        output.managePlayerList(args[0], type)
         output.appendToConsole("#55FF55", type + " the game")
     } else if (type == "info") {
         output.appendToConsole("#CCCCCC", args[0])

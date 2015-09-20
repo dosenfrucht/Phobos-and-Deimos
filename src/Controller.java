@@ -1,8 +1,7 @@
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.fxmisc.richtext.InlineCssTextArea;
-import org.fxmisc.richtext.StyledDocument;
 
 /**
  * Created by Nikodemus on 14.09.2015.
@@ -13,8 +12,18 @@ public class Controller {
     public InlineCssTextArea console;
     public InlineCssTextArea test;
 
+
     public void btnSendOnClick() {
         InstancePool.get(0).getProcess().send(input.getText());
+        input.getText();
     }
+
+    public void onInputKeyPressed(KeyEvent ke) {
+        if (ke.getCode() == KeyCode.ENTER) {
+            btnSendOnClick();
+        }
+    }
+
+
 
 }
