@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,6 +22,10 @@ public class Controller {
     public void onInputKeyPressed(KeyEvent ke) {
         if (ke.getCode() == KeyCode.ENTER) {
             btnSendOnClick();
+        }
+        if (ke.getCode() == KeyCode.TAB) {
+            btnSendOnClick();
+            Platform.runLater(input::requestFocus);
         }
     }
 

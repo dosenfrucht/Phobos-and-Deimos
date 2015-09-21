@@ -14,18 +14,20 @@ function match(line) {
 
 	var mJoined = patJoined.exec(line)
 	if (mJoined !== null) {
-		writer.receive("joined", d, mJoined[2], mJoined[3], [mJoined[4]])
+		log.send("joined", d, mJoined[2], mJoined[3], mJoined[4])
+		players.join(mJoined[4])
 		return
 	}
 
 	var mLeft = patLeft.exec(line)
 	if (mLeft !== null) {
-		writer.receive("left", d, mLeft[2], mLeft[3], [mLeft[4]])
+		log.send("left", d, mLeft[2], mLeft[3], mLeft[4])
+		players.left(mJoined[4])
 		return
     }
 
 	var m = pat.exec(line)
 	if (m !== null) {
-		writer.receive("info", d, m[2], m[3], m.slice(4))
+		log.send("info", d, m[2], m[3], m[4])
 	}
 }

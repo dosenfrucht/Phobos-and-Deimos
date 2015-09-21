@@ -1,5 +1,5 @@
 
-function write(type, time, thread, loglvl, args) {
+function write(type, time, thread, loglvl, arg) {
 
     var logPrefix
 
@@ -32,13 +32,12 @@ function write(type, time, thread, loglvl, args) {
     }
 
     if (type == "joined" || type == "left") {
-        output.appendToConsole("#FFFF55", args[0] + " ")
-        output.managePlayerList(args[0], type)
+        output.appendToConsole("#FFFF55", arg + " ")
         output.appendToConsole("#55FF55", type + " the game")
     } else if (type == "info") {
-        output.appendToConsole("#CCCCCC", args[0])
+        output.appendToConsole("#CCCCCC", arg)
     } else {
-        output.appendToConsole("#FFFFFF", args[0])
+        output.appendToConsole("#FFFFFF", arg)
     }
     output.appendToConsole("#000000", "\n")
 }

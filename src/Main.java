@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import net.demus_intergalactical.serverman.Globals;
+import net.demus_intergalactical.serverman.PlayerHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 import org.fxmisc.richtext.InlineCssTextArea;
 
@@ -23,6 +24,7 @@ import java.io.FileReader;
 
 public class Main extends Application {
 
+    Stage window;
     InlineCssTextArea console;
     ListView<String> playerDisplay;
     ObservableList<String> playerList = FXCollections.observableArrayList();
@@ -32,12 +34,17 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage window) throws Exception{
+    public void start(Stage primaryStage) throws Exception{
+        window = primaryStage;
         window.minHeightProperty().set(600);
         window.minWidthProperty().set(1024);
         Parent root = FXMLLoader.load(getClass().getResource("style.fxml"));
         window.setScene(new Scene(root));
         window.setTitle("Server GUI");
+        window.setOnCloseRequest(e -> {
+            e.consume();
+            closeProgram();
+        });
         console = (InlineCssTextArea)root.lookup("#console");
         playerDisplay = (ListView<String>)root.lookup("#playerdisplay");
         playerDisplay.setItems(playerList);
@@ -61,11 +68,22 @@ public class Main extends Application {
         se.put("output", this);
         se.eval(new FileReader(outputScriptFile));
 
-        instance = new ServerInstance("1.8 Vanilla", (type, time, thread, loglvl, args) -> {
+        instance = new ServerInstance("1.8 Vanilla", (type, time, thread, loglvl, arg) -> {
             try {
-                ((Invocable)se).invokeFunction("write", type, time, thread, loglvl, args);
+                ((Invocable)se).invokeFunction("write", type, time, thread, loglvl, arg);
             } catch (ScriptException | NoSuchMethodException e) {
                 e.printStackTrace();
+            }
+        }, null);
+        instance.setPlayerHandler(new PlayerHandler() {
+            @Override
+            public void onPlayerJoined(String player) {
+                playerList.add(player);
+            }
+
+            @Override
+            public void onPlayerLeft(String player) {
+                playerList.remove(player);
             }
         });
 
@@ -75,18 +93,18 @@ public class Main extends Application {
         InstancePool.add(instance);
 
         window.show();
-        //instance.getProcess().send("stop");
-    }
-    @Override
-    public void stop(){
-        InstancePool.get(0).getProcess().stop();
-        while (InstancePool.get(0).getProcess().isRunning()) {
-            System.out.println("Im still running");
-        }
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public void closeProgram(){
+        InstancePool.get(0).getProcess().stop();
+        while (InstancePool.get(0).getProcess().isRunning()) {
+            System.out.println("Im still running");
+        }
+        window.close();
     }
 
     public void appendToConsole(String color, String s) {
@@ -97,15 +115,6 @@ public class Main extends Application {
             console.appendText(s);
             console.setStyle(currlength, currlength + s.length(), "-fx-fill:" + color + ";");
         });
-    }
-
-    public void managePlayerList(String player, String type) {
-
-        if (type.equals("joined")) {
-            playerList.add(player);
-        } else {
-            playerList.remove(player);
-        }
     }
 
     public void addCellFactoryForPlayerDisplay() {
