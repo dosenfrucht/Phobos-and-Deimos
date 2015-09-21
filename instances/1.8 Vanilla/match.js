@@ -22,7 +22,7 @@ function match(line) {
 	var mLeft = patLeft.exec(line)
 	if (mLeft !== null) {
 		log.send("left", d, mLeft[2], mLeft[3], mLeft[4])
-		players.left(mJoined[4])
+		players.left(mLeft[4])
 		return
     }
 
