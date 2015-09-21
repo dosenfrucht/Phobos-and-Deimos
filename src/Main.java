@@ -78,12 +78,12 @@ public class Main extends Application {
         instance.setPlayerHandler(new PlayerHandler() {
             @Override
             public void onPlayerJoined(String player) {
-                playerList.add(player);
+                Platform.runLater(() -> playerList.add(player));
             }
 
             @Override
             public void onPlayerLeft(String player) {
-                playerList.remove(player);
+                Platform.runLater(() -> playerList.remove(player));
             }
         });
 
