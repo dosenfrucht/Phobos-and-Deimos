@@ -12,15 +12,15 @@
 
 <AnchorPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0" minWidth="0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <Button fx:id="btnSend" mnemonicParsing="false" onAction="#btnSendOnClick" prefHeight="30.0" prefWidth="100.0" text="Send" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="510.0">
+      <Button fx:id="btnSend" mnemonicParsing="false" onAction="#btnSendOnClick" prefHeight="40.0" prefWidth="100.0" text="Send" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="510.0">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
       <AmbientLight color="CHARTREUSE" layoutX="425.0" layoutY="66.0" lightOn="true" />
       <InlineCssTextArea fx:id="console" editable="false" layoutX="580.0" prefHeight="500.0" prefWidth="-Infinity" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <TextField fx:id="input" layoutX="580.0" layoutY="510.0" onKeyPressed="#onInputKeyPressed" prefHeight="30.0" prefWidth="-Infinity"  AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="510.0" />
-      <ListView fx:id="playerdisplay" prefHeight="540.0" prefWidth="200.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="0.0" />
+      <TextField fx:id="input" layoutX="580.0" layoutY="510.0" onKeyPressed="#onInputKeyPressed" prefHeight="40.0" prefWidth="-Infinity"  AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="510.0" />
+      <ListView fx:id="playerdisplay" prefHeight="550.0" prefWidth="200.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="0.0" />
       <ListView fx:id="serverdisplay" prefHeight="-Infinity" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
    <padding>
