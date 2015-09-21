@@ -90,6 +90,32 @@
 *           ListView                *
 ************************************/
 
+#playerdisplay {
+    -fx-background-color: rgba(20,20,20,0.50);
+}
+#playerdisplay .label{
+    -fx-text-fill: #E0E0E0;
+}
+#playerdisplay .context-menu {
+    -fx-background-color: rgba(0,0,0,0.80);
+    /*-fx-border-color: rgba(0,0,127,0.60);
+    -fx-border-width: 2;*/
+}
+#playerdisplay .menu {
+    -fx-background-color: transparent;
+}
+#playerdisplay .menu-item {
+    -fx-background-color: transparent;
+}
+#playerdisplay .menu-item:hover {
+    -fx-background-color: rgba(50,50,50,0.60);
+}
+
+#playerdisplay .cell {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(0,0,0,0.40);
+    -fx-border-width: 1 2 1 2;
+}
 
 /*MC Color Formats*/
 

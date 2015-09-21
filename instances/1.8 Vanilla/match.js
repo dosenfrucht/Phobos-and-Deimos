@@ -24,7 +24,7 @@ function match(line) {
 		log.send("left", d, mLeft[2], mLeft[3], mLeft[4])
 		players.left(mLeft[4])
 		return
-    }
+	}
 
 	var m = pat.exec(line)
 	if (m !== null) {

@@ -24,8 +24,8 @@ public class Controller {
             btnSendOnClick();
         }
         if (ke.getCode() == KeyCode.TAB) {
+            ke.consume();
             btnSendOnClick();
-            Platform.runLater(input::requestFocus);
         }
     }
 
