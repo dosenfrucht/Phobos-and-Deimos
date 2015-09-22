@@ -13,6 +13,7 @@ public class UIController {
     static ListView<HBox> playerDisplay;
     static InlineCssTextArea console;
     static ObservableList<GridPane> serverList = FXCollections.observableArrayList();
+    static ObservableList<HBox> test = FXCollections.observableArrayList();
     static ListView<GridPane> serverDisplay;
     static String activeInstance;
 

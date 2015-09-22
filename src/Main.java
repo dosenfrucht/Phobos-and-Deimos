@@ -32,6 +32,8 @@ public class Main extends Application {
         InstanceContainer i0 = new InstanceContainer("1.8 Vanilla");
         InstanceContainer i1 = new InstanceContainer("1.8 Modded");
 
+        UIController.changeInstance(i0.instanceID);
+
         i0.getInstance().run();
         i1.getInstance().run();
 

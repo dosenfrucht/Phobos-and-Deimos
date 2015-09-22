@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/UIController.java" line="29" />
+    <bookmark url="file://$PROJECT_DIR$/src/UIController.java" line="30" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/InstanceContainer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/UIController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller.java" afterPath="$PROJECT_DIR$/src/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/InstancePool.java" afterPath="$PROJECT_DIR$/src/InstancePool.java" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added support for multiple instances !!!!!!!!!!!">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/InstanceContainer.java" afterPath="$PROJECT_DIR$/src/InstanceContainer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/instances.json" afterPath="$PROJECT_DIR$/instances/instances.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/style.fxml" afterPath="$PROJECT_DIR$/src/style.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UIController.java" afterPath="$PROJECT_DIR$/src/UIController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -72,17 +68,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.32415903">
+              <caret line="32" column="67" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1179#1180#0" expanded="true" />
-                <element signature="e#1207#1208#0" expanded="true" />
-                <element signature="e#1241#1242#0" expanded="true" />
-                <element signature="e#1271#1272#0" expanded="true" />
+                <element signature="e#1232#1233#0" expanded="true" />
+                <element signature="e#1260#1261#0" expanded="true" />
+                <element signature="e#1294#1295#0" expanded="true" />
+                <element signature="e#1324#1325#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -92,34 +88,37 @@
         <entry file="file://$PROJECT_DIR$/src/InstanceContainer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="162" column="35" selection-start-line="162" selection-start-column="35" selection-end-line="162" selection-end-column="35" />
+              <caret line="96" column="41" selection-start-line="96" selection-start-column="41" selection-end-line="96" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6232#6233#0" expanded="true" />
-                <element signature="e#6293#6294#0" expanded="true" />
-                <element signature="e#7053#7054#0" expanded="true" />
-                <element signature="e#7081#7082#0" expanded="true" />
-                <element signature="e#7114#7115#0" expanded="true" />
-                <element signature="e#7145#7146#0" expanded="true" />
-                <element signature="e#7339#7340#0" expanded="true" />
-                <element signature="e#7370#7371#0" expanded="true" />
+                <element signature="e#1786#1787#0" expanded="true" />
+                <element signature="e#1841#1842#0" expanded="true" />
+                <element signature="e#1918#1919#0" expanded="true" />
+                <element signature="e#1978#1979#0" expanded="true" />
+                <element signature="e#6042#6043#0" expanded="true" />
+                <element signature="e#6103#6104#0" expanded="true" />
+                <element signature="e#6863#6864#0" expanded="true" />
+                <element signature="e#6891#6892#0" expanded="true" />
+                <element signature="e#7086#7087#0" expanded="true" />
+                <element signature="e#7117#7118#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UIController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UIController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/UIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.75535166">
-              <caret line="46" column="51" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="40" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1760#1761#0" expanded="true" />
-                <element signature="e#1815#1816#0" expanded="true" />
-                <element signature="e#1881#1882#0" expanded="true" />
-                <element signature="e#2240#2241#0" expanded="true" />
-                <element signature="e#2277#2278#0" expanded="true" />
+                <element signature="e#1773#1774#0" expanded="true" />
+                <element signature="e#1836#1837#0" expanded="true" />
+                <element signature="e#1891#1892#0" expanded="true" />
+                <element signature="e#1957#1958#0" expanded="true" />
+                <element signature="e#2316#2317#0" expanded="true" />
+                <element signature="e#2353#2354#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -243,11 +242,11 @@
         <option value="$PROJECT_DIR$/src/style.css" />
         <option value="$PROJECT_DIR$/instances/instances.json" />
         <option value="$PROJECT_DIR$/src/InstancePool.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/style.fxml" />
         <option value="$PROJECT_DIR$/src/Controller.java" />
-        <option value="$PROJECT_DIR$/src/InstanceContainer.java" />
         <option value="$PROJECT_DIR$/src/UIController.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/InstanceContainer.java" />
       </list>
     </option>
   </component>
@@ -426,6 +425,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://E:/Daten/IntelliJ Workspace/Server GUI/src/InstancePool.java" />
     <property name="extract.method.default.visibility" value="private" />
+    <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -435,15 +435,15 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
-    <configuration default="false" name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Server GUI">
+    <configuration default="false" name="Server GUI" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
@@ -600,35 +600,12 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="false" name="Main" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="sample.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="sample.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Server GUI" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="Application.Main (1)" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Application.Server GUI" />
     </list>
     <recent_temporary>
       <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Application.Main (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Server GUI" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -666,7 +643,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442866856225</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added support for multiple instances !!!!!!!!!!!">
+      <created>1442953823330</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1442953823330</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -751,7 +734,8 @@
     <MESSAGE value="Fixed  bugs" />
     <MESSAGE value="Added some CSS stuff for looks" />
     <MESSAGE value="More design and player list awesomeness" />
-    <option name="LAST_COMMIT_MESSAGE" value="More design and player list awesomeness" />
+    <MESSAGE value="Added support for multiple instances !!!!!!!!!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added support for multiple instances !!!!!!!!!!!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -848,10 +832,10 @@
           <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="e#1241#1242#0" expanded="true" />
-            <element signature="e#1271#1272#0" expanded="true" />
+            <element signature="e#1232#1233#0" expanded="true" />
+            <element signature="e#1260#1261#0" expanded="true" />
+            <element signature="e#1294#1295#0" expanded="true" />
+            <element signature="e#1324#1325#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -912,10 +896,10 @@
           <caret line="40" column="173" selection-start-line="40" selection-start-column="173" selection-end-line="40" selection-end-column="173" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="e#1241#1242#0" expanded="true" />
-            <element signature="e#1271#1272#0" expanded="true" />
+            <element signature="e#1232#1233#0" expanded="true" />
+            <element signature="e#1260#1261#0" expanded="true" />
+            <element signature="e#1294#1295#0" expanded="true" />
+            <element signature="e#1324#1325#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -976,10 +960,10 @@
           <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="e#1241#1242#0" expanded="true" />
-            <element signature="e#1271#1272#0" expanded="true" />
+            <element signature="e#1232#1233#0" expanded="true" />
+            <element signature="e#1260#1261#0" expanded="true" />
+            <element signature="e#1294#1295#0" expanded="true" />
+            <element signature="e#1324#1325#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1047,10 +1031,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="e#1241#1242#0" expanded="true" />
-            <element signature="e#1271#1272#0" expanded="true" />
+            <element signature="e#1232#1233#0" expanded="true" />
+            <element signature="e#1260#1261#0" expanded="true" />
+            <element signature="e#1294#1295#0" expanded="true" />
+            <element signature="e#1324#1325#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1110,10 +1094,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="e#1241#1242#0" expanded="true" />
-            <element signature="e#1271#1272#0" expanded="true" />
+            <element signature="e#1232#1233#0" expanded="true" />
+            <element signature="e#1260#1261#0" expanded="true" />
+            <element signature="e#1294#1295#0" expanded="true" />
+            <element signature="e#1324#1325#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1222,20 +1206,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="e#1241#1242#0" expanded="true" />
-            <element signature="e#1271#1272#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1256,35 +1226,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/InstanceContainer.java">
+    <entry file="file://$PROJECT_DIR$/src/UIController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="162" column="35" selection-start-line="162" selection-start-column="35" selection-end-line="162" selection-end-column="35" />
+          <caret line="28" column="40" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6232#6233#0" expanded="true" />
-            <element signature="e#6293#6294#0" expanded="true" />
-            <element signature="e#7053#7054#0" expanded="true" />
-            <element signature="e#7081#7082#0" expanded="true" />
-            <element signature="e#7114#7115#0" expanded="true" />
-            <element signature="e#7145#7146#0" expanded="true" />
-            <element signature="e#7339#7340#0" expanded="true" />
-            <element signature="e#7370#7371#0" expanded="true" />
+            <element signature="e#1773#1774#0" expanded="true" />
+            <element signature="e#1836#1837#0" expanded="true" />
+            <element signature="e#1891#1892#0" expanded="true" />
+            <element signature="e#1957#1958#0" expanded="true" />
+            <element signature="e#2316#2317#0" expanded="true" />
+            <element signature="e#2353#2354#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UIController.java">
+    <entry file="file://$PROJECT_DIR$/src/InstanceContainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75535166">
-          <caret line="46" column="51" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="96" column="41" selection-start-line="96" selection-start-column="41" selection-end-line="96" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1760#1761#0" expanded="true" />
-            <element signature="e#1815#1816#0" expanded="true" />
-            <element signature="e#1881#1882#0" expanded="true" />
-            <element signature="e#2240#2241#0" expanded="true" />
-            <element signature="e#2277#2278#0" expanded="true" />
+            <element signature="e#1786#1787#0" expanded="true" />
+            <element signature="e#1841#1842#0" expanded="true" />
+            <element signature="e#1918#1919#0" expanded="true" />
+            <element signature="e#1978#1979#0" expanded="true" />
+            <element signature="e#6042#6043#0" expanded="true" />
+            <element signature="e#6103#6104#0" expanded="true" />
+            <element signature="e#6863#6864#0" expanded="true" />
+            <element signature="e#6891#6892#0" expanded="true" />
+            <element signature="e#7086#7087#0" expanded="true" />
+            <element signature="e#7117#7118#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32415903">
+          <caret line="32" column="67" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1232#1233#0" expanded="true" />
+            <element signature="e#1260#1261#0" expanded="true" />
+            <element signature="e#1294#1295#0" expanded="true" />
+            <element signature="e#1324#1325#0" expanded="true" />
           </folding>
         </state>
       </provider>

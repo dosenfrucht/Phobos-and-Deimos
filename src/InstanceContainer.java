@@ -51,22 +51,18 @@ public class InstanceContainer {
         instance.setPlayerHandler(new PlayerHandler() {
             @Override
             public void onPlayerJoined(String player) {
-                    addPlayerToList(player);
-                if (isActive) {
-                    UIController.updatePlayerList(playerList);
-                }
+                addPlayerToList(player);
             }
+
             @Override
             public void onPlayerLeft(String player) {
                 removePlayerFromList(player);
-                if (isActive) {
-                    UIController.updatePlayerList(playerList);
-                }
             }
         });
         instance.loadInstance();
         InstancePool.set(instanceID, this);
         addServerInstanceToList(instance);
+        //addFakePlayerToList();
     }
 
     private ScriptEngine initScript() {
@@ -98,8 +94,8 @@ public class InstanceContainer {
     }
     public void addPlayerToList(String player) {
         Platform.runLater(() -> {
-            if (playerList.size() < 2) {
-                removeFakePlayerFromList();
+            if (playerList.size() == 1) {
+                //removeFakePlayerFromList();
             }
             MenuItem kick = new MenuItem("Kick " + player);
             kick.setOnAction(e -> instance.send("kick " + player));
@@ -151,8 +147,8 @@ public class InstanceContainer {
     }
 
     public void removePlayerFromList(String player) {
-        if (playerList.size() < 2) {
-            addFakePlayerToList();
+        if (playerList.size() == 1) {
+            //addFakePlayerToList();
         }
         Platform.runLater(() -> playerList.remove(searchForPlayer(player)));
 
@@ -197,9 +193,6 @@ public class InstanceContainer {
         isActive = b;
     }
 
-    public boolean isActive() {
-        return isActive;
-    }
     public void onActivated() {
         UIController.updateConsole(instanceLog.getDocument());
         UIController.updatePlayerList(playerList);
