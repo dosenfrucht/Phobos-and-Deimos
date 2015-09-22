@@ -4,18 +4,19 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.fxmisc.richtext.InlineCssTextArea;
 
-/**
- * Created by Nikodemus on 14.09.2015.
- */
 public class Controller {
 
     public TextField input;
     public InlineCssTextArea console;
     public InlineCssTextArea test;
+    String instanceID;
 
+    public void setInstance(String instanceID) {
+        this.instanceID = instanceID;
+    }
 
     public void btnSendOnClick() {
-        InstancePool.get(0).getProcess().send(input.getText());
+        InstancePool.get(UIController.getActiveInstance()).getInstance().getProcess().send(input.getText());
         input.setText("");
     }
 
@@ -28,6 +29,7 @@ public class Controller {
             btnSendOnClick();
         }
     }
+
 
 
 
