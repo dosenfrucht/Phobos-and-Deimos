@@ -32,22 +32,22 @@ public class InstanceContainer {
     Boolean isActive;
     InlineCssTextArea instanceLog;
 
-    public InstanceContainer(String instanceID) {
+    public InstanceContainer() {
 
+        instance = new ServerInstance();
         isActive = false;
         instanceLog = new InlineCssTextArea();
 
-        this.instanceID = instanceID;
+    }
+    public void init() {
         se = initScript();
-
-        instance = new ServerInstance(instanceID, (type, time, thread, loglvl, arg) -> {
+        instance.setOut((type, time, thread, loglvl, arg) -> {
             try {
-                ((Invocable)se).invokeFunction("write", type, time, thread, loglvl, arg);
+                ((Invocable) se).invokeFunction("write", type, time, thread, loglvl, arg);
             } catch (ScriptException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
-        }, null);
-
+        });
         instance.setPlayerHandler(new PlayerHandler() {
             @Override
             public void onPlayerJoined(String player) {
@@ -59,13 +59,11 @@ public class InstanceContainer {
                 removePlayerFromList(player);
             }
         });
-        instance.loadInstance();
-        InstancePool.set(instanceID, this);
-        addServerInstanceToList(instance);
-        //addFakePlayerToList();
+        instance.load();
     }
 
-    private ScriptEngine initScript() {
+    public ScriptEngine initScript() {
+        instanceID = instance.getServerInstanceID();
         String outputScriptPath = Globals.getServerManConfig()
                 .get("instances_home") + File.separator
                 + instanceID + File.separator + "output.js";
@@ -81,13 +79,19 @@ public class InstanceContainer {
         return se;
     }
 
-    public void addServerInstanceToList(ServerInstance si) {
+    public void addServerInstanceToList() {
 
         GridPane gp = new GridPane();
-        Label lb = new Label(si.getName());
+        Label lb = new Label(instance.getName());
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem start = new MenuItem("Start server");
+        start.setOnAction(e -> instance.run());
+        MenuItem stop = new MenuItem("Stop server");
+        stop.setOnAction(e -> instance.stop());
+        contextMenu.getItems().addAll(start, stop);
 
         gp.add(lb, 0, 0);
-
+        gp.setOnContextMenuRequested(e -> contextMenu.show(gp, e.getScreenX(), e.getScreenY()));
         gp.setOnMouseClicked(e -> UIController.changeInstance(instanceID));
 
         UIController.addServer(gp);
@@ -199,5 +203,9 @@ public class InstanceContainer {
     }
     public ServerInstance getInstance() {
         return instance;
+    }
+
+    public void setInstance(ServerInstance si) {
+        instance = si;
     }
 }

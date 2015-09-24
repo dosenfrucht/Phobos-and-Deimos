@@ -4,6 +4,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import net.demus_intergalactical.serverman.Globals;
+import net.demus_intergalactical.serverman.instance.ServerInstance;
+
+import java.util.List;
 
 
 public class Main extends Application {
@@ -13,7 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         window = primaryStage;
-        window.minHeightProperty().set(600);
+        window.minHeightProperty().set(630);
         window.minWidthProperty().set(1024);
         Parent root = FXMLLoader.load(getClass().getResource("style.fxml"));
         window.setScene(new Scene(root));
@@ -29,13 +32,14 @@ public class Main extends Application {
         InstancePool.init();
         UIController.init(root);
 
-        InstanceContainer i0 = new InstanceContainer("1.8 Vanilla");
-        InstanceContainer i1 = new InstanceContainer("1.8 Modded");
-
-        UIController.changeInstance(i0.instanceID);
-
-        i0.getInstance().run();
-        i1.getInstance().run();
+        List<ServerInstance> instanceList = Globals.getInstanceSettings().getAllInstances();
+        for (ServerInstance i : instanceList) {
+            InstanceContainer ic = new InstanceContainer();
+            ic.setInstance(i);
+            ic.init();
+            ic.addServerInstanceToList();
+            InstancePool.set(i.getServerInstanceID(), ic);
+        }
 
         window.show();
     }
@@ -45,6 +49,7 @@ public class Main extends Application {
     }
 
     public void closeProgram() {
+        CreateInstanceWindow.close();
         window.close();
     }
 

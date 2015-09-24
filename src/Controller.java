@@ -15,6 +15,10 @@ public class Controller {
         this.instanceID = instanceID;
     }
 
+    public void onNewInstancePressed() {
+        CreateInstanceWindow.display();
+    }
+
     public void btnSendOnClick() {
         InstancePool.get(UIController.getActiveInstance()).getInstance().getProcess().send(input.getText());
         input.setText("");
