@@ -3,6 +3,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import org.fxmisc.richtext.InlineCssTextArea;
@@ -12,14 +13,13 @@ public class UIController {
 
     static ListView<HBox> playerDisplay;
     static InlineCssTextArea console;
-    static ObservableList<GridPane> serverList = FXCollections.observableArrayList();
-    static ObservableList<HBox> test = FXCollections.observableArrayList();
-    static ListView<GridPane> serverDisplay;
+    static ObservableList<BorderPane> serverList = FXCollections.observableArrayList();
+    static ListView<BorderPane> serverDisplay;
     static String activeInstance;
 
     public static void init(Parent root) {
         Platform.runLater(() -> {
-            serverDisplay = (ListView<GridPane>) root.lookup("#serverdisplay");
+            serverDisplay = (ListView<BorderPane>) root.lookup("#serverdisplay");
             serverDisplay.setItems(serverList);
             playerDisplay = (ListView<HBox>) root.lookup("#playerdisplay");
             console = (InlineCssTextArea) root.lookup("#console");
@@ -45,10 +45,10 @@ public class UIController {
             console.setStyle(currlength, currlength + text.length(), "-fx-fill:" + color + ";");
         });
     }
-    public static void addServer(GridPane server) {
+    public static void addServer(BorderPane server) {
         Platform.runLater(() -> serverList.add(server));
     }
-    public static void removeServer(GridPane server) {
+    public static void removeServer(BorderPane server) {
         Platform.runLater(() -> serverList.remove(server));
     }
 

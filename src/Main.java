@@ -27,8 +27,6 @@ public class Main extends Application {
         });
 
         Globals.init();
-        Globals.getServerManConfig().load();
-        Globals.getInstanceSettings().load();
         InstancePool.init();
         UIController.init(root);
 

@@ -21,7 +21,10 @@
       <InlineCssTextArea fx:id="console" editable="false" layoutX="580.0" prefHeight="500.0" prefWidth="-Infinity" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
       <TextField fx:id="input" layoutX="580.0" layoutY="510.0" onKeyPressed="#onInputKeyPressed" prefHeight="40.0" prefWidth="-Infinity" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="535.0" />
       <ListView fx:id="playerdisplay" prefHeight="550.0" prefWidth="200.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="25.0" />
-      <ListView fx:id="serverdisplay" prefHeight="-Infinity" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0" />
+      <ListView fx:id="serverdisplay" prefHeight="-Infinity" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></ListView>
       <MenuBar layoutY="0.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0">
         <menus>
           <Menu mnemonicParsing="false" text="Instances">

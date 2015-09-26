@@ -6,12 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverman.PlayerHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
+import org.apache.commons.io.FileUtils;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.StyledDocument;
 
@@ -19,9 +18,7 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 
 public class InstanceContainer {
 
@@ -31,6 +28,9 @@ public class InstanceContainer {
     ScriptEngine se;
     Boolean isActive;
     InlineCssTextArea instanceLog;
+
+    int playerCount;
+    Label playerlb;
 
     public InstanceContainer() {
 
@@ -59,7 +59,15 @@ public class InstanceContainer {
                 removePlayerFromList(player);
             }
         });
-        instance.load();
+        try {
+            instance.load();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ScriptException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public ScriptEngine initScript() {
@@ -81,26 +89,84 @@ public class InstanceContainer {
 
     public void addServerInstanceToList() {
 
-        GridPane gp = new GridPane();
-        Label lb = new Label(instance.getName());
+        BorderPane serverContainer = new BorderPane();
+
         ContextMenu contextMenu = new ContextMenu();
         MenuItem start = new MenuItem("Start server");
         start.setOnAction(e -> instance.run());
         MenuItem stop = new MenuItem("Stop server");
         stop.setOnAction(e -> instance.stop());
-        contextMenu.getItems().addAll(start, stop);
+        SeparatorMenuItem separatorMenuItem = new SeparatorMenuItem();
+        MenuItem openFolder = new MenuItem("Open folder");
+        openFolder.setOnAction(e -> {
+            try {
+                Runtime.getRuntime().exec("explorer.exe /open," + Globals.getServerManConfig().get("instances_home") + File.separator + instance.getServerInstanceID());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+        MenuItem deleteInstance = new MenuItem("Delete instance");
+        deleteInstance.setOnAction(e -> {
+            if (!ConfirmWindow.display("Delete instance", "Are you sure you want to delete this instance?\nAll worlds, configs, etc. will be\ndeleted forever (this is a long time)")) {
+                return;
+            }
+            UIController.removeServer(serverContainer);
+            try {
+                FileUtils.deleteDirectory(new File(Globals.getServerManConfig().get("instances_home") + File.separator + instance.getServerInstanceID()));
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+        contextMenu.getItems().addAll(start, stop, separatorMenuItem, openFolder, deleteInstance);
 
-        gp.add(lb, 0, 0);
-        gp.setOnContextMenuRequested(e -> contextMenu.show(gp, e.getScreenX(), e.getScreenY()));
-        gp.setOnMouseClicked(e -> UIController.changeInstance(instanceID));
+        ImageView icon = null;
+        try {
+            icon = new ImageView(new Image("file:" + instance.getIcon().getPath()));
+        } catch (NullPointerException e) {
+            try {
+                icon = new ImageView(new Image(new FileInputStream(new File("./assets/unknown_server.png")), 64, 64, true , true));
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            }
+        }
 
-        UIController.addServer(gp);
+        GridPane center = new GridPane();
+        Label name = new Label("Name: " + instance.getName());
+        Label port = new Label("Port: 25565");
+
+        center.add(name, 0, 0);
+        center.add(port, 0, 1);
+
+        VBox right = new VBox(10);
+        HBox topright = new HBox(10);
+        ImageView status = null;
+        try {
+            status = new ImageView(new Image(new FileInputStream(new File("./assets/server_status_off.png")), 20, 14, true, false));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        playerlb = new Label(playerCount + "/123");
+        topright.getChildren().addAll(playerlb, status);
+
+        right.getChildren().addAll(topright);
+
+
+
+        serverContainer.setLeft(icon);
+        serverContainer.setCenter(center);
+        serverContainer.setRight(right);
+        serverContainer.setOnContextMenuRequested(e -> contextMenu.show(serverContainer, e.getScreenX(), e.getScreenY()));
+        serverContainer.setOnMouseClicked(e -> UIController.changeInstance(instanceID));
+
+        UIController.addServer(serverContainer);
     }
     public void addPlayerToList(String player) {
         Platform.runLater(() -> {
             if (playerList.size() == 1) {
                 //removeFakePlayerFromList();
             }
+            playerCount++;
+            playerlb.setText(playerCount + "/123");
             MenuItem kick = new MenuItem("Kick " + player);
             kick.setOnAction(e -> instance.send("kick " + player));
             MenuItem op = new MenuItem("OP " + player);
@@ -154,7 +220,11 @@ public class InstanceContainer {
         if (playerList.size() == 1) {
             //addFakePlayerToList();
         }
-        Platform.runLater(() -> playerList.remove(searchForPlayer(player)));
+        Platform.runLater(() -> {
+            playerCount--;
+            playerlb.setText(playerCount + "/123");
+            playerList.remove(searchForPlayer(player));
+        });
 
     }
 
