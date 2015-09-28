@@ -2,10 +2,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 
@@ -18,6 +21,7 @@ public class Main extends Application {
         window = primaryStage;
         window.minHeightProperty().set(630);
         window.minWidthProperty().set(1024);
+        Font.loadFont(Main.class.getResource("Minecraftia.ttf").toExternalForm(), 10);
         Parent root = FXMLLoader.load(getClass().getResource("style.fxml"));
         window.setScene(new Scene(root));
         window.setTitle("Server GUI");
@@ -25,6 +29,9 @@ public class Main extends Application {
             e.consume();
             closeProgram();
         });
+
+        root.lookup("#serverdisplay").setStyle("-fx-font-family: Minecraftia;");
+
 
         Globals.init();
         InstancePool.init();

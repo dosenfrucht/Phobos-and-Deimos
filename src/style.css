@@ -1,6 +1,12 @@
+@font-face {
+    font-family: 'minecraftia';
+    src: url('../../../assets/fonts/Minecraftia.ttf');
+}
 .root {
     /*-fx-background-image: url("dirt_bg.png");*/
     -fx-background-image: url("../../../assets/dirt_console.png");
+    -fx-font-family: 'Minecraftia';
+    -fx-font-size: 14;
 
 }
 #text {
@@ -87,7 +93,7 @@
 }
 
 /************************************
-*           ListView                *
+*           PlayerDisplay           *
 ************************************/
 
 #playerdisplay {
@@ -115,6 +121,42 @@
     -fx-background-color: transparent;
     -fx-border-color: rgba(0,0,0,0.40);
     -fx-border-width: 1 2 1 2;
+}
+
+/************************************
+*           ServererDisplay           *
+************************************/
+
+#serverdisplay {
+    -fx-background-color: rgba(0,0,0,0.50);
+}
+#serverdisplay .label{
+    -fx-text-fill: #E0E0E0;
+}
+
+#serverdisplay .context-menu {
+    -fx-background-color: rgba(0,0,0,0.80);
+    -fx-border-color: rgba(0,0,127,0.60);
+    -fx-border-width: 2;
+}
+#serverdisplay .menu {
+    -fx-background-color: transparent;
+}
+#serverdisplay .menu-item {
+    -fx-background-color: transparent;
+}
+#serverdisplay .menu-item:hover {
+    -fx-background-color: rgba(50,50,50,0.60);
+}
+#serverdisplay .cell{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+}
+#serverdisplay .cell:selected{
+    -fx-background-color: black;
+    -fx-border-color: #808080;
+    -fx-border-width: 2;
 }
 
 /*MC Color Formats*/

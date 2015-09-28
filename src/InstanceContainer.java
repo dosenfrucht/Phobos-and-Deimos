@@ -1,14 +1,19 @@
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverman.PlayerHandler;
+import net.demus_intergalactical.serverman.StatusHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 import org.apache.commons.io.FileUtils;
 import org.fxmisc.richtext.InlineCssTextArea;
@@ -18,7 +23,9 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.awt.*;
 import java.io.*;
+import java.net.URL;
 
 public class InstanceContainer {
 
@@ -28,6 +35,8 @@ public class InstanceContainer {
     ScriptEngine se;
     Boolean isActive;
     InlineCssTextArea instanceLog;
+
+    ImageView status;
 
     int playerCount;
     Label playerlb;
@@ -59,6 +68,17 @@ public class InstanceContainer {
                 removePlayerFromList(player);
             }
         });
+        instance.setStatusHandler(new StatusHandler() {
+            @Override
+            public void onStatusStarted() {
+                setInstanceStatusIcon(true);
+            }
+
+            @Override
+            public void onStatusStopped() {
+                setInstanceStatusIcon(false);
+            }
+        });
         try {
             instance.load();
         } catch (NoSuchMethodException e) {
@@ -76,6 +96,15 @@ public class InstanceContainer {
                 .get("instances_home") + File.separator
                 + instanceID + File.separator + "output.js";
         File outputScriptFile = new File(outputScriptPath);
+        if (!outputScriptFile.exists()) {
+            String url = "http://serverman.demus-intergalactical.net/v/" + instance.getServerVersion() + "/output.js";
+            try {
+                FileUtils.copyURLToFile(new URL(url), outputScriptFile, 300000, 300000);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         ScriptEngineManager sm = new ScriptEngineManager();
         ScriptEngine se = sm.getEngineByName("JavaScript");
         se.put("output", this);
@@ -97,27 +126,33 @@ public class InstanceContainer {
         MenuItem stop = new MenuItem("Stop server");
         stop.setOnAction(e -> instance.stop());
         SeparatorMenuItem separatorMenuItem = new SeparatorMenuItem();
+        SeparatorMenuItem separatorMenuItem1 = new SeparatorMenuItem();
+        MenuItem moveup = new MenuItem("Move up");
+        moveup.setOnAction(e -> UIController.swapInstances());
+        MenuItem movedown = new MenuItem("Move down");
         MenuItem openFolder = new MenuItem("Open folder");
         openFolder.setOnAction(e -> {
             try {
-                Runtime.getRuntime().exec("explorer.exe /open," + Globals.getServerManConfig().get("instances_home") + File.separator + instance.getServerInstanceID());
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(new File(Globals.getServerManConfig().get("instances_home") + File.separator + instance.getServerInstanceID()));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         });
         MenuItem deleteInstance = new MenuItem("Delete instance");
         deleteInstance.setOnAction(e -> {
-            if (!ConfirmWindow.display("Delete instance", "Are you sure you want to delete this instance?\nAll worlds, configs, etc. will be\ndeleted forever (this is a long time)")) {
+            if (!ConfirmWindow.display("Delete instance", "Are you sure you want to delete this instance?\nAll worlds, configs, etc. will be\ndeleted forever (a long time!)")) {
                 return;
             }
             UIController.removeServer(serverContainer);
+            Globals.getInstanceSettings().remove(instanceID);
             try {
                 FileUtils.deleteDirectory(new File(Globals.getServerManConfig().get("instances_home") + File.separator + instance.getServerInstanceID()));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         });
-        contextMenu.getItems().addAll(start, stop, separatorMenuItem, openFolder, deleteInstance);
+        contextMenu.getItems().addAll(start, stop, separatorMenuItem, moveup, movedown, separatorMenuItem1 ,openFolder, deleteInstance);
 
         ImageView icon = null;
         try {
@@ -132,20 +167,19 @@ public class InstanceContainer {
 
         GridPane center = new GridPane();
         Label name = new Label("Name: " + instance.getName());
-        Label port = new Label("Port: 25565");
-
+        Label port = new Label("Port: xxxxx");
         center.add(name, 0, 0);
         center.add(port, 0, 1);
 
         VBox right = new VBox(10);
         HBox topright = new HBox(10);
-        ImageView status = null;
+        status = null;
         try {
             status = new ImageView(new Image(new FileInputStream(new File("./assets/server_status_off.png")), 20, 14, true, false));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        playerlb = new Label(playerCount + "/123");
+        playerlb = new Label(playerCount + "/xxx");
         topright.getChildren().addAll(playerlb, status);
 
         right.getChildren().addAll(topright);
@@ -157,7 +191,7 @@ public class InstanceContainer {
         serverContainer.setRight(right);
         serverContainer.setOnContextMenuRequested(e -> contextMenu.show(serverContainer, e.getScreenX(), e.getScreenY()));
         serverContainer.setOnMouseClicked(e -> UIController.changeInstance(instanceID));
-
+        BorderPane.setMargin(center, new Insets(0, 10, 0, 10));
         UIController.addServer(serverContainer);
     }
     public void addPlayerToList(String player) {
@@ -166,7 +200,7 @@ public class InstanceContainer {
                 //removeFakePlayerFromList();
             }
             playerCount++;
-            playerlb.setText(playerCount + "/123");
+            playerlb.setText(playerCount + "/xxx");
             MenuItem kick = new MenuItem("Kick " + player);
             kick.setOnAction(e -> instance.send("kick " + player));
             MenuItem op = new MenuItem("OP " + player);
@@ -222,7 +256,7 @@ public class InstanceContainer {
         }
         Platform.runLater(() -> {
             playerCount--;
-            playerlb.setText(playerCount + "/123");
+            playerlb.setText(playerCount + "/xxx");
             playerList.remove(searchForPlayer(player));
         });
 
@@ -278,4 +312,16 @@ public class InstanceContainer {
     public void setInstance(ServerInstance si) {
         instance = si;
     }
+
+    public void setInstanceStatusIcon(boolean isOn) {
+        System.out.println(isOn);
+        try {
+            String path = "./assets/server_status_" + (isOn ? "on" : "off") + ".png";
+            Image stOn = new Image(new FileInputStream(new File(path)), 20, 14, true, false);
+            status.setImage(stOn);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
