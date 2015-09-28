@@ -77,6 +77,27 @@ public class UIController {
         return activeInstance;
     }
 
-    public static void swapInstances() {
+    public static void swapInstances(BorderPane serverContainer, boolean swapUp) {
+
+        for (int i = 0 ; i < serverList.size(); i++) {
+            if (serverList.get(i).equals(serverContainer) && swapUp && i == 0) {
+                break;
+            } else if (serverList.get(i).equals(serverContainer) && !swapUp && i == serverList.size() - 1) {
+                break;
+            } else if (serverList.get(i).equals(serverContainer) && swapUp) {
+                BorderPane tmp = serverList.get(i - 1);
+                serverList.set(i, tmp);
+                serverList.set(i - 1, serverContainer);
+                serverDisplay.getSelectionModel().select(i - 1);
+                break;
+            } else if (serverList.get(i).equals(serverContainer) && !swapUp) {
+                BorderPane tmp = serverList.get(i + 1);
+                serverList.set(i, tmp);
+                serverList.set(i + 1, serverContainer);
+                serverDisplay.getSelectionModel().select(i + 1);
+                break;
+            }
+        }
     }
 }
+

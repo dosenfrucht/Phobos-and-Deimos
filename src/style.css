@@ -1,11 +1,11 @@
-@font-face {
+/*@font-face {
     font-family: 'minecraftia';
     src: url('../../../assets/fonts/Minecraftia.ttf');
-}
+}*/
 .root {
     /*-fx-background-image: url("dirt_bg.png");*/
     -fx-background-image: url("../../../assets/dirt_console.png");
-    -fx-font-family: 'Minecraftia';
+    -fx-font-family: "Minecraftia";
     -fx-font-size: 14;
 
 }

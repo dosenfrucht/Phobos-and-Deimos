@@ -21,7 +21,7 @@ public class Main extends Application {
         window = primaryStage;
         window.minHeightProperty().set(630);
         window.minWidthProperty().set(1024);
-        Font.loadFont(Main.class.getResource("Minecraftia.ttf").toExternalForm(), 10);
+        Font.loadFont("./assets/fonts/Minecratia.ttf", 10);
         Parent root = FXMLLoader.load(getClass().getResource("style.fxml"));
         window.setScene(new Scene(root));
         window.setTitle("Server GUI");
@@ -55,6 +55,11 @@ public class Main extends Application {
 
     public void closeProgram() {
         CreateInstanceWindow.close();
+        for (String s : InstancePool.getAllInstanceIDs()) {
+            if (InstancePool.get(s).getInstance().getProcess() != null) {
+                InstancePool.get(s).getInstance().stop();
+            }
+        }
         window.close();
     }
 

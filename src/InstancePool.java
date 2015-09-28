@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Set;
 
 public class InstancePool {
 
@@ -19,5 +20,9 @@ public class InstancePool {
 
     public synchronized static void remove(String instanceID) {
         pool.remove(instanceID);
+    }
+
+    public synchronized static Set<String> getAllInstanceIDs() {
+        return pool.keySet();
     }
 }

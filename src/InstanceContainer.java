@@ -128,8 +128,9 @@ public class InstanceContainer {
         SeparatorMenuItem separatorMenuItem = new SeparatorMenuItem();
         SeparatorMenuItem separatorMenuItem1 = new SeparatorMenuItem();
         MenuItem moveup = new MenuItem("Move up");
-        moveup.setOnAction(e -> UIController.swapInstances());
+        moveup.setOnAction(e -> UIController.swapInstances(serverContainer, true));
         MenuItem movedown = new MenuItem("Move down");
+        movedown.setOnAction(e -> UIController.swapInstances(serverContainer, false));
         MenuItem openFolder = new MenuItem("Open folder");
         openFolder.setOnAction(e -> {
             try {
@@ -146,6 +147,7 @@ public class InstanceContainer {
             }
             UIController.removeServer(serverContainer);
             Globals.getInstanceSettings().remove(instanceID);
+            InstancePool.remove(instanceID);
             try {
                 FileUtils.deleteDirectory(new File(Globals.getServerManConfig().get("instances_home") + File.separator + instance.getServerInstanceID()));
             } catch (IOException e1) {
