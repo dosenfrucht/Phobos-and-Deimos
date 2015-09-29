@@ -1,11 +1,11 @@
 @font-face {
-    font-family: 'minecraftia';
-    src: url('../../../assets/fonts/Minecraftia.ttf');
+    font-family: "minecraft";
+    src: url("../../../assets/fonts/minecraft.ttf");
 }
 .root {
     /*-fx-background-image: url("dirt_bg.png");*/
     -fx-background-image: url("../../../assets/dirt_console.png");
-    -fx-font-family: "Minecraftia";
+    -fx-font-family: "minecraft";
     -fx-font-size: 14;
 
 }
@@ -61,6 +61,13 @@
 }
 
 /************************************
+*           Menubar                 *
+************************************/
+
+#menubarOptions {
+}
+
+/************************************
 *           Textfield               *
 ************************************/
 
@@ -91,6 +98,10 @@
     -fx-background-color: transparent;
     -fx-background-radius: 0em;
     -fx-text-fill: #FFFFA0;
+}
+
+#btnClose {
+    -fx-text-fill: #FF0000;
 }
 
 /************************************
@@ -130,7 +141,7 @@
 
 #serverdisplay {
     -fx-background-color: rgba(0,0,0,0.50);
-    /*-fx-font-family: "Minecraftia"; already applied by .root */
+    /*-fx-font-family: "minecraft"; already applied by .root */
 }
 #serverdisplay .label{
     -fx-text-fill: #E0E0E0;

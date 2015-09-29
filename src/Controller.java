@@ -23,6 +23,10 @@ public class Controller {
         input.setText("");
     }
 
+    public void btnCloseOnClick() {
+        System.out.println("closing??!?");
+    }
+
     public void onInputKeyPressed(KeyEvent ke) {
         if (ke.getCode() == KeyCode.ENTER) {
             btnSendOnClick();
