@@ -1,25 +1,12 @@
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import net.demus_intergalactical.serverman.instance.ServerInstance;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.StyledDocument;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UIController {
 

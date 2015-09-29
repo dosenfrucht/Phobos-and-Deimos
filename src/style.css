@@ -1,7 +1,7 @@
-/*@font-face {
+@font-face {
     font-family: 'minecraftia';
     src: url('../../../assets/fonts/Minecraftia.ttf');
-}*/
+}
 .root {
     /*-fx-background-image: url("dirt_bg.png");*/
     -fx-background-image: url("../../../assets/dirt_console.png");
@@ -82,6 +82,7 @@
     -fx-background-color: transparent;
     -fx-background-radius: 0em;
     -fx-text-fill: #E0E0E0;
+    -fx-font-size: 14px;
 }
 #btnSend:hover {
     -fx-background-image: url("../../../assets/button40_center_hover.png"), url("../../../assets/button40_right_hover.png"), url("../../../assets/button40_left_hover.png");
@@ -124,11 +125,12 @@
 }
 
 /************************************
-*           ServererDisplay           *
+*           ServerDisplay           *
 ************************************/
 
 #serverdisplay {
     -fx-background-color: rgba(0,0,0,0.50);
+    /*-fx-font-family: "Minecraftia"; already applied by .root */
 }
 #serverdisplay .label{
     -fx-text-fill: #E0E0E0;
