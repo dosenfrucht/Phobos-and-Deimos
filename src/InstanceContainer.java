@@ -15,6 +15,7 @@ import net.demus_intergalactical.serverman.OutputHandler;
 import net.demus_intergalactical.serverman.PlayerHandler;
 import net.demus_intergalactical.serverman.StatusHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
+import net.demus_intergalactical.serverproperties.ServerProperties;
 import org.apache.commons.io.FileUtils;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.reactfx.util.PentaConsumer;
@@ -30,6 +31,7 @@ import java.net.URL;
 public class InstanceContainer {
 
 	ServerInstance instance;
+	ServerProperties properties;
 	ObservableList<HBox> playerList = FXCollections.observableArrayList();
 	String instanceID;
 	ScriptEngine se;
@@ -45,6 +47,7 @@ public class InstanceContainer {
 	public InstanceContainer() {
 
 		instance = new ServerInstance();
+		properties = new ServerProperties();
 		isActive = false;
 		instanceLog = new InlineCssTextArea();
 
@@ -53,6 +56,12 @@ public class InstanceContainer {
 	public void init() {
 		initScript();
 
+		properties.setPropertiesFilePath(Globals.getServerManConfig().get("instances_home") + File.separator + instance.getServerInstanceID() + File.separator + "server.properties");
+		try {
+			properties.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		instance.setOut((type, time, thread, loglvl, arg) -> {
 			try {
 				((Invocable) seProcess).invokeFunction
@@ -156,6 +165,7 @@ public class InstanceContainer {
 	public void addServerInstanceToList() {
 
 		BorderPane serverContainer = new BorderPane();
+		serverContainer.setMaxWidth(330);
 
 		ContextMenu contextMenu = new ContextMenu();
 		MenuItem start = new MenuItem("Start server");
@@ -208,7 +218,9 @@ public class InstanceContainer {
 
 		GridPane center = new GridPane();
 		Label name = new Label(instance.getName());
-		Label port = new Label("xxxxx");
+		name.setId("lblName");
+		Label port = new Label(properties.getInteger("server-port").toString());
+		port.setId("lblPort");
 		center.add(name, 0, 0);
 		center.add(port, 0, 1);
 
@@ -220,7 +232,8 @@ public class InstanceContainer {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		playerlb = new Label(playerCount + "/xxx");
+		playerlb = new Label(playerCount + "/" + properties.getInteger("max-players"));
+		playerlb.setId("lblPlayer");
 		topright.getChildren().addAll(playerlb, status);
 
 		right.getChildren().addAll(topright);
@@ -241,7 +254,7 @@ public class InstanceContainer {
 				//removeFakePlayerFromList();
 			}
 			playerCount++;
-			playerlb.setText(playerCount + "/xxx");
+			playerlb.setText(playerCount + "/" + properties.getInteger("max-players"));
 			MenuItem kick = new MenuItem("Kick " + player);
 			kick.setOnAction(e -> instance.send("kick " + player));
 			MenuItem op = new MenuItem("OP " + player);
@@ -297,7 +310,7 @@ public class InstanceContainer {
 		}
 		Platform.runLater(() -> {
 			playerCount--;
-			playerlb.setText(playerCount + "/xxx");
+			playerlb.setText(playerCount + "/" + properties.getInteger("max-players"));
 			playerList.remove(searchForPlayer(player));
 		});
 

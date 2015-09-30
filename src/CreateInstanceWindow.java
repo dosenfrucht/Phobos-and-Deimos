@@ -59,7 +59,7 @@ public class CreateInstanceWindow extends Stage {
 
 		si = instCont.getInstance();
 
-		Image serverIcon = new Image(new FileInputStream(new File("./assets/unknown_server.png")));
+		Image serverIcon = new Image(ClassLoader.getSystemResourceAsStream("/assets/unkown_server.png"));
 
 		imgViewServer = new ImageView(serverIcon);
 		imgViewServer.setFitHeight(64);
