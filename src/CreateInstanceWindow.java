@@ -186,7 +186,7 @@ public class CreateInstanceWindow extends Stage {
 			}
 		});
 		createbtn.setPrefSize(100, 30);
-		hboxButtonBox.getChildren().addAll(cancelbtn, createbtn);
+		hboxButtonBox.getChildren().addAll(createbtn, cancelbtn);
 
 		layout.getChildren().addAll(imgpane, vboxName, vboxServerJarFilePopup, version, eula, hboxButtonBox);
 

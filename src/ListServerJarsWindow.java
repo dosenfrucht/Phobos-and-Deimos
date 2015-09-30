@@ -6,13 +6,18 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import net.demus_intergalactical.serverman.Globals;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 
 public class ListServerJarsWindow extends Stage {
@@ -24,7 +29,7 @@ public class ListServerJarsWindow extends Stage {
 	private TableColumn tblColName = new TableColumn("Name");
 	private TableColumn tblColType = new TableColumn("Type");
 
-	private HBox hboxBtnPanel = new HBox(50);
+	private BorderPane bpBtnPanel = new BorderPane();
 	private FileChooser fileChooser = new FileChooser();
 
 	private HBox hboxLeftBtns = new HBox(10);
@@ -46,7 +51,7 @@ public class ListServerJarsWindow extends Stage {
 		Scene scene = new Scene(layout);
 		this.setScene(scene);
 
-		tblView.setPrefSize(300, 400);
+		tblView.setPrefSize(300, 300);
 		fillTable(tblColName, tblColType);
 		tblView.getColumns().addAll(tblColName, tblColType);
 
@@ -55,18 +60,18 @@ public class ListServerJarsWindow extends Stage {
 		btnBrowse.setPrefSize(50, 30);
 
 		btnBrowse.setOnAction(e -> {
-			File jar = fileChooser.showOpenDialog(this);
-			if (jar != null) {
-				if (jar.getName().endsWith(".jar")) {
-					serverJar = jar;
-					this.close();
-				} else {
-					AlertWindow aw = new AlertWindow("Select server-jar", "The server-jar has to be a JAR", Alert.AlertType.ERROR);
+            File jar = fileChooser.showOpenDialog(this);
+            if (jar != null) {
+                if (jar.getName().endsWith(".jar")) {
+                    serverJar = jar;
+                    this.close();
+                } else {
+                    AlertWindow aw = new AlertWindow("Select server-jar", "The server-jar has to be a JAR", Alert.AlertType.ERROR);
 
-					aw.showAndWait();
-				}
-			}
-		});
+                    aw.showAndWait();
+                }
+            }
+        });
 		hboxLeftBtns.getChildren().addAll(btnRefresh, btnBrowse);
 
 		hboxRightBtns.setAlignment(Pos.CENTER_RIGHT);
@@ -74,20 +79,32 @@ public class ListServerJarsWindow extends Stage {
 		btnCancel.setPrefSize(80, 30);
 		btnOk.setPrefSize(50, 30);
 		btnOk.setOnAction(e -> {
-			if (serverJar != null) {
-				this.close();
-			} else {
-				AlertWindow aw = new AlertWindow("Selecr server-jar", "Please select a server-jar from the list or btnBrowse for one on your PC manually", Alert.AlertType.ERROR);
+            if (serverJar != null) {
+                this.close();
+            } else if (tblView.getSelectionModel().getSelectedItem() != null) {
+                ServerInstanceVersion siv = (ServerInstanceVersion)tblView.getSelectionModel().getSelectedItem();
+                try {
+					File f = new File(Globals.getServerManConfig().get("versions_home") + File.separator + "minecraft_server." + siv.getVersionName() + ".jar");
+					if (!f.exists()) {
+						FileUtils.copyURLToFile(new URL(siv.getLocation()), new File(Globals.getServerManConfig().get("versions_home") + File.separator + "minecraft_server." + siv.getVersionName() + ".jar"));
+					}
+                    this.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            } else {
+                AlertWindow aw = new AlertWindow("Selecr server-jar", "Please select a server-jar from the list or btnBrowse for one on your PC manually", Alert.AlertType.ERROR);
 
-				aw.showAndWait();
-			}
+                aw.showAndWait();
+            }
 
-		});
-		hboxRightBtns.getChildren().addAll(btnCancel, btnOk);
+        });
+		hboxRightBtns.getChildren().addAll(btnOk, btnCancel);
 
-		hboxBtnPanel.getChildren().addAll(hboxLeftBtns, hboxRightBtns);
+        bpBtnPanel.setLeft(hboxLeftBtns);
+        bpBtnPanel.setRight(hboxRightBtns);
 
-		layout.getChildren().addAll(tblView, hboxBtnPanel);
+		layout.getChildren().addAll(tblView, bpBtnPanel);
 	}//public ListServerJarsWindow()
 
 
@@ -100,7 +117,9 @@ public class ListServerJarsWindow extends Stage {
 		ObservableList<ServerInstanceVersion> data = ServerInstanceVersion.getAllVersions();
 
 		tblColName.setCellValueFactory(new PropertyValueFactory<ServerInstanceVersion, String>("versionName"));
-		tblColType.setCellValueFactory(new PropertyValueFactory<ServerInstanceVersion, String>("location"));
+        tblColName.setPrefWidth(208);
+		tblColType.setCellValueFactory(new PropertyValueFactory<ServerInstanceVersion, String>("versionType"));
+        tblColType.setPrefWidth(100);
 
 
 		tblView.setItems(data);
