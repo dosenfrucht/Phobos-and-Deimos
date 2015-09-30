@@ -16,6 +16,7 @@ import net.demus_intergalactical.serverman.Globals;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
@@ -86,7 +87,9 @@ public class ListServerJarsWindow extends Stage {
                 try {
 					File f = new File(Globals.getServerManConfig().get("versions_home") + File.separator + "minecraft_server." + siv.getVersionName() + ".jar");
 					if (!f.exists()) {
+
 						FileUtils.copyURLToFile(new URL(siv.getLocation()), new File(Globals.getServerManConfig().get("versions_home") + File.separator + "minecraft_server." + siv.getVersionName() + ".jar"));
+
 					}
 					serverJar = f;
                     this.close();
@@ -94,7 +97,7 @@ public class ListServerJarsWindow extends Stage {
                     e1.printStackTrace();
                 }
             } else {
-                AlertWindow aw = new AlertWindow("Selecr server-jar", "Please select a server-jar from the list or btnBrowse for one on your PC manually", Alert.AlertType.ERROR);
+                AlertWindow aw = new AlertWindow("Select server-jar", "Please select a server-jar from the list or btnBrowse for one on your PC manually", Alert.AlertType.ERROR);
 
                 aw.showAndWait();
             }
