@@ -13,69 +13,69 @@ import java.util.List;
 
 public class Main extends Application {
 
-    Stage window;
+	Stage window;
 
-    @Override
-    public void start(Stage primaryStage) {
-        window = primaryStage;
-        window.minHeightProperty().set(630);
-        window.minWidthProperty().set(1024);
-        //Font.loadFont("./assets/fonts/Minecraftia.ttf", 10);
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("style.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        window.setScene(new Scene(root));
-        window.setTitle("Server GUI");
-        window.setOnCloseRequest(e -> {
-            e.consume();
-            closeProgram();
-        });
+	@Override
+	public void start(Stage primaryStage) {
+		window = primaryStage;
+		window.minHeightProperty().set(630);
+		window.minWidthProperty().set(1024);
+		//Font.loadFont("./assets/fonts/Minecraftia.ttf", 10);
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource("style.fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		window.setScene(new Scene(root));
+		window.setTitle("Server GUI");
+		window.setOnCloseRequest(e -> {
+			e.consume();
+			closeProgram();
+		});
 
-        //root.lookup("#serverdisplay").setStyle("-fx-font-family: Minecraftia;");
+		//root.lookup("#serverdisplay").setStyle("-fx-font-family: Minecraftia;");
 
 
-        try {
-            Globals.init();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        InstancePool.init();
-        UIController.init(root);
+		try {
+			Globals.init();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		InstancePool.init();
+		UIController.init(root);
 
-        List<ServerInstance> instanceList = Globals.getInstanceSettings().getAllInstances();
-        for (ServerInstance i : instanceList) {
-            InstanceContainer ic = new InstanceContainer();
-            ic.setInstance(i);
-            ic.init();
-            ic.addServerInstanceToList();
-            InstancePool.set(i.getServerInstanceID(), ic);
-        }
+		List<ServerInstance> instanceList = Globals.getInstanceSettings().getAllInstances();
+		for (ServerInstance i : instanceList) {
+			InstanceContainer ic = new InstanceContainer();
+			ic.setInstance(i);
+			ic.init();
+			ic.addServerInstanceToList();
+			InstancePool.set(i.getServerInstanceID(), ic);
+		}
 
-        window.show();
-    }
+		window.show();
+	}
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+	public static void main(String[] args) {
+		launch(args);
+	}
 
-    public void closeProgram() {
-        for (String s : InstancePool.getAllInstanceIDs()) {
-            if (InstancePool.get(s).getInstance().getProcess() != null) {
-                InstancePool.get(s).getInstance().stop();
-            }
-        }
+	public void closeProgram() {
+		for (String s : InstancePool.getAllInstanceIDs()) {
+			if (InstancePool.get(s).getInstance().getProcess() != null) {
+				InstancePool.get(s).getInstance().stop();
+			}
+		}
 
-        WindowRegistry.closeAllStages();
+		WindowRegistry.closeAllStages();
 
-        window.close();
+		window.close();
 
-        System.exit(0);
-    }
+		System.exit(0);
+	}
 
 
 }

@@ -7,40 +7,38 @@ import java.io.FileNotFoundException;
 
 public class Controller {
 
-    public TextField input;
-    public InlineCssTextArea console;
-    String instanceID;
+	public TextField input;
+	public InlineCssTextArea console;
+	String instanceID;
 
-    public void setInstance(String instanceID) {
-        this.instanceID = instanceID;
-    }
+	public void setInstance(String instanceID) {
+		this.instanceID = instanceID;
+	}
 
-    public void onNewInstancePressed() throws FileNotFoundException {
-        CreateInstanceWindow ciw = new CreateInstanceWindow();
+	public void onNewInstancePressed() throws FileNotFoundException {
+		CreateInstanceWindow ciw = new CreateInstanceWindow();
 
-        ciw.show();
-    }
+		ciw.show();
+	}
 
-    public void btnSendOnClick() {
-        if(UIController.getActiveInstance() != null) {
-            InstancePool.get(UIController.getActiveInstance()).getInstance().getProcess().send(input.getText());
-            input.setText("");
-        }
-    }
+	public void btnSendOnClick() {
+		if (UIController.getActiveInstance() != null) {
+			InstancePool.get(UIController.getActiveInstance()).getInstance().getProcess().send(input.getText());
+			input.setText("");
+		}
+	}
 
-    public void btnCloseOnClick() {
-        System.out.println("closing??!?");
-    }
+	public void btnCloseOnClick() {
+		System.out.println("closing??!?");
+	}
 
-    public void onInputKeyPressed(KeyEvent ke) {
-        if ((ke.getCode() == KeyCode.ENTER) ||
-                (ke.getCode() == KeyCode.TAB)) {
-            ke.consume();
-            btnSendOnClick();
-        }
-    }
-
-
+	public void onInputKeyPressed(KeyEvent ke) {
+		if ((ke.getCode() == KeyCode.ENTER) ||
+			(ke.getCode() == KeyCode.TAB)) {
+			ke.consume();
+			btnSendOnClick();
+		}
+	}
 
 
 }
