@@ -1,10 +1,16 @@
+/*
 @font-face {
-    font-family: "minecraft";
-    src: url("../../../assets/fonts/minecraft.ttf");
+    -fx-font-family: "minecraft";
+    src: url("/minecraft.ttf");
+}*/
+@font-face {
+    -fx-font-family: 'minecraft';
+    src: url('minecraft.ttf');
 }
+
 .root {
     /*-fx-background-image: url("dirt_bg.png");*/
-    -fx-background-image: url("../../../assets/dirt_console.png");
+    -fx-background-image: url("/assets/dirt_console.png");
     -fx-font-family: "minecraft";
     -fx-font-size: 14;
 
@@ -83,16 +89,14 @@
 ************************************/
 
 #btnSend {
-    -fx-background-image: url("../../../assets/button40_center.png"), url("../../../assets/button40_right.png"), url("../../../assets/button40_left.png");
+    -fx-background-image: url("/assets/button40_center.png"), url("/assets/button40_right.png"), url("/assets/button40_left.png");
     -fx-background-position: center, right, left;
     -fx-background-repeat: repeat-x, no-repeat, no-repeat;
     -fx-background-color: transparent;
-    -fx-background-radius: 0em;
-    -fx-text-fill: #E0E0E0;
     -fx-font-size: 14px;
 }
 #btnSend:hover {
-    -fx-background-image: url("../../../assets/button40_center_hover.png"), url("../../../assets/button40_right_hover.png"), url("../../../assets/button40_left_hover.png");
+    -fx-background-image: url("/assets/button40_center_hover.png"), url("/assets/button40_right_hover.png"), url("/assets/button40_left_hover.png");
     -fx-background-position: center, right, left;
     -fx-background-repeat: repeat-x, no-repeat, no-repeat;
     -fx-background-color: transparent;

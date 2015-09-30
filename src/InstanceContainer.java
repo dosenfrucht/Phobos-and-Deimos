@@ -18,7 +18,6 @@ import net.demus_intergalactical.serverman.instance.ServerInstance;
 import net.demus_intergalactical.serverproperties.ServerProperties;
 import org.apache.commons.io.FileUtils;
 import org.fxmisc.richtext.InlineCssTextArea;
-import org.reactfx.util.PentaConsumer;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -43,6 +42,9 @@ public class InstanceContainer {
 
 	int playerCount;
 	Label playerlb;
+
+	VBox right = new VBox(10);
+	HBox topright = new HBox(10);
 
 	public InstanceContainer() {
 
@@ -209,11 +211,7 @@ public class InstanceContainer {
 		try {
 			icon = new ImageView(new Image("file:" + instance.getIcon().getPath()));
 		} catch (NullPointerException e) {
-			try {
-				icon = new ImageView(new Image(new FileInputStream(new File("./assets/unknown_server.png")), 64, 64, true, true));
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
+			icon = new ImageView(new Image(Main.class.getResourceAsStream("assets/unknown_server.png"), 64, 64, true, true));
 		}
 
 		GridPane center = new GridPane();
@@ -224,14 +222,10 @@ public class InstanceContainer {
 		center.add(name, 0, 0);
 		center.add(port, 0, 1);
 
-		VBox right = new VBox(10);
-		HBox topright = new HBox(10);
-		status = null;
-		try {
-			status = new ImageView(new Image(new FileInputStream(new File("./assets/server_status_off.png")), 20, 14, true, false));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+
+
+		status = new ImageView(new Image(Main.class.getResourceAsStream("assets/server_status_off.png"), 20, 14, true, false));
+
 		playerlb = new Label(playerCount + "/" + properties.getInteger("max-players"));
 		playerlb.setId("lblPlayer");
 		topright.getChildren().addAll(playerlb, status);
@@ -370,13 +364,10 @@ public class InstanceContainer {
 
 	public void setInstanceStatusIcon(boolean isOn) {
 		System.out.println("ServerInstance status changed to: " + (isOn ? "on" : "off"));
-		try {
-			String path = "./assets/server_status_" + (isOn ? "on" : "off") + ".png";
-			Image stOn = new Image(new FileInputStream(new File(path)), 20, 14, true, false);
-			status.setImage(stOn);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+
+		String path = "assets/server_status_" + (isOn ? "on" : "off") + ".png";
+		Image stOn = new Image(Main.class.getResourceAsStream(path), 20, 14, true, false);
+		status.setImage(stOn);
 	}
 }
 

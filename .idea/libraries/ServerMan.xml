@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/ServerMan.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/richtextfx-fat-0.6.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ServerProperties.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

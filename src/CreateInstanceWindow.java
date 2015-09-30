@@ -13,10 +13,7 @@ import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 import org.apache.commons.io.FileUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class CreateInstanceWindow extends Stage {
 	public static final int SERVER_ICON_SIZE = 64;
@@ -47,6 +44,8 @@ public class CreateInstanceWindow extends Stage {
 	private TextField tfVersionInput = new TextField();
 
 	private HBox hboxButtonBox = new HBox(10);
+	private Button cancelbtn = new Button("Cancel");
+	private Button createbtn = new Button("Create");
 
 
 	public CreateInstanceWindow() throws FileNotFoundException {
@@ -59,7 +58,8 @@ public class CreateInstanceWindow extends Stage {
 
 		si = instCont.getInstance();
 
-		Image serverIcon = new Image(ClassLoader.getSystemResourceAsStream("/assets/unkown_server.png"));
+
+		Image serverIcon = new Image(Main.class.getResourceAsStream("assets/unknown_server.png"));
 
 		imgViewServer = new ImageView(serverIcon);
 		imgViewServer.setFitHeight(64);
@@ -140,12 +140,9 @@ public class CreateInstanceWindow extends Stage {
 		CheckBox eula = new CheckBox("Do you agree with the " + eulalink.getText());
 		//(https://account.mojang.com/documents/minecraft_eula)
 
-		HBox hboxButtonBox = new HBox(10);
 		hboxButtonBox.setAlignment(Pos.CENTER);
-		Button cancelbtn = new Button("Cancel");
 		cancelbtn.setPrefSize(100, 30);
 		cancelbtn.setOnAction(e -> this.close());
-		Button createbtn = new Button("Create");
 		createbtn.setOnAction(e -> {
 			if (!tfNameInput.getText().equals("") && !tfServerJarFileInput.getText().equals("") && !tfVersionInput.getText().equals("")) {
 				if (eula.isSelected()) {
