@@ -88,6 +88,7 @@ public class ListServerJarsWindow extends Stage {
 					if (!f.exists()) {
 						FileUtils.copyURLToFile(new URL(siv.getLocation()), new File(Globals.getServerManConfig().get("versions_home") + File.separator + "minecraft_server." + siv.getVersionName() + ".jar"));
 					}
+					serverJar = f;
                     this.close();
                 } catch (IOException e1) {
                     e1.printStackTrace();
