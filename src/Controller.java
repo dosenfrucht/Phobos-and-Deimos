@@ -3,24 +3,29 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import java.io.FileNotFoundException;
+
 public class Controller {
 
     public TextField input;
     public InlineCssTextArea console;
-    public InlineCssTextArea test;
     String instanceID;
 
     public void setInstance(String instanceID) {
         this.instanceID = instanceID;
     }
 
-    public void onNewInstancePressed() {
-        CreateInstanceWindow.display();
+    public void onNewInstancePressed() throws FileNotFoundException {
+        CreateInstanceWindow ciw = new CreateInstanceWindow();
+
+        ciw.show();
     }
 
     public void btnSendOnClick() {
-        InstancePool.get(UIController.getActiveInstance()).getInstance().getProcess().send(input.getText());
-        input.setText("");
+        if(UIController.getActiveInstance() != null) {
+            InstancePool.get(UIController.getActiveInstance()).getInstance().getProcess().send(input.getText());
+            input.setText("");
+        }
     }
 
     public void btnCloseOnClick() {
@@ -28,10 +33,8 @@ public class Controller {
     }
 
     public void onInputKeyPressed(KeyEvent ke) {
-        if (ke.getCode() == KeyCode.ENTER) {
-            btnSendOnClick();
-        }
-        if (ke.getCode() == KeyCode.TAB) {
+        if ((ke.getCode() == KeyCode.ENTER) ||
+                (ke.getCode() == KeyCode.TAB)) {
             ke.consume();
             btnSendOnClick();
         }

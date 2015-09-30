@@ -3,7 +3,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -17,7 +16,6 @@ import net.demus_intergalactical.serverman.StatusHandler;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 import org.apache.commons.io.FileUtils;
 import org.fxmisc.richtext.InlineCssTextArea;
-import org.fxmisc.richtext.StyledDocument;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -142,7 +140,9 @@ public class InstanceContainer {
         });
         MenuItem deleteInstance = new MenuItem("Delete instance");
         deleteInstance.setOnAction(e -> {
-            if (!ConfirmWindow.display("Delete instance", "Are you sure you want to delete this instance?\nAll worlds, configs, etc. will be\ndeleted forever (a long time!)")) {
+            ConfirmWindow cw = new ConfirmWindow("Delete instance", "Are you sure you want to delete this instance?\nAll worlds, configs, etc. will be\ndeleted forever (a long time!)");
+
+            if (!cw.waitAndGetResult()) {
                 return;
             }
             UIController.removeServer(serverContainer);
@@ -168,8 +168,8 @@ public class InstanceContainer {
         }
 
         GridPane center = new GridPane();
-        Label name = new Label("Name: " + instance.getName());
-        Label port = new Label("Port: xxxxx");
+        Label name = new Label(instance.getName());
+        Label port = new Label("xxxxx");
         center.add(name, 0, 0);
         center.add(port, 0, 1);
 
@@ -316,7 +316,7 @@ public class InstanceContainer {
     }
 
     public void setInstanceStatusIcon(boolean isOn) {
-        System.out.println(isOn);
+        System.out.println("ServerInstance status changed to: " + (isOn ? "on" : "off"));
         try {
             String path = "./assets/server_status_" + (isOn ? "on" : "off") + ".png";
             Image stOn = new Image(new FileInputStream(new File(path)), 20, 14, true, false);
