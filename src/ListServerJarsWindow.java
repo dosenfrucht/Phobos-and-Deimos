@@ -16,10 +16,8 @@ import net.demus_intergalactical.serverman.Globals;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Map;
 
 public class ListServerJarsWindow extends Stage {
 	private File serverJar;
@@ -61,18 +59,19 @@ public class ListServerJarsWindow extends Stage {
 		btnBrowse.setPrefSize(50, 30);
 
 		btnBrowse.setOnAction(e -> {
-            File jar = fileChooser.showOpenDialog(this);
-            if (jar != null) {
-                if (jar.getName().endsWith(".jar")) {
-                    serverJar = jar;
-                    this.close();
-                } else {
-                    AlertWindow aw = new AlertWindow("Select server-jar", "The server-jar has to be a JAR", Alert.AlertType.ERROR);
+			File jar = fileChooser.showOpenDialog(this);
+			if (jar != null) {
+				if (jar.getName().endsWith(".jar")) {
+					serverJar = jar;
+					this.close();
+				} else {
+					AlertWindow aw;
+					aw = new AlertWindow("Select server .jar", "The server .jar has to be a JAR", Alert.AlertType.ERROR);
 
-                    aw.showAndWait();
-                }
-            }
-        });
+					aw.showAndWait();
+				}
+			}
+		});
 		hboxLeftBtns.getChildren().addAll(btnRefresh, btnBrowse);
 
 		hboxRightBtns.setAlignment(Pos.CENTER_RIGHT);
@@ -80,11 +79,11 @@ public class ListServerJarsWindow extends Stage {
 		btnCancel.setPrefSize(80, 30);
 		btnOk.setPrefSize(50, 30);
 		btnOk.setOnAction(e -> {
-            if (serverJar != null) {
-                this.close();
-            } else if (tblView.getSelectionModel().getSelectedItem() != null) {
-                ServerInstanceVersion siv = (ServerInstanceVersion)tblView.getSelectionModel().getSelectedItem();
-                try {
+			if (serverJar != null) {
+				this.close();
+			} else if (tblView.getSelectionModel().getSelectedItem() != null) {
+				ServerInstanceVersion siv = (ServerInstanceVersion) tblView.getSelectionModel().getSelectedItem();
+				try {
 					File f = new File(Globals.getServerManConfig().get("versions_home") + File.separator + "minecraft_server." + siv.getVersionName() + ".jar");
 					if (!f.exists()) {
 
@@ -92,21 +91,21 @@ public class ListServerJarsWindow extends Stage {
 
 					}
 					serverJar = f;
-                    this.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            } else {
-                AlertWindow aw = new AlertWindow("Select server-jar", "Please select a server-jar from the list or btnBrowse for one on your PC manually", Alert.AlertType.ERROR);
+					this.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			} else {
+				AlertWindow aw = new AlertWindow("Select server-jar", "Please select a server-jar from the list or btnBrowse for one on your PC manually", Alert.AlertType.ERROR);
 
-                aw.showAndWait();
-            }
+				aw.showAndWait();
+			}
 
-        });
+		});
 		hboxRightBtns.getChildren().addAll(btnOk, btnCancel);
 
-        bpBtnPanel.setLeft(hboxLeftBtns);
-        bpBtnPanel.setRight(hboxRightBtns);
+		bpBtnPanel.setLeft(hboxLeftBtns);
+		bpBtnPanel.setRight(hboxRightBtns);
 
 		layout.getChildren().addAll(tblView, bpBtnPanel);
 	}//public ListServerJarsWindow()
@@ -121,9 +120,9 @@ public class ListServerJarsWindow extends Stage {
 		ObservableList<ServerInstanceVersion> data = ServerInstanceVersion.getAllVersions();
 
 		tblColName.setCellValueFactory(new PropertyValueFactory<ServerInstanceVersion, String>("versionName"));
-        tblColName.setPrefWidth(208);
+		tblColName.setPrefWidth(208);
 		tblColType.setCellValueFactory(new PropertyValueFactory<ServerInstanceVersion, String>("versionType"));
-        tblColType.setPrefWidth(100);
+		tblColType.setPrefWidth(100);
 
 
 		tblView.setItems(data);

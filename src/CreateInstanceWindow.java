@@ -25,13 +25,13 @@ public class CreateInstanceWindow extends Stage {
 	private VBox layout = new VBox(10);
 	private InstanceContainer instCont = new InstanceContainer();
 	private ServerInstance si;
-	private ImageView imgViewServer;
+	private ImageView imgViewServer = new ImageView();
 
 	private VBox vboxName = new VBox();
 	private Label lblNameInfo = new Label("Server Name");
 	private TextField tfNameInput = new TextField();
 
-	private StackPane imgpane;
+	private StackPane stackPnServer = new StackPane(imgViewServer);
 
 	private VBox vboxServerJarFilePopup = new VBox();
 	private Label lblServerJarFileInfo = new Label("Server .jar");
@@ -61,7 +61,7 @@ public class CreateInstanceWindow extends Stage {
 
 		Image serverIcon = new Image(Main.class.getResourceAsStream("assets/unknown_server.png"));
 
-		imgViewServer = new ImageView(serverIcon);
+		imgViewServer.setImage(serverIcon);
 		imgViewServer.setFitHeight(64);
 		imgViewServer.setFitWidth(64);
 
@@ -93,8 +93,7 @@ public class CreateInstanceWindow extends Stage {
 				}
 			}
 		});
-		imgpane = new StackPane(imgViewServer);
-		imgpane.setAlignment(Pos.CENTER);
+		stackPnServer.setAlignment(Pos.CENTER);
 
 		tfNameInput.setOnKeyTyped(e -> {
 			if (!e.getCharacter().matches("[\\w\\.!\\?\\-\\+,&'#\\(\\)\\[\\]\\s]")) {
@@ -106,11 +105,6 @@ public class CreateInstanceWindow extends Stage {
 
 
 		//FileChooser fileChooser = new FileChooser();
-
-		vboxServerJarFilePopup = new VBox();
-		lblServerJarFileInfo = new Label("Server-jar");
-		hboxServerJarFileSelect = new HBox(10);
-		tfServerJarFileInput = new TextField();
 
 		tfServerJarFileInput.setEditable(false);
 		tfServerJarFileInput.setPromptText("Select jar");
@@ -185,7 +179,7 @@ public class CreateInstanceWindow extends Stage {
 		createbtn.setPrefSize(100, 30);
 		hboxButtonBox.getChildren().addAll(createbtn, cancelbtn);
 
-		layout.getChildren().addAll(imgpane, vboxName, vboxServerJarFilePopup, version, eula, hboxButtonBox);
+		layout.getChildren().addAll(stackPnServer, vboxName, vboxServerJarFilePopup, version, eula, hboxButtonBox);
 
 		this.show();
 	}//private void display()

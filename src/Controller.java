@@ -34,7 +34,7 @@ public class Controller {
 
 	public void onInputKeyPressed(KeyEvent ke) {
 		if ((ke.getCode() == KeyCode.ENTER) ||
-			(ke.getCode() == KeyCode.TAB)) {
+				(ke.getCode() == KeyCode.TAB)) {
 			ke.consume();
 			btnSendOnClick();
 		}

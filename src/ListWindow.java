@@ -11,25 +11,25 @@ import javafx.stage.Window;
 
 public class ListWindow extends Dialog {
 
-    static Stage window;
+	static Stage window;
 
-    public static void display(String msg, Window parentWindow) {
-        window = new Stage();
-        window.setTitle("Error");
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setResizable(false);
-        VBox layout = new VBox(20);
-        layout.setPadding(new Insets(20, 20, 20, 20));
-        layout.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(layout);
-        window.setScene(scene);
+	public static void display(String msg, Window parentWindow) {
+		window = new Stage();
+		window.setTitle("Error");
+		window.initModality(Modality.APPLICATION_MODAL);
+		window.setResizable(false);
+		VBox layout = new VBox(20);
+		layout.setPadding(new Insets(20, 20, 20, 20));
+		layout.setAlignment(Pos.CENTER);
+		Scene scene = new Scene(layout);
+		window.setScene(scene);
 
-        Label error = new Label(msg);
-        Button ok = new Button("OK");
-        ok.setPrefSize(50, 30);
-        ok.setOnAction(e -> window.close());
-        layout.getChildren().addAll(error, ok);
+		Label error = new Label(msg);
+		Button ok = new Button("OK");
+		ok.setPrefSize(50, 30);
+		ok.setOnAction(e -> window.close());
+		layout.getChildren().addAll(error, ok);
 
-        window.showAndWait();
-    }
+		window.showAndWait();
+	}
 }

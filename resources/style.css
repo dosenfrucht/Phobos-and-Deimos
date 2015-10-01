@@ -1,11 +1,6 @@
-/*
-@font-face {
-    -fx-font-family: "minecraft";
-    src: url("/minecraft.ttf");
-}*/
 @font-face {
     -fx-font-family: 'minecraft';
-    src: url('minecraft.ttf');
+    src: url('assets/font/minecraft.ttf');
 }
 
 .root {
@@ -147,15 +142,15 @@
     -fx-background-color: rgba(0,0,0,0.50);
     /*-fx-font-family: "minecraft"; already applied by .root */
 }
-#lblPlayer {
+#lblPlayerCount {
     -fx-text-fill: #E0E0E0;
     -fx-font-size: 16;
 }
-#lblName {
+#lblInstanceName {
     -fx-text-fill: #E0E0E0;
     -fx-font-size: 16;
 }
-#lblPort {
+#lblInstancePort {
     -fx-text-fill: #AAAAAA;
 }
 
@@ -178,7 +173,7 @@
     -fx-border-color: transparent;
     -fx-border-width: 2;
 }
-#serverdisplay .cell:selected{
+#serverdisplay .cell:selected {
     -fx-background-color: black;
     -fx-border-color: #808080;
     -fx-border-width: 2;

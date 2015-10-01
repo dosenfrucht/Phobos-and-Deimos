@@ -28,52 +28,59 @@ import java.io.*;
 import java.net.URL;
 
 public class InstanceContainer {
+	public static final String DEFAULT_OUTPUT_JS = "/default/output.js";
+	public static final String DEFAULT_PROCESS_JS = "/default/process.js";
+	public static final String DEFAULT_MATCH_JS = "/default/match.js";
 
-	ServerInstance instance;
-	ServerProperties properties;
-	ObservableList<HBox> playerList = FXCollections.observableArrayList();
-	String instanceID;
-	ScriptEngine se;
-	ScriptEngine seProcess;
-	Boolean isActive;
-	InlineCssTextArea instanceLog;
 
-	ImageView status;
+	private ServerInstance currentInstance;
+	private ServerProperties properties;
+	private ObservableList<HBox> playerList = FXCollections.observableArrayList();
+	private String instanceID;
+	private ScriptEngine jsEngine;
+	private Boolean isActive;
+	private InlineCssTextArea instanceLog;
 
-	int playerCount;
-	Label playerlb;
+	private ImageView imgViewInstanceStatus;
 
-	VBox right = new VBox(10);
-	HBox topright = new HBox(10);
+	private ImageView imgViewIcon = new ImageView();
+	private GridPane gridInstanceCenter = new GridPane();
+	private Label lblInstanceName = new Label("ERR");
+	private Label lblInstancePort = new Label("ERR");
+	private int playerCount = 0;
+	private Label lblPlayerCount = new Label("ERR");
+
+	private VBox vboxInstanceRight = new VBox(10);
+	private HBox hboxInstanceTopRight = new HBox(10);
+
 
 	public InstanceContainer() {
-
-		instance = new ServerInstance();
+		currentInstance = new ServerInstance();
 		properties = new ServerProperties();
 		isActive = false;
 		instanceLog = new InlineCssTextArea();
-
 	}
+
 
 	public void init() {
 		initScript();
 
-		properties.setPropertiesFilePath(Globals.getServerManConfig().get("instances_home") + File.separator + instance.getServerInstanceID() + File.separator + "server.properties");
+		properties.setPropertiesFilePath(Globals.getServerManConfig().get("instances_home") + File.separator + currentInstance.getServerInstanceID() + File.separator + "server.properties");
 		try {
 			properties.load();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		instance.setOut((type, time, thread, loglvl, arg) -> {
+		currentInstance.setOut((type, time, thread, loglvl, arg) -> {
 			try {
-				((Invocable) seProcess).invokeFunction
-					("onOutput", type, time, thread,
-						loglvl, arg);
+				((Invocable) jsEngine).invokeFunction
+						("onOutput", type, time, thread,
+								loglvl, arg);
 			} catch (ScriptException | NoSuchMethodException e) {
 				e.printStackTrace();
 			}
 		});
-		instance.setPlayerHandler(new PlayerHandler() {
+		currentInstance.setPlayerHandler(new PlayerHandler() {
 			@Override
 			public void onPlayerJoined(String player) {
 				addPlayerToList(player);
@@ -84,7 +91,7 @@ public class InstanceContainer {
 				removePlayerFromList(player);
 			}
 		});
-		instance.setStatusHandler(new StatusHandler() {
+		currentInstance.setStatusHandler(new StatusHandler() {
 			@Override
 			public void onStatusStarted() {
 				setInstanceStatusIcon(true);
@@ -96,69 +103,94 @@ public class InstanceContainer {
 			}
 		});
 		try {
-			instance.load();
-			((Invocable) seProcess).invokeFunction("init");
-		} catch (NoSuchMethodException | IOException | ScriptException e) {
+			currentInstance.load();
+			((Invocable) jsEngine).invokeFunction("init");
+		} catch (NoSuchMethodException | ScriptException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			try {
+				System.out.println("could not load currentInstance");
+				String matchScriptPath = Globals.getServerManConfig()
+						.get("instances_home") + File.separator
+						+ instanceID + File.separator + "match.js";
+				File matchScriptFile = new File(matchScriptPath);
+
+				if (!matchScriptFile.exists() || matchScriptFile.isDirectory()) {
+					System.out.println("copying default match.js");
+					FileUtils.copyURLToFile(Main.class.getResource(DEFAULT_MATCH_JS), matchScriptFile);
+				}
+			} catch (IOException ex) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void initScript() {
-
 		OutputHandler output
-			= (type, time, thread, loglvl, arg) -> {
+				= (type, time, thread, loglvl, arg) -> {
 			try {
-				((Invocable) se).invokeFunction
-					("write", type, time, thread,
-						loglvl, arg);
+				((Invocable) jsEngine).invokeFunction
+						("write", type, time, thread,
+								loglvl, arg);
 			} catch (ScriptException | NoSuchMethodException e) {
 				e.printStackTrace();
 			}
 		};
 
-		instanceID = instance.getServerInstanceID();
+		instanceID = currentInstance.getServerInstanceID();
 		String outputScriptPath = Globals.getServerManConfig()
-			.get("instances_home") + File.separator
-			+ instanceID + File.separator + "output.js";
+				.get("instances_home") + File.separator
+				+ instanceID + File.separator + "output.js";
 		File outputScriptFile = new File(outputScriptPath);
 		if (!outputScriptFile.exists()) {
-			String url = "http://serverman.demus-intergalactical.net/v/" + instance.getServerVersion() + "/output.js";
+			String url = "http://serverman.demus-intergalactical.net/v/" +
+					currentInstance.getServerVersion() +
+					"/output.js";
 			try {
 				FileUtils.copyURLToFile(new URL(url), outputScriptFile, 300000, 300000);
 			} catch (IOException e) {
-				e.printStackTrace();
+				try {
+					System.out.println("could not load [" + url + "], trying to use default file");
+					FileUtils.copyURLToFile(Main.class.getResource(DEFAULT_OUTPUT_JS), outputScriptFile);
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
 			}
 		}
 
-		ScriptEngineManager sm = new ScriptEngineManager();
-		se = sm.getEngineByName("JavaScript");
-		se.put("output", this);
+		ScriptEngineManager sem = new ScriptEngineManager();
+		jsEngine = sem.getEngineByName("JavaScript");
+		jsEngine.put("output", this);
 		try {
-			se.eval(new FileReader(outputScriptFile));
+			jsEngine.eval(new FileReader(outputScriptFile));
 		} catch (ScriptException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		String processScriptPath = Globals.getServerManConfig()
-			.get("instances_home") + File.separator
-			+ instanceID + File.separator + "process.js";
+				.get("instances_home") + File.separator
+				+ instanceID + File.separator + "process.js";
 		File processScriptFile = new File(processScriptPath);
 		if (!processScriptFile.exists()) {
-			String url = "http://serverman.demus-intergalactical" +
-				".net/v/" + instance.getServerVersion() +
-				"/process.js";
+			String url = "http://serverman.demus-intergalactical.net/v/" +
+					currentInstance.getServerVersion() +
+					"/process.js";
 			try {
 				FileUtils.copyURLToFile(new URL(url), processScriptFile, 300000, 300000);
 			} catch (IOException e) {
-				e.printStackTrace();
+				try {
+					System.out.println("could not load [" + url + "], trying to use default file");
+					FileUtils.copyURLToFile(Main.class.getResource(DEFAULT_PROCESS_JS), processScriptFile);
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
 			}
 		}
 
-		seProcess = sm.getEngineByName("JavaScript");
-		seProcess.put("output", output);
-		seProcess.put("instance", this.getInstance());
+		jsEngine.put("output", output);
+		jsEngine.put("instance", this.getInstance());
 		try {
-			seProcess.eval(new FileReader(processScriptFile));
+			jsEngine.eval(new FileReader(processScriptFile));
 		} catch (ScriptException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -171,9 +203,9 @@ public class InstanceContainer {
 
 		ContextMenu contextMenu = new ContextMenu();
 		MenuItem start = new MenuItem("Start server");
-		start.setOnAction(e -> instance.run());
+		start.setOnAction(e -> currentInstance.run());
 		MenuItem stop = new MenuItem("Stop server");
-		stop.setOnAction(e -> instance.stop());
+		stop.setOnAction(e -> currentInstance.stop());
 		SeparatorMenuItem separatorMenuItem = new SeparatorMenuItem();
 		SeparatorMenuItem separatorMenuItem1 = new SeparatorMenuItem();
 		MenuItem moveup = new MenuItem("Move up");
@@ -184,7 +216,7 @@ public class InstanceContainer {
 		openFolder.setOnAction(e -> {
 			try {
 				Desktop desktop = Desktop.getDesktop();
-				desktop.open(new File(Globals.getServerManConfig().get("instances_home") + File.separator + instance.getServerInstanceID()));
+				desktop.open(new File(Globals.getServerManConfig().get("instances_home") + File.separator + currentInstance.getServerInstanceID()));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -200,101 +232,108 @@ public class InstanceContainer {
 			Globals.getInstanceSettings().remove(instanceID);
 			InstancePool.remove(instanceID);
 			try {
-				FileUtils.deleteDirectory(new File(Globals.getServerManConfig().get("instances_home") + File.separator + instance.getServerInstanceID()));
+				FileUtils.deleteDirectory(new File(Globals.getServerManConfig().get("instances_home") + File.separator + currentInstance.getServerInstanceID()));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		});
 		contextMenu.getItems().addAll(start, stop, separatorMenuItem, moveup, movedown, separatorMenuItem1, openFolder, deleteInstance);
 
-		ImageView icon = null;
 		try {
-			icon = new ImageView(new Image("file:" + instance.getIcon().getPath()));
+			imgViewIcon.setImage(new Image("file:" + currentInstance.getIcon().getPath()));
 		} catch (NullPointerException e) {
-			icon = new ImageView(new Image(Main.class.getResourceAsStream("assets/unknown_server.png"), 64, 64, true, true));
+			imgViewIcon.setImage(new Image(Main.class.getResourceAsStream("assets/unknown_server.png"), 64, 64, true, true));
 		}
 
-		GridPane center = new GridPane();
-		Label name = new Label(instance.getName());
-		name.setId("lblName");
-		Label port = new Label(properties.getInteger("server-port").toString());
-		port.setId("lblPort");
-		center.add(name, 0, 0);
-		center.add(port, 0, 1);
+		lblInstanceName = new Label(currentInstance.getName());
+		lblInstanceName.setId("lblInstanceName");
+		try {
+			lblInstancePort.setText(properties.getInteger("server-port").toString());
+		} catch (NullPointerException npe) {
+			lblInstancePort.setText("ERR");
+			System.out.println();
+		}
+		lblInstancePort.setId("lblInstancePort");
+		gridInstanceCenter.add(lblInstanceName, 0, 0);
+		gridInstanceCenter.add(lblInstancePort, 0, 1);
 
 
+		imgViewInstanceStatus = new ImageView(new Image(Main.class.getResourceAsStream("assets/server_status_off.png"), 20, 14, true, false));
 
-		status = new ImageView(new Image(Main.class.getResourceAsStream("assets/server_status_off.png"), 20, 14, true, false));
+		try {
+			lblPlayerCount.setText(playerCount + "/" + properties.getInteger("max-players"));
+		} catch (NullPointerException npe) {
+			lblPlayerCount.setText("ERR");
+			System.out.println();
+		}
+		lblPlayerCount.setId("lblPlayerCount");
+		hboxInstanceTopRight.getChildren().addAll(lblPlayerCount, imgViewInstanceStatus);
 
-		playerlb = new Label(playerCount + "/" + properties.getInteger("max-players"));
-		playerlb.setId("lblPlayer");
-		topright.getChildren().addAll(playerlb, status);
-
-		right.getChildren().addAll(topright);
+		vboxInstanceRight.getChildren().addAll(hboxInstanceTopRight);
 
 
-		serverContainer.setLeft(icon);
-		serverContainer.setCenter(center);
-		serverContainer.setRight(right);
+		serverContainer.setLeft(imgViewIcon);
+		serverContainer.setCenter(gridInstanceCenter);
+		serverContainer.setRight(vboxInstanceRight);
 		serverContainer.setOnContextMenuRequested(e -> contextMenu.show(serverContainer, e.getScreenX(), e.getScreenY()));
 		serverContainer.setOnMouseClicked(e -> UIController.changeInstance(instanceID));
-		BorderPane.setMargin(center, new Insets(0, 10, 0, 10));
+		BorderPane.setMargin(gridInstanceCenter, new Insets(0, 10, 0, 10));
 		UIController.addServer(serverContainer);
 	}
 
-	public void addPlayerToList(String player) {
+	public void addPlayerToList(String playerName) {
 		Platform.runLater(() -> {
 			if (playerList.size() == 1) {
 				//removeFakePlayerFromList();
 			}
 			playerCount++;
-			playerlb.setText(playerCount + "/" + properties.getInteger("max-players"));
-			MenuItem kick = new MenuItem("Kick " + player);
-			kick.setOnAction(e -> instance.send("kick " + player));
-			MenuItem op = new MenuItem("OP " + player);
-			op.setOnAction(e -> instance.send("op " + player));
+			lblPlayerCount.setText(playerCount + "/" + properties.getInteger("max-players"));
+			MenuItem kick = new MenuItem("Kick " + playerName);
+			kick.setOnAction(e -> currentInstance.send("kick " + playerName));
+			MenuItem op = new MenuItem("OP " + playerName);
+			op.setOnAction(e -> currentInstance.send("op " + playerName));
 
 			Menu gamemode = new Menu("Gamemode");
 			MenuItem survival = new MenuItem("Survival");
-			survival.setOnAction(e -> instance.send("gamemode 0 " + player));
+			survival.setOnAction(e -> currentInstance.send("gamemode 0 " + playerName));
 			MenuItem creative = new MenuItem("Creative");
-			creative.setOnAction(e -> instance.send("gamemode 1 " + player));
+			creative.setOnAction(e -> currentInstance.send("gamemode 1 " + playerName));
 			MenuItem adventure = new MenuItem("Adventure");
-			adventure.setOnAction(e -> instance.send("gamemode 2 " + player));
+			adventure.setOnAction(e -> currentInstance.send("gamemode 2 " + playerName));
 			MenuItem spectator = new MenuItem("Spectator");
-			spectator.setOnAction(e -> instance.send("gamemode 3 " + player));
+			spectator.setOnAction(e -> currentInstance.send("gamemode 3 " + playerName));
 			gamemode.getItems().addAll(survival, creative, adventure, spectator);
 
 			ContextMenu contextMenu = new ContextMenu(kick, op, gamemode);
 
 
-			HBox hbox = new HBox(5);
-			hbox.setOnContextMenuRequested(e -> contextMenu.show(hbox, e.getScreenX(), e.getScreenY()));
+			HBox hboxPlayerInfo = new HBox(5);
+			hboxPlayerInfo.setOnContextMenuRequested(e -> contextMenu.show(hboxPlayerInfo, e.getScreenX(), e.getScreenY()));
 
 			int facesize = 16;
 			int facesize1 = facesize + facesize / 8;
 
-			Image skin = new Image("https://s3.amazonaws.com/MinecraftSkins/" + player + ".png", facesize * 8, facesize * 8, true, false);
-			Image skin1 = new Image("https://s3.amazonaws.com/MinecraftSkins/" + player + ".png", facesize1 * 8, facesize1 * 8, true, false);
+			Image skin = new Image("https://s3.amazonaws.com/MinecraftSkins/" + playerName + ".png", facesize * 8, facesize * 8, true, false);
+			Image skin1 = new Image("https://s3.amazonaws.com/MinecraftSkins/" + playerName + ".png", facesize1 * 8, facesize1 * 8, true, false);
 
-			ImageView baselayer = new ImageView();
-			baselayer.setImage(skin);
+			ImageView imgViewPlayerSkinBaseLayer = new ImageView();
+			imgViewPlayerSkinBaseLayer.setImage(skin);
 			Rectangle2D face = new Rectangle2D(facesize, facesize, facesize, facesize);
-			baselayer.setViewport(face);
+			imgViewPlayerSkinBaseLayer.setViewport(face);
 
-			ImageView upperlayer = new ImageView();
-			upperlayer.setImage(skin1);
+			ImageView imgViewPlayerSkinUpperLayer = new ImageView();
+			imgViewPlayerSkinUpperLayer.setImage(skin1);
 			Rectangle2D decoration = new Rectangle2D(facesize1 * 5, facesize1, facesize1, facesize1);
-			upperlayer.setViewport(decoration);
+			imgViewPlayerSkinUpperLayer.setViewport(decoration);
 
-			StackPane imgpane = new StackPane();
-			imgpane.getChildren().addAll(baselayer, upperlayer);
-			//imgpane.setStyle("-fx-border-color: gray; -fx-border-width: 1; -fx-background-color: gray;");
+			StackPane stackPnPlayerSkin = new StackPane();
+			stackPnPlayerSkin.getChildren().addAll(imgViewPlayerSkinBaseLayer, imgViewPlayerSkinUpperLayer);
+			//stackPnPlayerSkin.setStyle("-fx-border-color: gray; -fx-border-width: 1; -fx-background-color: gray;");
 
-			Label lb = new Label(player);
+			Label lblPlayerName = new Label(playerName);
 
-			hbox.getChildren().addAll(imgpane, lb);
-			playerList.add(hbox);
+			hboxPlayerInfo.getChildren().addAll(stackPnPlayerSkin, lblPlayerName);
+			playerList.add(hboxPlayerInfo);
 		});
 	}
 
@@ -304,7 +343,7 @@ public class InstanceContainer {
 		}
 		Platform.runLater(() -> {
 			playerCount--;
-			playerlb.setText(playerCount + "/" + properties.getInteger("max-players"));
+			lblPlayerCount.setText(playerCount + "/" + properties.getInteger("max-players"));
 			playerList.remove(searchForPlayer(player));
 		});
 
@@ -325,6 +364,7 @@ public class InstanceContainer {
 		int s = playerList.size();
 		HBox tmp;
 		Label lb;
+
 		for (int i = 0; i < s; i++) {
 			tmp = playerList.get(i);
 			lb = (Label) tmp.getChildren().get(1);
@@ -355,19 +395,19 @@ public class InstanceContainer {
 	}
 
 	public ServerInstance getInstance() {
-		return instance;
+		return currentInstance;
 	}
 
 	public void setInstance(ServerInstance si) {
-		instance = si;
+		currentInstance = si;
 	}
 
 	public void setInstanceStatusIcon(boolean isOn) {
 		System.out.println("ServerInstance status changed to: " + (isOn ? "on" : "off"));
 
 		String path = "assets/server_status_" + (isOn ? "on" : "off") + ".png";
-		Image stOn = new Image(Main.class.getResourceAsStream(path), 20, 14, true, false);
-		status.setImage(stOn);
+		Image imgInstanceStatus = new Image(Main.class.getResourceAsStream(path), 20, 14, true, false);
+		imgViewInstanceStatus.setImage(imgInstanceStatus);
 	}
 }
 

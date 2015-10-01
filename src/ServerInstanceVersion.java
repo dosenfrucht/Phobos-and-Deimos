@@ -6,20 +6,20 @@ import java.util.Iterator;
 
 public class ServerInstanceVersion {
 	private static final ObservableList<ServerInstanceVersion> versionRegistry = FXCollections.observableArrayList(
-        new ServerInstanceVersion("15w40a", "Snapshot", "https://s3.amazonaws.com/Minecraft.Download/versions/15w40a/minecraft_server.15w40a.jar"),
-		new ServerInstanceVersion("1.8.8", "Release", "https://s3.amazonaws.com/Minecraft.Download/versions/1.8.8/minecraft_server.1.8.8.jar"),
-		new ServerInstanceVersion("1.8.1", "Release", "https://s3.amazonaws.com/Minecraft.Download/versions/1.8.1/minecraft_server.1.8.1.jar"),
-		new ServerInstanceVersion("1.6.4", "Release", "https://s3.amazonaws.com/Minecraft.Download/versions/1.6.4/minecraft_server.1.6.4.jar"));
+			new ServerInstanceVersion("15w40a", "Snapshot", "https://s3.amazonaws.com/Minecraft.Download/versions/15w40a/minecraft_server.15w40a.jar"),
+			new ServerInstanceVersion("1.8.8", "Release", "https://s3.amazonaws.com/Minecraft.Download/versions/1.8.8/minecraft_server.1.8.8.jar"),
+			new ServerInstanceVersion("1.8.1", "Release", "https://s3.amazonaws.com/Minecraft.Download/versions/1.8.1/minecraft_server.1.8.1.jar"),
+			new ServerInstanceVersion("1.6.4", "Release", "https://s3.amazonaws.com/Minecraft.Download/versions/1.6.4/minecraft_server.1.6.4.jar"));
 
 
 	private SimpleStringProperty versionName;
-    private SimpleStringProperty versionType;
+	private SimpleStringProperty versionType;
 	private SimpleStringProperty location;
 
 
 	public ServerInstanceVersion(String versionName, String versionType, String location) {
 		this.versionName = new SimpleStringProperty(versionName);
-        this.versionType = new SimpleStringProperty(versionType);
+		this.versionType = new SimpleStringProperty(versionType);
 		this.location = new SimpleStringProperty(location);
 	}//public ServerInstanceVersion(String versionName, String location)
 
@@ -33,13 +33,13 @@ public class ServerInstanceVersion {
 		this.versionName.set(versionName);
 	}//public void setVersionName(String versionName)
 
-    public String getVersionType() {
-        return versionType.getValue();
-    }
+	public String getVersionType() {
+		return versionType.getValue();
+	}
 
-    public void setVersionType(String versionType) {
-        this.versionType.setValue(versionType);
-    }
+	public void setVersionType(String versionType) {
+		this.versionType.setValue(versionType);
+	}
 
 	public String getLocation() {
 		return location.getValue();
