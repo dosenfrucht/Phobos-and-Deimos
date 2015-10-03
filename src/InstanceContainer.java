@@ -245,7 +245,7 @@ public class InstanceContainer {
 			imgViewIcon.setImage(new Image(Main.class.getResourceAsStream("assets/unknown_server.png"), 64, 64, true, true));
 		}
 
-		lblInstanceName = new Label(currentInstance.getName());
+		lblInstanceName.setText(currentInstance.getName());
 		lblInstanceName.setId("lblInstanceName");
 		try {
 			lblInstancePort.setText(properties.getInteger("server-port").toString());
