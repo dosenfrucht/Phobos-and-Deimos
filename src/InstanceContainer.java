@@ -199,7 +199,7 @@ public class InstanceContainer {
 	public void addServerInstanceToList() {
 
 		BorderPane serverContainer = new BorderPane();
-		serverContainer.setMaxWidth(330);
+		serverContainer.setMaxWidth(305);
 
 		ContextMenu contextMenu = new ContextMenu();
 		MenuItem start = new MenuItem("Start server");
@@ -276,7 +276,10 @@ public class InstanceContainer {
 		serverContainer.setCenter(gridInstanceCenter);
 		serverContainer.setRight(vboxInstanceRight);
 		serverContainer.setOnContextMenuRequested(e -> contextMenu.show(serverContainer, e.getScreenX(), e.getScreenY()));
-		serverContainer.setOnMouseClicked(e -> UIController.changeInstance(instanceID));
+		serverContainer.setOnMouseClicked(e -> {
+			UIController.changeInstance(instanceID);
+
+		});
 		BorderPane.setMargin(gridInstanceCenter, new Insets(0, 10, 0, 10));
 		UIController.addServer(serverContainer);
 	}

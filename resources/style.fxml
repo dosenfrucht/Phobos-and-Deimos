@@ -22,7 +22,7 @@
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding></ListView>
-      <MenuBar fx:id="menubarOptions" layoutY="0.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0">
+      <MenuBar fx:id="menubar" layoutY="0.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0">
         <menus>
           <Menu mnemonicParsing="false" text="Instances">
             <items>
@@ -31,10 +31,10 @@
                   <MenuItem mnemonicParsing="false" text="Properties" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit instance">
+          <Menu fx:id="editinstancemenu" mnemonicParsing="false" text="Edit instance" disable="true">
             <items>
-              <MenuItem mnemonicParsing="false" text="Server properties" />
-                  <MenuItem mnemonicParsing="false" text="Settings" />
+                <MenuItem mnemonicParsing="false" onAction="#onInstanceSettingsPressed" text="Instance settings" />
+                <MenuItem mnemonicParsing="false" onAction="#onServerPropertiesPressed" text="Server properties" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Settings">

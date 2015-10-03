@@ -3,6 +3,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import org.fxmisc.richtext.InlineCssTextArea;
@@ -15,9 +17,13 @@ public class UIController {
 	static ObservableList<BorderPane> serverList = FXCollections.observableArrayList();
 	static ListView<BorderPane> serverDisplay;
 	static String activeInstance;
+	static MenuBar menuBar;
+	static Menu editInstanceMenu;
 
 	public static void init(Parent root) {
 		Platform.runLater(() -> {
+			menuBar = (MenuBar) root.lookup("#menubar");
+			editInstanceMenu = menuBar.getMenus().get(1);
 			serverDisplay = (ListView<BorderPane>) root.lookup("#serverdisplay");
 			serverDisplay.setItems(serverList);
 			//serverDisplay.setCellFactory(param -> new ServerInstanceCell());
@@ -51,7 +57,14 @@ public class UIController {
 	}
 
 	public static void removeServer(BorderPane server) {
-		Platform.runLater(() -> serverList.remove(server));
+		Platform.runLater(() -> {
+			serverList.remove(server);
+			if(serverList.size() == 0) {
+				editInstanceMenu.setDisable(true);
+			}
+			activeInstance = null;
+		});
+
 	}
 
 	public static void changeInstance(String instance) {
@@ -61,6 +74,7 @@ public class UIController {
 		InstancePool.get(instance).setActive(true);
 		activeInstance = instance;
 		InstancePool.get(instance).onActivated();
+		editInstanceMenu.setDisable(false);
 	}
 
 	public static String getActiveInstance() {

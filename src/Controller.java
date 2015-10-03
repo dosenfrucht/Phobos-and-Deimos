@@ -21,6 +21,16 @@ public class Controller {
 		ciw.show();
 	}
 
+
+	public void onInstanceSettingsPressed() {
+
+	}
+
+	public void onServerPropertiesPressed() {
+		EditPropertiesWindow epw = new EditPropertiesWindow();
+		epw.show();
+	}
+
 	public void btnSendOnClick() {
 		if (UIController.getActiveInstance() != null) {
 			InstancePool.get(UIController.getActiveInstance()).getInstance().getProcess().send(input.getText());
