@@ -1,8 +1,7 @@
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -24,9 +23,9 @@ public class ListServerJarsWindow extends Stage {
 
 	private VBox layout = new VBox(10);
 
-	private TableView tblView = new TableView();
-	private TableColumn tblColName = new TableColumn("Name");
-	private TableColumn tblColType = new TableColumn("Type");
+	private TableView<ServerInstanceVersion> tblView = new TableView<>();
+	private TableColumn<ServerInstanceVersion, String> tblColName = new TableColumn<>("Name");
+	private TableColumn<ServerInstanceVersion, String> tblColType = new TableColumn<>("Type");
 
 	private BorderPane bpBtnPanel = new BorderPane();
 	private FileChooser fileChooser = new FileChooser();
@@ -52,6 +51,8 @@ public class ListServerJarsWindow extends Stage {
 
 		tblView.setPrefSize(300, 300);
 		fillTable(tblColName, tblColType);
+
+		//noinspection unchecked
 		tblView.getColumns().addAll(tblColName, tblColType);
 
 		hboxLeftBtns.setAlignment(Pos.CENTER_LEFT);
@@ -82,7 +83,7 @@ public class ListServerJarsWindow extends Stage {
 			if (serverJar != null) {
 				this.close();
 			} else if (tblView.getSelectionModel().getSelectedItem() != null) {
-				ServerInstanceVersion siv = (ServerInstanceVersion) tblView.getSelectionModel().getSelectedItem();
+				ServerInstanceVersion siv = tblView.getSelectionModel().getSelectedItem();
 				try {
 					File f = new File(Globals.getServerManConfig().get("versions_home") + File.separator + "minecraft_server." + siv.getVersionName() + ".jar");
 					if (!f.exists()) {
@@ -116,12 +117,12 @@ public class ListServerJarsWindow extends Stage {
 		return serverJar;
 	}//public File showAndGetFile()
 
-	private void fillTable(TableColumn tblColName, TableColumn tblColType) {
+	private void fillTable(TableColumn<ServerInstanceVersion, String> tblColName, TableColumn<ServerInstanceVersion, String> tblColType) {
 		ObservableList<ServerInstanceVersion> data = ServerInstanceVersion.getAllVersions();
 
-		tblColName.setCellValueFactory(new PropertyValueFactory<ServerInstanceVersion, String>("versionName"));
+		tblColName.setCellValueFactory(new PropertyValueFactory<>("versionName"));
 		tblColName.setPrefWidth(208);
-		tblColType.setCellValueFactory(new PropertyValueFactory<ServerInstanceVersion, String>("versionType"));
+		tblColType.setCellValueFactory(new PropertyValueFactory<>("versionType"));
 		tblColType.setPrefWidth(100);
 
 

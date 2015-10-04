@@ -24,9 +24,11 @@ public class UIController {
 		Platform.runLater(() -> {
 			menuBar = (MenuBar) root.lookup("#menubar");
 			editInstanceMenu = menuBar.getMenus().get(1);
+			//noinspection unchecked
 			serverDisplay = (ListView<BorderPane>) root.lookup("#serverdisplay");
 			serverDisplay.setItems(serverList);
 			//serverDisplay.setCellFactory(param -> new ServerInstanceCell());
+			//noinspection unchecked
 			playerDisplay = (ListView<HBox>) root.lookup("#playerdisplay");
 			console = (InlineCssTextArea) root.lookup("#console");
 		});

@@ -28,7 +28,7 @@ public class EditPropertiesWindow extends Stage {
 
 	private GridPane gpPropertyContainer = new GridPane();
 	private Label[] lblKeys = new Label[40];
-	private Map<String, Node> propertyNodeMap = new HashMap();
+	private Map<String, Node> propertyNodeMap = new HashMap<>();
 
 	private static final Map<String, Integer> propertyTypes;
 
@@ -46,7 +46,7 @@ public class EditPropertiesWindow extends Stage {
 
 	static {
 
-		propertyTypes = new HashMap<String, Integer>();
+		propertyTypes = new HashMap<>();
 
 		propertyTypes.put("allow-flight", PROPERTY_TYPE_BOOLEAN);
 		propertyTypes.put("allow-nether", PROPERTY_TYPE_BOOLEAN);
@@ -148,7 +148,7 @@ public class EditPropertiesWindow extends Stage {
 		for (String property : propertySet) {
 			if(property.equals("enable-command-block")) {
 				Label header = new Label("command");
-				gpPropertyContainer.setMargin(header, margin);
+				GridPane.setMargin(header, margin);
 				gpPropertyContainer.addRow(i + (offset++), header);
 			}
 
@@ -164,27 +164,30 @@ public class EditPropertiesWindow extends Stage {
 					tmpNode = new TextField(properties.getString(property));
 					break;
 				case PROPERTY_TYPE_INTEGER_COMBO:
-					tmpNode = new ComboBox<Integer>();
-
 					int tmpInt = properties.getInteger(property);
-					ComboBox<Integer> tmpIntCombo = (ComboBox<Integer>) tmpNode;
+					ComboBox<Integer> tmpIntCombo = new ComboBox<>();
+					tmpNode = tmpIntCombo;
 					ObservableList<Integer> intItems = tmpIntCombo.getItems();
 
-					if(property.equals("difficulty")) {
-						intItems.add(0);
-						intItems.add(1);
-						intItems.add(2);
-						intItems.add(3);
-					} else if(property.equals("gamemode")) {
-						intItems.add(0);
-						intItems.add(1);
-						intItems.add(2);
-						intItems.add(3);
-					} else if(property.equals("op-permission-level")) {
-						intItems.add(1);
-						intItems.add(2);
-						intItems.add(3);
-						intItems.add(4);
+					switch (property) {
+						case "difficulty":
+							intItems.add(0);
+							intItems.add(1);
+							intItems.add(2);
+							intItems.add(3);
+							break;
+						case "gamemode":
+							intItems.add(0);
+							intItems.add(1);
+							intItems.add(2);
+							intItems.add(3);
+							break;
+						case "op-permission-level":
+							intItems.add(1);
+							intItems.add(2);
+							intItems.add(3);
+							intItems.add(4);
+							break;
 					}
 
 					if(intItems.contains(tmpInt)) {
@@ -196,10 +199,9 @@ public class EditPropertiesWindow extends Stage {
 					tmpNode = new TextField(properties.getString(property));
 					break;
 				case PROPERTY_TYPE_STRING_COMBO:
-					tmpNode = new ComboBox<String>();
-
 					String tmpStr = properties.getString(property);
-					ComboBox<String> tmpStrCombo = (ComboBox<String>) tmpNode;
+					ComboBox<String> tmpStrCombo = new ComboBox<>();
+					tmpNode = tmpStrCombo;
 					ObservableList<String> strItems = tmpStrCombo.getItems();
 
 					if(property.equals("level-type")) {
@@ -220,8 +222,8 @@ public class EditPropertiesWindow extends Stage {
 					break;
 			}
 
-			gpPropertyContainer.setMargin(lblKeys[i], margin);
-			gpPropertyContainer.setMargin(tmpNode, margin);
+			GridPane.setMargin(lblKeys[i], margin);
+			GridPane.setMargin(tmpNode, margin);
 			gpPropertyContainer.addRow(i + offset, lblKeys[i]);
 			gpPropertyContainer.addRow(i + offset, tmpNode);
 			propertyNodeMap.put(property, tmpNode);

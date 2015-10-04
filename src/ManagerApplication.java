@@ -19,13 +19,15 @@ public class ManagerApplication extends Application {
 
 		primaryStage.minHeightProperty().set(630);
 		primaryStage.minWidthProperty().set(1024);
-		//Font.loadFont(getClass().getResourceAsStream("/assets/fonts/minecraft.ttf"), 10);
-		Parent root = null;
+		Font.loadFont(getClass().getResourceAsStream("/assets/fonts/minecraft.ttf"), 10);
+		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("style.fxml"));
 		} catch (IOException e) {
 			System.err.println("Style not loaded");
 			e.printStackTrace();
+			System.err.println("We honestly messed something up. Sorry.");
+			return;
 		}
 		primaryStage.setScene(new Scene(root));
 		primaryStage.setTitle("Server GUI");
@@ -37,9 +39,7 @@ public class ManagerApplication extends Application {
 
 		try {
 			Globals.init();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
+		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
 		InstancePool.init();
