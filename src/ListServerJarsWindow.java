@@ -40,6 +40,7 @@ public class ListServerJarsWindow extends Stage {
 
 
 	public ListServerJarsWindow() {
+		WindowRegistry.register(this);
 		this.setTitle("Select server-jar");
 		this.initModality(Modality.APPLICATION_MODAL);
 		this.setResizable(false);
@@ -129,4 +130,10 @@ public class ListServerJarsWindow extends Stage {
 		tblView.setItems(data);
 	}//private void fillTable(TableColumn tblColName, TableColumn tblColType)
 
+
+	@Override
+	public void close() {
+		WindowRegistry.remove(this);
+		super.close();
+	}//public void close()
 }//public class ListServerJarsWindow extends Stage

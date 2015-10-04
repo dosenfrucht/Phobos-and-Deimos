@@ -49,6 +49,7 @@ public class CreateInstanceWindow extends Stage {
 
 
 	public CreateInstanceWindow() throws FileNotFoundException {
+		WindowRegistry.register(this);
 		this.setTitle("Create new instance");
 		this.setResizable(false);
 

@@ -154,6 +154,12 @@
     -fx-text-fill: #AAAAAA;
 }
 
+#instanceContextMenu {
+    -fx-fill: #FF0000;
+    -fx-font-fill: #FF0000;
+    -fx-text-fill: #FF0000;
+}
+
 #serverdisplay .context-menu {
     -fx-background-color: rgba(0,0,0,0.80);
     -fx-border-color: rgba(0,0,127,0.60);
@@ -166,12 +172,13 @@
     -fx-background-color: transparent;
 }
 #serverdisplay .menu-item:hover {
-    -fx-background-color: rgba(50,50,50,0.60);
+    -fx-background-color: rgba(85,85,85,0.60);
 }
 #serverdisplay .cell{
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 2;
+    -fx-font-fill: #FFFFFF;
 }
 #serverdisplay .cell:selected {
     -fx-background-color: black;
