@@ -38,6 +38,7 @@ public class InstanceContainer {
 	private ObservableList<HBox> playerList = FXCollections.observableArrayList();
 	private String instanceID;
 	private ScriptEngine jsEngine;
+	private ScriptEngine jsProcessEngine;
 	private Boolean isActive;
 	private InlineCssTextArea instanceLog;
 
@@ -73,7 +74,7 @@ public class InstanceContainer {
 		}
 		currentInstance.setOut((type, time, thread, loglvl, arg) -> {
 			try {
-				((Invocable) jsEngine).invokeFunction
+				((Invocable) jsProcessEngine).invokeFunction
 						("onOutput", type, time, thread,
 								loglvl, arg);
 			} catch (ScriptException | NoSuchMethodException e) {
@@ -104,7 +105,7 @@ public class InstanceContainer {
 		});
 		try {
 			currentInstance.load();
-			((Invocable) jsEngine).invokeFunction("init");
+			((Invocable) jsProcessEngine).invokeFunction("init");
 		} catch (NoSuchMethodException | ScriptException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -187,10 +188,11 @@ public class InstanceContainer {
 			}
 		}
 
-		jsEngine.put("output", output);
-		jsEngine.put("instance", this.getInstance());
+		jsProcessEngine = sem.getEngineByName("JavaScript");
+		jsProcessEngine.put("output", output);
+		jsProcessEngine.put("instance", this.getInstance());
 		try {
-			jsEngine.eval(new FileReader(processScriptFile));
+			jsProcessEngine.eval(new FileReader(processScriptFile));
 		} catch (ScriptException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
