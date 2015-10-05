@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class WindowRegistry {
 	private static Map<String, Stage> registry = new HashMap<>();
+	private static Stage primaryStage = null;
 
 
 	public static void closeAllStages() {
@@ -33,4 +34,8 @@ public class WindowRegistry {
 	public static void remove(Stage window) {
 		registry.remove(window.toString(), window);
 	}//public static void register(Stage window)
+
+	public static void setPrimaryStage(Stage primaryStage) {
+		WindowRegistry.primaryStage = primaryStage;
+	}//public static void setPrimaryStage(Stage primaryStage)
 }//public class WindowRegistry
