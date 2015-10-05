@@ -6,6 +6,8 @@
       <root url="jar://$PROJECT_DIR$/lib/ServerProperties.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/ServerMan.jar!/" />
+    </SOURCES>
   </library>
 </component>
