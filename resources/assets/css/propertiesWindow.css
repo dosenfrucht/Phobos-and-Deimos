@@ -1,0 +1,141 @@
+#spContent {
+    /*-fx-background-image: url("/assets/dirt_console.png");*/
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-effect: innershadow(three-pass-box, #000000, 15, 0.5, 0, 0);
+}
+
+#gpPropertyContainer {
+   -fx-background-color: transparent;
+   -fx-background-image: url("/assets/dirt_console_dark.png");
+   -fx-padding: 10 10 10 10;
+}
+#gpPropertyContainer .label {
+   -fx-text-fill: white;
+   -fx-margin: 0 0 10 0;
+}
+#propertiesCategory {
+    -fx-font-size: 18;
+    -fx-margin: 10 10 10 10;
+}
+
+#header {
+    -fx-font-size: 18;
+    -fx-text-fill: white;
+}
+#hboxheader, #hboxbuttons {
+    -fx-padding: 10 10 10 10;
+}
+
+.root {
+    -fx-fill: #FF0000;
+    -fx-background-image: url("/assets/dirt_console.png");
+    -fx-font-family: "minecraft";
+    -fx-font-size: 14;
+    -fx-text-fill: #FFFFFF;
+}
+/************************************
+*           Textfield               *
+************************************/
+
+.text-field {
+    -fx-background-color: black;
+    -fx-border-color: #A0A0A0;
+    -fx-border-width: 2;
+    -fx-text-fill: #CCCCCC;
+}
+
+/************************************
+*           Scrollbar               *
+************************************/
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+	-fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 12 0 0;
+}
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-button {
+	-fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 0 12 0;
+}
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+	-fx-shape: " ";
+	-fx-padding:0;
+}
+.scroll-bar:horizontal,
+.scroll-bar:vertical {
+    -fx-background-color:transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: black;
+	-fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #C0C0C0;
+    -fx-effect: innershadow(three-pass-box, #808080, 0, 0, -2, -2);
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 0em;
+}
+
+/************************************
+*           Button                  *
+************************************/
+
+.button {
+    -fx-background-image: url("/assets/button40_center.png"), url("/assets/button40_right.png"), url("/assets/button40_left.png");
+    -fx-background-position: center, right, left;
+    -fx-height: 40;
+    -fx-background-repeat: repeat-x, no-repeat, no-repeat;
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+}
+.button:hover {
+    -fx-background-image: url("/assets/button40_center_hover.png"), url("/assets/button40_right_hover.png"), url("/assets/button40_left_hover.png");
+    -fx-background-position: center, right, left;
+    -fx-background-repeat: repeat-x, no-repeat, no-repeat;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-text-fill: #FFFFA0;
+}
+
+/************************************
+*           ComboBox                *
+************************************/
+
+.combo-box,
+.combo-box-popup .list-view {
+    -fx-background-color: black;
+    -fx-border-color: #A0A0A0;
+    -fx-border-width: 2;
+    -fx-text-fill: #CCCCCC;
+}
+
+.combo-box:hover {
+    -fx-background-color: black;
+    -fx-border-color: #A0A0A0;
+    -fx-border-width: 2;
+    -fx-text-fill: #CCCCCC;
+}
+
+.combo-box .arrow{
+    -fx-background-image: url("/assets/arrow_down.png");
+}
+.combo-box-popup .list-cell,
+.combo-box .list-cell {
+    -fx-text-fill: #CCCCCC;
+    -fx-background-color: transparent;
+}
+.combo-box .list-cell:hover {
+    -fx-background-color: rgba(85,85,85,0.60);
+}
