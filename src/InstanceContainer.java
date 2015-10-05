@@ -30,6 +30,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.FileAlreadyExistsException;
+import java.util.function.Function;
 
 public class InstanceContainer {
 	public static final String DEFAULT_OUTPUT_JS = "/default/output.js";
@@ -81,16 +82,13 @@ public class InstanceContainer {
 			boolean dontShow = false;
 			switch (type) {
 			case "chat":
-				dontShow = api.queueChat(type, time, thread,
-					loglvl, arg);
+				dontShow = api.queueChat(time, arg);
 				break;
 			case "joined":
-				dontShow = api.queuePlayerJoined(type, time, thread,
-					loglvl, arg);
+				dontShow = api.queuePlayerJoined(time, arg);
 				break;
 			case "left":
-				dontShow = api.queuePlayerLeft(type, time, thread,
-					loglvl, arg);
+				dontShow = api.queuePlayerLeft(time, arg);
 				break;
 			default:
 				dontShow = api.queue(type, time, thread,
@@ -151,7 +149,7 @@ public class InstanceContainer {
 	private void initPlugins() {
 		api = new APIManager(getInstance());
 		try {
-			PluginLoader.loadAll(api, getInstance());
+			PluginLoader.loadAll(api, getInstance(), this::appendToConsole);
 		} catch (FileNotFoundException | FileAlreadyExistsException e) {
 			e.printStackTrace();
 		}
@@ -388,7 +386,7 @@ public class InstanceContainer {
 		return -1;
 	}
 
-	public void appendToConsole(String color, String text) {
+	public Void appendToConsole(String color, String text) {
 		int currlength = instanceLog.getText().length();
 		instanceLog.appendText(text);
 		instanceLog.setStyle(currlength, currlength + text.length(), "-fx-fill:" + color + ";");
@@ -396,6 +394,7 @@ public class InstanceContainer {
 		if (isActive) {
 			UIController.appendToConsole(color, text);
 		}
+		return null;
 	}
 
 	public void setActive(boolean b) {
@@ -421,6 +420,13 @@ public class InstanceContainer {
 		String path = "assets/server_status_" + (isOn ? "on" : "off") + ".png";
 		Image imgInstanceStatus = new Image(Main.class.getResourceAsStream(path), 20, 14, true, false);
 		imgViewInstanceStatus.setImage(imgInstanceStatus);
+	}
+
+	public void send(String text) {
+		if (!api.queueInput(text)) {
+			// no-one wants to block the input
+			currentInstance.send(text);
+		}
 	}
 }
 

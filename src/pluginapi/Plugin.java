@@ -10,6 +10,8 @@ import javax.script.ScriptException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public class Plugin {
 
@@ -23,10 +25,11 @@ public class Plugin {
 	private String basePath;
 
 
-	public Plugin(String name, ServerInstance instance, APIManager apiManager) {
+	public Plugin(String name, ServerInstance instance, APIManager
+		apiManager, BiFunction<String, String, Void> writeFun) {
 		this.instance = instance;
 		this.apiManager = apiManager;
-		api = new API(instance, apiManager, this);
+		api = new API(instance, apiManager, this, writeFun);
 		basePath = Globals.getServerManConfig().get("instances_home")
 			+ File.separator + instance.getServerInstanceID()
 			+ File.separator + "plugins" + File.separator

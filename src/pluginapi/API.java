@@ -4,39 +4,32 @@ import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 
 import javax.script.ScriptEngine;
-import javax.script.ScriptException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.function.BiFunction;
 
 public class API {
 
 	public CommandAPI command;
 	public UtilAPI util;
+	public ConsoleAPI console;
 
 	private Plugin parent;
 
 	private ScriptEngine scriptEngine;
 
-	private List<ScriptObjectMirror> chatListener;
-	private List<ScriptObjectMirror> playerListenerJoined;
-	private List<ScriptObjectMirror> playerListenerLeft;
-	private List<ScriptObjectMirror> eventListener;
 	private APIManager apiManager;
 
 
 	public API(ServerInstance instance, APIManager apiManager, Plugin
-		parent) {
+		parent, BiFunction<String, String, Void> writeFun) {
 		this.apiManager = apiManager;
 		this.parent = parent;
 		command = new CommandAPI(instance);
-		chatListener = new ArrayList<>();
-		playerListenerJoined = new ArrayList<>();
-		playerListenerLeft = new ArrayList<>();
-		eventListener = new ArrayList<>();
+		console = new ConsoleAPI(writeFun);
 	}
 
+	public void registerInputListener(ScriptObjectMirror f) {
+		apiManager.registerInputListener(f);
+	}
 
 	public void registerChatListener(ScriptObjectMirror f) {
 		apiManager.registerChatListener(f);
@@ -48,7 +41,7 @@ public class API {
 	}
 
 	public void registerEventListener(ScriptObjectMirror f) {
-		registerEventListener(f);
+		apiManager.registerEventListener(f);
 	}
 
 	public boolean queueChat(Object time, Object arg) {
@@ -68,6 +61,10 @@ public class API {
 	public boolean queue(String type, Object time, String thread,
 	                     String loglvl, Object arg) {
 		return apiManager.queue(type, time, thread, loglvl, arg);
+	}
+
+	public boolean queueInput(String command) {
+		return apiManager.queueInput(command);
 	}
 
 	public void addToEngine(ScriptEngine scriptEngine) {

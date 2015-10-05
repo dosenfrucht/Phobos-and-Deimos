@@ -18,6 +18,7 @@ public class APIManager {
 	private List<ScriptObjectMirror> playerListenerJoined;
 	private List<ScriptObjectMirror> playerListenerLeft;
 	private List<ScriptObjectMirror> eventListener;
+	private List<ScriptObjectMirror> inputListener;
 
 
 	public APIManager(ServerInstance instance) {
@@ -26,8 +27,17 @@ public class APIManager {
 		playerListenerJoined = new ArrayList<>();
 		playerListenerLeft = new ArrayList<>();
 		eventListener = new ArrayList<>();
+		inputListener = new ArrayList<>();
 	}
 
+	public void registerInputListener(ScriptObjectMirror f) {
+		if (!f.isFunction()) {
+			System.err.println("expected function as input " +
+				"listener but got " + f.toString());
+			return;
+		}
+		inputListener.add(f);
+	}
 
 	public void registerChatListener(ScriptObjectMirror f) {
 		if (!f.isFunction()) {
@@ -122,4 +132,12 @@ public class APIManager {
 		});
 	}
 
+	public boolean queueInput(String text) {
+		return inputListener.stream().map(e ->
+					e.call(null, text)
+			).anyMatch(
+				o -> !(o instanceof Boolean) || (Boolean) o
+				// any of them want to disable input?
+			);
+	}
 }
