@@ -117,7 +117,6 @@ public class EditPropertiesWindow extends Stage {
 		Scene scene = new Scene(vbox);
 		this.setScene(scene);
 
-
 		bpButtons.setLeft(btnOK);
 		bpButtons.setRight(btnCancel);
 
@@ -243,11 +242,5 @@ public class EditPropertiesWindow extends Stage {
 		super.close();
 	}
 
-	private void addTextFieldProperty() {
-
-	}
-	private void addComboBoxProperty() {
-
-	}
 }
 
