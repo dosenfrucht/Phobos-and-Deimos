@@ -15,6 +15,7 @@ public class ManagerApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		WindowRegistry.setPrimaryStage(primaryStage);
 		WindowRegistry.register(primaryStage);
 
 		primaryStage.minHeightProperty().set(630);

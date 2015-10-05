@@ -27,7 +27,7 @@ public class Controller {
 	}
 
 	public void onServerPropertiesPressed() {
-		EditPropertiesWindow epw = new EditPropertiesWindow();
+		PropertiesWindow epw = new PropertiesWindow();
 		epw.show();
 	}
 

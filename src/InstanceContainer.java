@@ -211,6 +211,7 @@ public class InstanceContainer {
 		serverContainer.setMaxWidth(305);
 
 		ContextMenu contextMenu = new ContextMenu();
+		contextMenu.setId("instanceContextMenu");
 		MenuItem start = new MenuItem("Start server");
 		start.setOnAction(e -> currentInstance.run());
 		MenuItem stop = new MenuItem("Stop server");

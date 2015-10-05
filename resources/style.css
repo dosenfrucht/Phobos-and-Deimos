@@ -88,6 +88,7 @@
     -fx-background-position: center, right, left;
     -fx-background-repeat: repeat-x, no-repeat, no-repeat;
     -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 14px;
 }
 #btnSend:hover {
@@ -155,26 +156,19 @@
 }
 
 #instanceContextMenu {
-    -fx-fill: #FF0000;
-    -fx-font-fill: #FF0000;
-    -fx-text-fill: #FF0000;
-}
-
-#serverdisplay .context-menu {
     -fx-background-color: rgba(0,0,0,0.80);
     -fx-border-color: rgba(0,0,127,0.60);
     -fx-border-width: 2;
 }
-#serverdisplay .menu {
+#instanceContextMenu .menu-item .label,
+#instanceContextMenu .menu-item {
+    -fx-text-fill: #CCCCCC;
     -fx-background-color: transparent;
 }
-#serverdisplay .menu-item {
-    -fx-background-color: transparent;
-}
-#serverdisplay .menu-item:hover {
+#instanceContextMenu .menu-item:hover {
     -fx-background-color: rgba(85,85,85,0.60);
 }
-#serverdisplay .cell{
+#serverdisplay .cell {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 2;
