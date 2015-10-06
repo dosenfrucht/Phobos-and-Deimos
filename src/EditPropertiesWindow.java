@@ -232,8 +232,6 @@ public class EditPropertiesWindow extends Stage {
 	}
 
 	public void close() {
-		WindowRegistry.remove(this);
-
 		super.close();
 	}
 

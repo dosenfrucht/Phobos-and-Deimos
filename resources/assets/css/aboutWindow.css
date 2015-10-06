@@ -1,0 +1,47 @@
+.root {
+    -fx-fill: #FF0000;
+    -fx-background-image: url("/assets/dirt_console.png");
+    -fx-font-family: "minecraft";
+    -fx-font-size: 14;
+    -fx-text-fill: #FFFFFF;
+}
+#gpAuthors {
+   -fx-background-color: transparent;
+   -fx-background-image: url("/assets/dirt_console_dark.png");
+   -fx-padding: 10 10 10 10;
+   -fx-vgap: 50;
+   -fx-hgap: 20;
+}
+#gpAuthors .vbox {
+   -fx-margin: 0 0 30 0;
+}
+#gpAuthors .label {
+   -fx-text-fill: white;
+   -fx-margin: 0 0 20 0;
+}
+/************************************
+*           Button                  *
+************************************/
+
+#hboxButtons {
+   -fx-padding: 10 10 10 10;
+}
+
+#hboxButtons .button {
+    -fx-background-image: url("/assets/button40_center.png"), url("/assets/button40_right.png"), url("/assets/button40_left.png");
+    -fx-background-position: center, right, left;
+    -fx-pref-width: 200;
+    -fx-pref-height: 40;
+    -fx-background-repeat: repeat-x, no-repeat, no-repeat;
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+}
+#hboxButtons .button:hover {
+    -fx-background-image: url("/assets/button40_center_hover.png"), url("/assets/button40_right_hover.png"), url("/assets/button40_left_hover.png");
+    -fx-background-position: center, right, left;
+    -fx-background-repeat: repeat-x, no-repeat, no-repeat;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-text-fill: #FFFFA0;
+}

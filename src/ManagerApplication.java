@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import net.demus_intergalactical.serverman.Globals;
@@ -15,9 +16,9 @@ public class ManagerApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		WindowRegistry.setApplication(this);
 		WindowRegistry.setPrimaryStage(primaryStage);
-		WindowRegistry.register(primaryStage);
-
+		primaryStage.setTitle("Phobos and Deimus - See Minecraft from another planet");
 		primaryStage.minHeightProperty().set(630);
 		primaryStage.minWidthProperty().set(1024);
 		Font.loadFont(getClass().getResourceAsStream("/assets/fonts/minecraft.ttf"), 10);
@@ -31,7 +32,6 @@ public class ManagerApplication extends Application {
 			return;
 		}
 		primaryStage.setScene(new Scene(root));
-		primaryStage.setTitle("Server GUI");
 		primaryStage.setOnCloseRequest(e -> {
 			e.consume();
 			closeProgram();

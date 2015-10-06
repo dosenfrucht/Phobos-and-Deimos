@@ -1,4 +1,3 @@
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -215,11 +214,11 @@ public class PropertiesWindow extends Stage {
 
 	public void init() {
 		Set<String> propertySet = properties.getAllKeys();
-		int setSize = propertySet.size();
 		int rowIndex = 0;
 
 		Node tmpNode;
-		for (int i = 0 ; i < setSize; i++) {
+		int allSize = propertiesAll.size();
+		for (int i = 0 ; i < allSize; i++) {
 			List<String> propertyCategory = propertiesAll.get(i);
 
 			if (propertyCategory == propertiesServer) {
@@ -366,12 +365,6 @@ public class PropertiesWindow extends Stage {
 		this.show();
 	}
 
-	public void close() {
-		WindowRegistry.remove(this);
-
-		super.close();
-	}
-
 	private void saveProperties() {
 		for (String tmpProperty : properties.getAllKeys()) {
 			String key = ((Label) gpPropertyContainer.getChildren().get(getIndexOfKey(tmpProperty))).getText();
@@ -423,6 +416,10 @@ public class PropertiesWindow extends Stage {
 			}
 		}
 		return 1;
+	}
+
+	public void close() {
+		super.close();
 	}
 }
 
