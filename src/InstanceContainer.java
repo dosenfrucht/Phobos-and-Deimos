@@ -30,6 +30,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.FileAlreadyExistsException;
+import java.util.Set;
 import java.util.function.Function;
 
 public class InstanceContainer {
@@ -123,6 +124,9 @@ public class InstanceContainer {
 			public void onStatusStopped() {
 				api.unloadAll();
 				setInstanceStatusIcon(false);
+				// remove players...
+				Set<String> playerSet = getInstance().getProcess().getPlayers();
+				playerSet.forEach(InstanceContainer.this::removePlayerFromList);
 			}
 		});
 		try {
