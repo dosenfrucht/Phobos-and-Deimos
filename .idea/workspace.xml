@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/default/calc/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/default/calc/math.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CreateInstanceWindow.java" afterPath="$PROJECT_DIR$/src/CreateInstanceWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/instances.json" afterPath="$PROJECT_DIR$/instances/instances.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/assets/css/listServerJarsWindow.css" afterPath="$PROJECT_DIR$/resources/assets/css/listServerJarsWindow.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -91,11 +88,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateInstanceWindow.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CreateInstanceWindow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CreateInstanceWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3227848">
-              <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="listServerJarsWindow.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/assets/css/listServerJarsWindow.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.13449366">
+              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="propertiesWindow.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/assets/css/propertiesWindow.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="6" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -173,13 +190,13 @@
         <option value="$PROJECT_DIR$/resources/assets/css/aboutWindow.css" />
         <option value="$PROJECT_DIR$/resources/assets/css/createInstanceWindow.css" />
         <option value="$PROJECT_DIR$/src/ListWindow.java" />
-        <option value="$PROJECT_DIR$/resources/assets/css/listServerJarsWindow.css" />
         <option value="$PROJECT_DIR$/src/ListServerJarsWindow.java" />
         <option value="$PROJECT_DIR$/resources/default/auto-save/main.js" />
         <option value="$PROJECT_DIR$/resources/default/gm/main.js" />
         <option value="$PROJECT_DIR$/resources/default/calc/math.js" />
         <option value="$PROJECT_DIR$/resources/default/calc/main.js" />
         <option value="$PROJECT_DIR$/src/CreateInstanceWindow.java" />
+        <option value="$PROJECT_DIR$/resources/assets/css/listServerJarsWindow.css" />
       </list>
     </option>
   </component>
@@ -281,6 +298,60 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ServerGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Server-GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ServerGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Server-GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ServerGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Server-GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -641,7 +712,13 @@
       <option name="project" value="LOCAL" />
       <updated>1444168613697</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="changed style of several windows and added basic plugins">
+      <created>1444169809757</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1444169809757</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1027,20 +1104,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/assets/css/listServerJarsWindow.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15954119">
-          <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/assets/css/propertiesWindow.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="40" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pluginapi/Plugin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.51582277">
@@ -1116,8 +1179,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CreateInstanceWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3227848">
-          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/css/propertiesWindow.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="6" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/css/listServerJarsWindow.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13449366">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
           <folding />
         </state>
       </provider>
