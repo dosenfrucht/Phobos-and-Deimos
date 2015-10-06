@@ -1,7 +1,5 @@
 package pluginapi;
 
-import net.demus_intergalactical.serverman.Globals;
-
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import java.io.File;
@@ -29,12 +27,16 @@ public class UtilAPI {
 		return res;
 	}
 
+	public String getSeperator() {
+		return File.separator;
+	}
+
 	public String getCurrentPluginPath() {
 		return basePath;
 	}
 
 	public String getInstanceFolderPath() {
 		return new File(basePath).getParentFile().getParentFile()
-			.getPath();
+			.getPath() + File.separator;
 	}
 }
