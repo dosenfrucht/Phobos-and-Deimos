@@ -33,7 +33,7 @@ public class Controller {
 
 	public void btnSendOnClick() {
 		if (UIController.getActiveInstance() != null) {
-			InstancePool.get(UIController.getActiveInstance()).getInstance().getProcess().send(input.getText());
+			InstancePool.get(UIController.getActiveInstance()).send(input.getText());
 			input.setText("");
 		}
 	}

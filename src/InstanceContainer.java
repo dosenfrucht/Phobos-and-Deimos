@@ -18,6 +18,9 @@ import net.demus_intergalactical.serverman.instance.ServerInstance;
 import net.demus_intergalactical.serverproperties.ServerProperties;
 import org.apache.commons.io.FileUtils;
 import org.fxmisc.richtext.InlineCssTextArea;
+import pluginapi.API;
+import pluginapi.APIManager;
+import pluginapi.PluginLoader;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -26,6 +29,8 @@ import javax.script.ScriptException;
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
+import java.util.function.Function;
 
 public class InstanceContainer {
 	public static final String DEFAULT_OUTPUT_JS = "/default/output.js";
@@ -35,10 +40,10 @@ public class InstanceContainer {
 
 	private ServerInstance currentInstance;
 	private ServerProperties properties;
+	private APIManager api;
 	private ObservableList<HBox> playerList = FXCollections.observableArrayList();
 	private String instanceID;
 	private ScriptEngine jsEngine;
-	private ScriptEngine jsProcessEngine;
 	private Boolean isActive;
 	private InlineCssTextArea instanceLog;
 
@@ -53,6 +58,7 @@ public class InstanceContainer {
 
 	private VBox vboxInstanceRight = new VBox(10);
 	private HBox hboxInstanceTopRight = new HBox(10);
+	private OutputHandler output;
 
 
 	public InstanceContainer() {
@@ -73,13 +79,26 @@ public class InstanceContainer {
 			e.printStackTrace();
 		}
 		currentInstance.setOut((type, time, thread, loglvl, arg) -> {
-			try {
-				((Invocable) jsProcessEngine).invokeFunction
-						("onOutput", type, time, thread,
-								loglvl, arg);
-			} catch (ScriptException | NoSuchMethodException e) {
-				e.printStackTrace();
+			boolean dontShow = false;
+			switch (type) {
+			case "chat":
+				dontShow = api.queueChat(time, arg);
+				break;
+			case "joined":
+				dontShow = api.queuePlayerJoined(time, arg);
+				break;
+			case "left":
+				dontShow = api.queuePlayerLeft(time, arg);
+				break;
+			default:
+				dontShow = api.queue(type, time, thread,
+					loglvl, arg);
+				break;
 			}
+			if (!dontShow) {
+				output.send(type, time, thread, loglvl, arg);
+			}
+
 		});
 		currentInstance.setPlayerHandler(new PlayerHandler() {
 			@Override
@@ -95,17 +114,19 @@ public class InstanceContainer {
 		currentInstance.setStatusHandler(new StatusHandler() {
 			@Override
 			public void onStatusStarted() {
+				initPlugins();
+				api.initTicks();
 				setInstanceStatusIcon(true);
 			}
 
 			@Override
 			public void onStatusStopped() {
+				api.unloadAll();
 				setInstanceStatusIcon(false);
 			}
 		});
 		try {
 			currentInstance.load();
-			((Invocable) jsProcessEngine).invokeFunction("init");
 		} catch (NoSuchMethodException | ScriptException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -126,9 +147,21 @@ public class InstanceContainer {
 		}
 	}
 
+	private void initPlugins() {
+		api = new APIManager(getInstance());
+		try {
+			PluginLoader.loadAll(api, getInstance(), this::appendToConsole);
+		} catch (FileNotFoundException | FileAlreadyExistsException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void stopPlugins() {
+		api.unloadAll();
+	}
+
 	public void initScript() {
-		OutputHandler output
-				= (type, time, thread, loglvl, arg) -> {
+		output = (type, time, thread, loglvl, arg) -> {
 			try {
 				((Invocable) jsEngine).invokeFunction
 						("write", type, time, thread,
@@ -168,34 +201,7 @@ public class InstanceContainer {
 			e.printStackTrace();
 		}
 
-		String processScriptPath = Globals.getServerManConfig()
-				.get("instances_home") + File.separator
-				+ instanceID + File.separator + "process.js";
-		File processScriptFile = new File(processScriptPath);
-		if (!processScriptFile.exists()) {
-			String url = "http://serverman.demus-intergalactical.net/v/" +
-					currentInstance.getServerVersion() +
-					"/process.js";
-			try {
-				FileUtils.copyURLToFile(new URL(url), processScriptFile, 300000, 300000);
-			} catch (IOException e) {
-				try {
-					System.out.println("could not load [" + url + "], trying to use default file");
-					FileUtils.copyURLToFile(Main.class.getResource(DEFAULT_PROCESS_JS), processScriptFile);
-				} catch (IOException ex) {
-					ex.printStackTrace();
-				}
-			}
-		}
 
-		jsProcessEngine = sem.getEngineByName("JavaScript");
-		jsProcessEngine.put("output", output);
-		jsProcessEngine.put("instance", this.getInstance());
-		try {
-			jsProcessEngine.eval(new FileReader(processScriptFile));
-		} catch (ScriptException | FileNotFoundException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void addServerInstanceToList() {
@@ -381,7 +387,7 @@ public class InstanceContainer {
 		return -1;
 	}
 
-	public void appendToConsole(String color, String text) {
+	public Void appendToConsole(String color, String text) {
 		int currlength = instanceLog.getText().length();
 		instanceLog.appendText(text);
 		instanceLog.setStyle(currlength, currlength + text.length(), "-fx-fill:" + color + ";");
@@ -389,6 +395,7 @@ public class InstanceContainer {
 		if (isActive) {
 			UIController.appendToConsole(color, text);
 		}
+		return null;
 	}
 
 	public void setActive(boolean b) {
@@ -414,6 +421,13 @@ public class InstanceContainer {
 		String path = "assets/server_status_" + (isOn ? "on" : "off") + ".png";
 		Image imgInstanceStatus = new Image(Main.class.getResourceAsStream(path), 20, 14, true, false);
 		imgViewInstanceStatus.setImage(imgInstanceStatus);
+	}
+
+	public void send(String text) {
+		if (!api.queueInput(text)) {
+			// no-one wants to block the input
+			currentInstance.send(text);
+		}
 	}
 }
 
