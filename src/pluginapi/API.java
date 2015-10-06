@@ -44,6 +44,10 @@ public class API {
 		apiManager.registerEventListener(f);
 	}
 
+	public void registerTickListener(ScriptObjectMirror f) {
+		apiManager.registerTickListener(f);
+	}
+
 	public boolean queueChat(Object time, Object arg) {
 		return apiManager.queueChat(time, arg);
 	}

@@ -23,17 +23,21 @@ functions
 
 The purpose of the `init` function is to set up the plugin.
 
+The `unload` function is called when the server shuts down. (like a destructor)
+
 Currently there are these methods callable:
 * `api.registerEventListener(function(type, time, thread, loglvl, arg) {})`
 * `api.registerChatListener(function(time, arg) {})`
 * `api.registerPlayerListener(function(time, arg) {}, function(time, arg) {})`
 * `api.registerInputListener(function(command) {})`
+* `api.registerTickListener(function() {})`
 * `api.command.send(string)`
 * `api.console.write(text)`
 * `api.console.writeWithColor(color, text)`
 * `api.util.require(string)`
 * `api.util.getCurrentPluginPath()`
 * `api.util.getInstanceFolderPath()`
+* `api.util.getSeperator()`
 
 Example
 -------

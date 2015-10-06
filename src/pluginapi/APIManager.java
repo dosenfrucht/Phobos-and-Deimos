@@ -19,6 +19,9 @@ public class APIManager {
 	private List<ScriptObjectMirror> playerListenerLeft;
 	private List<ScriptObjectMirror> eventListener;
 	private List<ScriptObjectMirror> inputListener;
+	private List<ScriptObjectMirror> tickListener;
+	private Thread ticker;
+	private volatile boolean ticksRunning = true;
 
 
 	public APIManager(ServerInstance instance) {
@@ -28,6 +31,7 @@ public class APIManager {
 		playerListenerLeft = new ArrayList<>();
 		eventListener = new ArrayList<>();
 		inputListener = new ArrayList<>();
+		tickListener = new ArrayList<>();
 	}
 
 	public void registerInputListener(ScriptObjectMirror f) {
@@ -71,6 +75,15 @@ public class APIManager {
 			return;
 		}
 		eventListener.add(f);
+	}
+
+	public void registerTickListener(ScriptObjectMirror f) {
+		if (!f.isFunction()) {
+			System.err.println("expected function as tick " +
+				"listener but got " + f.toString());
+			return;
+		}
+		tickListener.add(f);
 	}
 
 	public boolean queueChat(Object time, Object arg) {
@@ -123,6 +136,7 @@ public class APIManager {
 	}
 
 	public void unloadAll() {
+		ticksRunning = false;
 		plugins.forEach(plugin -> {
 			try {
 				plugin.unload();
@@ -139,5 +153,17 @@ public class APIManager {
 				o -> !(o instanceof Boolean) || (Boolean) o
 				// any of them want to disable input?
 			);
+	}
+
+	public void initTicks() {
+		ticker = new Thread(() -> {
+			while (ticksRunning) {
+				tickListener.forEach(e -> e.call(null));
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException ignored) {}
+			}
+		});
+		ticker.start();
 	}
 }
