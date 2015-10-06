@@ -38,10 +38,6 @@ public class Controller {
 		}
 	}
 
-	public void btnCloseOnClick() {
-		System.out.println("closing??!?");
-	}
-
 	public void onInputKeyPressed(KeyEvent ke) {
 		if ((ke.getCode() == KeyCode.ENTER) ||
 				(ke.getCode() == KeyCode.TAB)) {

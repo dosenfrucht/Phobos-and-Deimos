@@ -1,4 +1,3 @@
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,10 +13,20 @@ import net.demus_intergalactical.serverman.instance.ServerInstance;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateInstanceWindow extends Stage {
 	public static final int SERVER_ICON_SIZE = 64;
 
+
+	public static final Map<String, String[]> defaultPlugins;
+	static {
+		defaultPlugins = new HashMap<>();
+		defaultPlugins.put("auto-save", new String[] {"main.js"});
+		defaultPlugins.put("calc", new String[] {"math.js", "main.js"});
+		defaultPlugins.put("gm", new String[] {"main.js"});
+	}
 
 	private File serverJarFile;
 	private File serverIconFile;
@@ -43,6 +52,8 @@ public class CreateInstanceWindow extends Stage {
 	private Label lblVersionInfo = new Label("Version");
 	private TextField tfVersionInput = new TextField();
 
+	private CheckBox eula = new CheckBox();
+
 	private HBox hboxButtonBox = new HBox(10);
 	private Button cancelbtn = new Button("Cancel");
 	private Button createbtn = new Button("Create");
@@ -50,10 +61,14 @@ public class CreateInstanceWindow extends Stage {
 
 	public CreateInstanceWindow() throws FileNotFoundException {
 		WindowRegistry.register(this);
+
 		this.setTitle("Create new instance");
+		String css = Main.class.getResource("/assets/css/createInstanceWindow.css").toExternalForm();
+		layout.getStylesheets().clear();
+		layout.getStylesheets().add(css);
+		layout.setId("layout");
 		this.setResizable(false);
 
-		layout.setPadding(new Insets(10, 10, 10, 10));
 		Scene scene = new Scene(layout);
 		this.setScene(scene);
 
@@ -121,20 +136,20 @@ public class CreateInstanceWindow extends Stage {
 			}
 
 		});
-		btnServerJarFile.setPrefSize(50, 30);
+		btnServerJarFile.setPrefSize(50, 40);
 		hboxServerJarFileSelect.getChildren().addAll(tfServerJarFileInput, btnServerJarFile);
 		vboxServerJarFilePopup.getChildren().addAll(lblServerJarFileInfo, hboxServerJarFileSelect);
 
-		tfVersionInput.setPrefSize(100, 30);
+		//tfVersionInput.setPrefSize(100, 30);
 		version.getChildren().addAll(lblVersionInfo, tfVersionInput);
 
 		Hyperlink eulalink = new Hyperlink("https://account.mojang.com/documents/minecraft_eula");
 		eulalink.setText("EULA");
-		CheckBox eula = new CheckBox("Do you agree with the " + eulalink.getText());
+		eula.setText("Do you agree with the " + eulalink.getText());
 		//(https://account.mojang.com/documents/minecraft_eula)
 
 		hboxButtonBox.setAlignment(Pos.CENTER);
-		cancelbtn.setPrefSize(100, 30);
+		cancelbtn.setPrefSize(100, 40);
 		cancelbtn.setOnAction(e -> this.close());
 		createbtn.setOnAction(e -> {
 			if (!tfNameInput.getText().equals("") && !tfServerJarFileInput.getText().equals("") && !tfVersionInput.getText().equals("")) {
@@ -164,6 +179,45 @@ public class CreateInstanceWindow extends Stage {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+
+				try {
+					for(String key : defaultPlugins.keySet()) {
+						String[] files = defaultPlugins.get(key);
+						for(String currentFile : files) {
+							String currentDir = Globals.getServerManConfig().get("instances_home") +
+									File.separator + si.getServerInstanceID() +
+									File.separator + "plugins" +
+									File.separator + key +
+									File.separator + currentFile;
+
+							File f = new File(currentDir);
+							f.getParentFile().mkdirs();
+
+							System.out.println(f.getAbsoluteFile());
+							if(!f.exists()) {
+								FileOutputStream fos = null;
+								try {
+									f.createNewFile();
+									fos = new FileOutputStream(f.getAbsolutePath());
+									byte[] buf = new byte[2048];
+
+									InputStream is = Main.class.getResourceAsStream("/default/" + key + "/" + currentFile);
+									int r = is.read(buf);
+									while(r != -1) {
+										fos.write(buf, 0, r);
+										r = is.read(buf);
+									}
+								} finally {
+									if(fos != null) {
+										fos.close();
+									}
+								}
+							}
+						}
+					}
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				si.save();
 				InstancePool.set(si.getServerInstanceID(), instCont);
 				instCont.init();
@@ -175,7 +229,7 @@ public class CreateInstanceWindow extends Stage {
 				aw.showAndWait();
 			}
 		});
-		createbtn.setPrefSize(100, 30);
+		createbtn.setPrefSize(100, 40);
 		hboxButtonBox.getChildren().addAll(createbtn, cancelbtn);
 
 		layout.getChildren().addAll(stackPnServer, vboxName, vboxServerJarFilePopup, version, eula, hboxButtonBox);
