@@ -1,4 +1,3 @@
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,14 +13,20 @@ import net.demus_intergalactical.serverman.instance.ServerInstance;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public class CreateInstanceWindow extends Stage {
 	public static final int SERVER_ICON_SIZE = 64;
 
+
+	public static final Map<String, String[]> defaultPlugins;
+	static {
+		defaultPlugins = new HashMap<>();
+		defaultPlugins.put("auto-save", new String[] {"main.js"});
+		defaultPlugins.put("calc", new String[] {"math.js", "main.js"});
+		defaultPlugins.put("gm", new String[] {"main.js"});
+	}
 
 	private File serverJarFile;
 	private File serverIconFile;
@@ -175,37 +180,37 @@ public class CreateInstanceWindow extends Stage {
 					e1.printStackTrace();
 				}
 
-				Map<String, String> defaultPlugins = new HashMap<>();
-				defaultPlugins.put("auto-save", "main.js");
-				defaultPlugins.put("gm", "main.js");
 				try {
 					for(String key : defaultPlugins.keySet()) {
-						String currentDir = Globals.getServerManConfig().get("instances_home") +
-								File.separator + si.getServerInstanceID() +
-								File.separator + "plugins" +
-								File.separator + key +
-								File.separator + defaultPlugins.get(key);
+						String[] files = defaultPlugins.get(key);
+						for(String currentFile : files) {
+							String currentDir = Globals.getServerManConfig().get("instances_home") +
+									File.separator + si.getServerInstanceID() +
+									File.separator + "plugins" +
+									File.separator + key +
+									File.separator + currentFile;
 
-						File f = new File(currentDir);
-						f.getParentFile().mkdirs();
+							File f = new File(currentDir);
+							f.getParentFile().mkdirs();
 
-						System.out.println(f.getAbsoluteFile());
-						if(!f.exists()) {
-							FileOutputStream fos = null;
-							try {
-								f.createNewFile();
-								fos = new FileOutputStream(f.getAbsolutePath());
-								byte[] buf = new byte[2048];
+							System.out.println(f.getAbsoluteFile());
+							if(!f.exists()) {
+								FileOutputStream fos = null;
+								try {
+									f.createNewFile();
+									fos = new FileOutputStream(f.getAbsolutePath());
+									byte[] buf = new byte[2048];
 
-								InputStream is = getClass().getResourceAsStream("/default/" + key + "/" + defaultPlugins.get(key));
-								int r = is.read(buf);
-								while(r != -1) {
-									fos.write(buf, 0, r);
-									r = is.read(buf);
-								}
-							} finally {
-								if(fos != null) {
-									fos.close();
+									InputStream is = Main.class.getResourceAsStream("/default/" + key + "/" + currentFile);
+									int r = is.read(buf);
+									while(r != -1) {
+										fos.write(buf, 0, r);
+										r = is.read(buf);
+									}
+								} finally {
+									if(fos != null) {
+										fos.close();
+									}
 								}
 							}
 						}
