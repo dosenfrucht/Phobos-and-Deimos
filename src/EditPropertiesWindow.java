@@ -5,7 +5,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.demus_intergalactical.serverman.Globals;
@@ -132,14 +131,10 @@ public class EditPropertiesWindow extends Stage {
 
 
 		init();
-
-		//UIController.editInstanceMenu = this;
 	}
 
 	public void init() {
 		Set<String> propertySet = properties.getAllKeys();
-		int setSize = propertySet.size();
-
 
 		int i = 0;
 		int offset = 0;
@@ -237,8 +232,6 @@ public class EditPropertiesWindow extends Stage {
 	}
 
 	public void close() {
-		WindowRegistry.remove(this);
-
 		super.close();
 	}
 

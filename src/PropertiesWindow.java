@@ -1,4 +1,3 @@
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,16 +18,12 @@ public class PropertiesWindow extends Stage {
 
 	private ServerProperties properties;
 	private InstanceContainer instance;
-	//private HashMap<String, String>
-
 
 	private VBox layout = new VBox();
 	private HBox hboxHeader = new HBox();
 	private Label lblHeader = new Label();
 	private ScrollPane spContent = new ScrollPane();
 	private GridPane gpPropertyContainer = new GridPane();
-	private Label[] lblKeys = new Label[40];
-	private Map<String, Node> propertyNodeMap = new HashMap<>();
 
 	private static final Map<String, Integer> propertyTypes;
 
@@ -219,41 +214,42 @@ public class PropertiesWindow extends Stage {
 
 	public void init() {
 		Set<String> propertySet = properties.getAllKeys();
-		int setSize = propertySet.size();
 		int rowIndex = 0;
 
-
 		Node tmpNode;
-		for (int i = 0 ; i < propertiesAll.size() ; i++) {
-			if (propertiesAll.get(i) == propertiesServer) {
+		int allSize = propertiesAll.size();
+		for (int i = 0 ; i < allSize; i++) {
+			List<String> propertyCategory = propertiesAll.get(i);
+
+			if (propertyCategory == propertiesServer) {
 				Label lbServer = new Label("Server");
 				lbServer.setPrefWidth(spContent.getPrefWidth());
 				lbServer.setAlignment(Pos.CENTER);
 				lbServer.setId("propertiesCategory");
 				gpPropertyContainer.add(lbServer, 0, rowIndex, 3, 1);
 			}
-			else if (propertiesAll.get(i) == propertiesPlayer) {
+			else if (propertyCategory == propertiesPlayer) {
 				Label lbPlayer = new Label("Player");
 				lbPlayer.setPrefWidth(spContent.getPrefWidth());
 				lbPlayer.setAlignment(Pos.CENTER);
 				lbPlayer.setId("propertiesCategory");
 				gpPropertyContainer.add(lbPlayer, 0, rowIndex, 3, 1);
 			}
-			else if (propertiesAll.get(i) == propertiesWorld) {
+			else if (propertyCategory == propertiesWorld) {
 				Label lbWorld = new Label("World");
 				lbWorld.setPrefWidth(spContent.getPrefWidth());
 				lbWorld.setAlignment(Pos.CENTER);
 				lbWorld.setId("propertiesCategory");
 				gpPropertyContainer.add(lbWorld, 0, rowIndex, 3, 1);
 			}
-			else if (propertiesAll.get(i) == propertiesWorldGen) {
+			else if (propertyCategory == propertiesWorldGen) {
 				Label lbWorldGen = new Label("World Gen (should NOT be changed after level creation)");
 				lbWorldGen.setPrefWidth(spContent.getPrefWidth());
 				lbWorldGen.setAlignment(Pos.CENTER);
 				lbWorldGen.setId("propertiesCategory");
 				gpPropertyContainer.add(lbWorldGen, 0, rowIndex, 3, 1);
 			}
-			else if (propertiesAll.get(i) == propertiesServerAdv) {
+			else if (propertyCategory == propertiesServerAdv) {
 				Label lbServerAdv = new Label("Server Advanced");
 				lbServerAdv.setPrefWidth(spContent.getPrefWidth());
 				lbServerAdv.setAlignment(Pos.CENTER);
@@ -269,10 +265,13 @@ public class PropertiesWindow extends Stage {
 
 			rowIndex++;
 
-			for (int n = 0 ; n < propertiesAll.get(i).size() ; n++) {
-				switch (propertyTypes.get(propertiesAll.get(i).get(n))) {
+			for (String propertyCategoryObject : propertyCategory) {
+				int propertyType = propertyTypes.get(propertyCategoryObject);
+				String property = properties.getString(propertyCategoryObject);
+				
+				switch (propertyType) {
 					case PROPERTY_TYPE_BOOLEAN:
-						Button tmpButton = new Button(properties.getString(propertiesAll.get(i).get(n)));
+						Button tmpButton = new Button(property);
 						tmpButton.setPrefSize(200, 40);
 						tmpButton.setOnAction(e -> {
 							if (tmpButton.getText().equals("true")) {
@@ -283,19 +282,19 @@ public class PropertiesWindow extends Stage {
 						});
 						tmpNode = tmpButton;
 						//tmpNode = new CheckBox();
-						//((CheckBox) tmpNode).setSelected(properties.getBool(propertiesAll.get(i).get(n)));
+						//((CheckBox) tmpNode).setSelected(properties.getBool(propertyCategoryObject));
 						break;
 					case PROPERTY_TYPE_INTEGER:
-						tmpNode = new TextField(properties.getString(propertiesAll.get(i).get(n)));
+						tmpNode = new TextField(property);
 						break;
 					case PROPERTY_TYPE_INTEGER_COMBO:
-						int tmpInt = properties.getInteger(propertiesAll.get(i).get(n));
+						int tmpInt = properties.getInteger(propertyCategoryObject);
 						ComboBox<Integer> tmpIntCombo = new ComboBox<>();
 						tmpIntCombo.setPrefSize(200, 30);
 						tmpNode = tmpIntCombo;
 						ObservableList<Integer> intItems = tmpIntCombo.getItems();
 
-						switch (propertiesAll.get(i).get(n)) {
+						switch (propertyCategoryObject) {
 							case "difficulty":
 								intItems.add(0);
 								intItems.add(1);
@@ -322,16 +321,15 @@ public class PropertiesWindow extends Stage {
 
 						break;
 					case PROPERTY_TYPE_STRING:
-						tmpNode = new TextField(properties.getString(propertiesAll.get(i).get(n)));
+						tmpNode = new TextField(property);
 						break;
 					case PROPERTY_TYPE_STRING_COMBO:
-						String tmpStr = properties.getString(propertiesAll.get(i).get(n));
 						ComboBox<String> tmpStrCombo = new ComboBox<>();
 						tmpStrCombo.setPrefSize(200, 30);
 						tmpNode = tmpStrCombo;
 						ObservableList<String> strItems = tmpStrCombo.getItems();
 
-						if(propertiesAll.get(i).get(n).equals("level-type")) {
+						if(propertyCategoryObject.equals("level-type")) {
 							strItems.add("DEFAULT");
 							strItems.add("FLAT");
 							strItems.add("LARGEBIOMES");
@@ -339,8 +337,8 @@ public class PropertiesWindow extends Stage {
 							strItems.add("CUSTOMIZED");
 						}
 
-						if(strItems.contains(tmpStr)) {
-							tmpStrCombo.setValue(tmpStr);
+						if(strItems.contains(property)) {
+							tmpStrCombo.setValue(property);
 						}
 
 						break;
@@ -350,7 +348,7 @@ public class PropertiesWindow extends Stage {
 				}
 
 				Insets margin = new Insets(0, 10, 0, 10);
-				gpPropertyContainer.addRow(rowIndex, new Label(propertiesAll.get(i).get(n)));
+				gpPropertyContainer.addRow(rowIndex, new Label(propertyCategoryObject));
 				gpPropertyContainer.addRow(rowIndex, tmpNode);
 				//gpPropertyContainer.setMargin(tmpNode, margin);
 				Button tmpButton = new Button("Reset");
@@ -365,12 +363,6 @@ public class PropertiesWindow extends Stage {
 		layout.getChildren().addAll(hboxHeader, spContent, hboxButtons);
 
 		this.show();
-	}
-
-	public void close() {
-		WindowRegistry.remove(this);
-
-		super.close();
 	}
 
 	private void saveProperties() {
@@ -394,7 +386,7 @@ public class PropertiesWindow extends Stage {
 					value = ((TextField) tmpNode).getText();
 					break;
 				case PROPERTY_TYPE_STRING_COMBO:
-					value = ((ComboBox<String>) tmpNode).getValue().toString();
+					value = ((ComboBox<String>) tmpNode).getValue();
 					break;
 				default:
 					value = "could not determine which proeprty type is currently being processed, tmpProperty:" + tmpProperty;
@@ -424,6 +416,10 @@ public class PropertiesWindow extends Stage {
 			}
 		}
 		return 1;
+	}
+
+	public void close() {
+		super.close();
 	}
 }
 

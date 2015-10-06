@@ -1,3 +1,5 @@
+import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
@@ -6,6 +8,7 @@ import java.util.Map;
 public class WindowRegistry {
 	private static Map<String, Stage> registry = new HashMap<>();
 	private static Stage primaryStage = null;
+	private static Application application = null;
 
 
 	public static void closeAllStages() {
@@ -18,6 +21,7 @@ public class WindowRegistry {
 				System.err.println("Stage '" + key + "' was not initialized");
 			}
 		}
+		primaryStage.close();
 	}//public static void closeAllStages()
 
 
@@ -28,6 +32,8 @@ public class WindowRegistry {
 
 	public static void register(Stage window) {
 		registry.put(window.toString(), window);
+
+		window.getIcons().add(new Image(Main.class.getResourceAsStream("/assets/icon.png")));
 	}//public static void register(Stage window)
 
 
@@ -37,5 +43,15 @@ public class WindowRegistry {
 
 	public static void setPrimaryStage(Stage primaryStage) {
 		WindowRegistry.primaryStage = primaryStage;
+
+		primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/assets/icon.png")));
 	}//public static void setPrimaryStage(Stage primaryStage)
+
+	public static void setApplication(Application application) {
+		WindowRegistry.application = application;
+	}//public static void setApplication(ManagerApplication application)
+
+	public static Application getApplication() {
+		return application;
+	}//public static Application getApplication()
 }//public class WindowRegistry

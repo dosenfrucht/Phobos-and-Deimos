@@ -50,5 +50,10 @@ public class Controller {
 		}
 	}
 
+	public void onAboutPressed() {
+		AboutWindow aw = new AboutWindow();
+		aw.show();
+	}//public void onAboutPressed()
+
 
 }

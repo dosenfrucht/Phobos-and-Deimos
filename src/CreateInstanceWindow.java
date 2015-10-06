@@ -103,8 +103,6 @@ public class CreateInstanceWindow extends Stage {
 		});
 		tfNameInput.setPrefSize(250, 30);
 		vboxName.getChildren().addAll(lblNameInfo, tfNameInput);
-
-
 		//FileChooser fileChooser = new FileChooser();
 
 		tfServerJarFileInput.setEditable(false);
@@ -186,8 +184,6 @@ public class CreateInstanceWindow extends Stage {
 	}//private void display()
 
 	public void close() {
-		WindowRegistry.remove(this);
-
 		super.close();
 	}//public void close()
 }//public class CreateInstanceWindow extends Stage

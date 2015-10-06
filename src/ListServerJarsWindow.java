@@ -133,7 +133,6 @@ public class ListServerJarsWindow extends Stage {
 
 	@Override
 	public void close() {
-		WindowRegistry.remove(this);
 		super.close();
 	}//public void close()
 }//public class ListServerJarsWindow extends Stage
