@@ -115,6 +115,7 @@ public class InstanceContainer {
 			@Override
 			public void onStatusStarted() {
 				initPlugins();
+				api.initTicks();
 				setInstanceStatusIcon(true);
 			}
 
