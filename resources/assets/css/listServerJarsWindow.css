@@ -11,12 +11,15 @@
    -fx-margin: 0 0 20 0;
 }
 .table-view {
-    -fx-background-color: #A0A0A0;
+    -fx-effect: innershadow(three-pass-box, #000000, 15, 0.5, 0, 0);
+    -fx-background-image: url("/assets/dirt_console_dark.png");
  }
 .column-header,
-.filler,
+.filler {
+    -fx-background-color: #A0A0A0;
+}
 .table-row-cell {
-    -fx-background-color: black;
+    -fx-background-color: transparent;
 }
 .table-row-cell .text {
     -fx-fill: white;
