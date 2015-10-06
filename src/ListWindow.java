@@ -26,7 +26,7 @@ public class ListWindow extends Dialog {
 
 		Label error = new Label(msg);
 		Button ok = new Button("OK");
-		ok.setPrefSize(50, 30);
+		ok.setPrefSize(50, 40);
 		ok.setOnAction(e -> window.close());
 		layout.getChildren().addAll(error, ok);
 

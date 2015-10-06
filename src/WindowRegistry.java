@@ -9,6 +9,7 @@ public class WindowRegistry {
 	private static Map<String, Stage> registry = new HashMap<>();
 	private static Stage primaryStage = null;
 	private static Application application = null;
+	private static Image icon = new Image(Main.class.getResourceAsStream("/assets/project_icon_32x32.png"));
 
 
 	public static void closeAllStages() {
@@ -33,7 +34,7 @@ public class WindowRegistry {
 	public static void register(Stage window) {
 		registry.put(window.toString(), window);
 
-		window.getIcons().add(new Image(Main.class.getResourceAsStream("/assets/icon.png")));
+		window.getIcons().add(icon);
 	}//public static void register(Stage window)
 
 
@@ -44,7 +45,7 @@ public class WindowRegistry {
 	public static void setPrimaryStage(Stage primaryStage) {
 		WindowRegistry.primaryStage = primaryStage;
 
-		primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/assets/icon.png")));
+		primaryStage.getIcons().add(icon);
 	}//public static void setPrimaryStage(Stage primaryStage)
 
 	public static void setApplication(Application application) {

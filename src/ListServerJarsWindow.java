@@ -1,3 +1,4 @@
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -41,24 +42,28 @@ public class ListServerJarsWindow extends Stage {
 
 	public ListServerJarsWindow() {
 		WindowRegistry.register(this);
+
 		this.setTitle("Select server-jar");
+		String css = Main.class.getResource("/assets/css/listServerJarsWindow.css").toExternalForm();
+		layout.getStylesheets().clear();
+		layout.getStylesheets().add(css);
+		layout.setId("layout");
 		this.initModality(Modality.APPLICATION_MODAL);
 		this.setResizable(false);
 
-		layout.setPadding(new Insets(10, 10, 10, 10));
 		layout.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(layout);
 		this.setScene(scene);
 
-		tblView.setPrefSize(300, 300);
-		fillTable(tblColName, tblColType);
+		tblView.setPrefSize(300, 350);
+		fillTable();
 
 		//noinspection unchecked
 		tblView.getColumns().addAll(tblColName, tblColType);
 
 		hboxLeftBtns.setAlignment(Pos.CENTER_LEFT);
-		btnRefresh.setPrefSize(90, 30);
-		btnBrowse.setPrefSize(50, 30);
+		btnRefresh.setPrefSize(110, 40);
+		btnBrowse.setPrefSize(50, 40);
 
 		btnBrowse.setOnAction(e -> {
 			File jar = fileChooser.showOpenDialog(this);
@@ -78,8 +83,8 @@ public class ListServerJarsWindow extends Stage {
 
 		hboxRightBtns.setAlignment(Pos.CENTER_RIGHT);
 		btnCancel.setOnAction(e -> this.close());
-		btnCancel.setPrefSize(80, 30);
-		btnOk.setPrefSize(50, 30);
+		btnCancel.setPrefSize(80, 40);
+		btnOk.setPrefSize(50, 40);
 		btnOk.setOnAction(e -> {
 			if (serverJar != null) {
 				this.close();
@@ -118,7 +123,7 @@ public class ListServerJarsWindow extends Stage {
 		return serverJar;
 	}//public File showAndGetFile()
 
-	private void fillTable(TableColumn<ServerInstanceVersion, String> tblColName, TableColumn<ServerInstanceVersion, String> tblColType) {
+	private void fillTable() {
 		ObservableList<ServerInstanceVersion> data = ServerInstanceVersion.getAllVersions();
 
 		tblColName.setCellValueFactory(new PropertyValueFactory<>("versionName"));

@@ -7,9 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.scene.web.WebEngine;
@@ -44,12 +42,19 @@ public class AboutWindow extends Stage {
 		listAuthorWeblinks.put("Dosenfrucht", "https://github.com/ThomasHerzog");
 		listAuthorWeblinks.put("Japu", "https://github.com/JapuDCret");
 	}
-	private static final WebView browser = new WebView();
-	private static final WebEngine webEngine = browser.getEngine();
 
 
 	private VBox layout = new VBox();
 
+	private HBox vboxProject = new HBox();
+	private VBox vboxProjectDescription = new VBox();
+	private VBox vboxProjectImage = new VBox();
+	private ImageView imgViewProjectImg = new ImageView();
+	private Label lblProjectName = new Label("Phobos and Deimos");
+	private Label lblProjectDescription = new Label("This small application aims to help administrate and manage multiple minecraft servers, regardless of the version or type you are using.");
+	private Hyperlink lblProjectWeblink = new Hyperlink("https://github.com/Nikman666/Server-GUI");
+
+	private FlowPane fpContent = new FlowPane();
 	private GridPane gpAuthors = new GridPane();
 
 
@@ -64,14 +69,27 @@ public class AboutWindow extends Stage {
 		String css = Main.class.getResource("/assets/css/aboutWindow.css").toExternalForm();
 		layout.getStylesheets().clear();
 		layout.getStylesheets().add(css);
-		layout.setPrefSize(700, 600);
+		layout.setPrefSize(900, 600);
+
+		lblProjectName.setId("lblProjectName");
+		vboxProjectDescription.getChildren().add(lblProjectName);
+		vboxProjectDescription.getChildren().add(lblProjectDescription);
+		lblProjectWeblink.setOnAction(e -> WindowRegistry.getApplication().getHostServices().showDocument(lblProjectWeblink.getText()));
+		vboxProjectDescription.getChildren().add(lblProjectWeblink);
+
+		imgViewProjectImg.setId("imgViewProjectImg");
+		vboxProjectImage.getChildren().add(imgViewProjectImg);
+
+		vboxProjectImage.setId("vboxProjectImage");
+		vboxProject.getChildren().add(vboxProjectImage);
+		vboxProjectDescription.setId("vboxProjectDescription");
+		vboxProject.getChildren().add(vboxProjectDescription);
 
 		Iterator<String> keySetIterator = listAuthorDescriptions.keySet().iterator();
 		for(int i = 0; keySetIterator.hasNext(); i++) {
 			VBox vboxLeftCol = new VBox();
 			String key = keySetIterator.next();
 			Label lblTmp = new Label(key);
-			lblTmp.setTextAlignment(TextAlignment.RIGHT);
 			vboxLeftCol.getChildren().add(lblTmp);
 
 			Image imgTmp = new Image(Main.class.getResourceAsStream("/assets/" + listAuthorPictures.get(key)));
@@ -83,13 +101,6 @@ public class AboutWindow extends Stage {
 
 			Hyperlink hyperTmp = new Hyperlink(listAuthorWeblinks.get(key));
 			hyperTmp.setOnAction(e -> WindowRegistry.getApplication().getHostServices().showDocument(hyperTmp.getText()));
-			hyperTmp.setTooltip(new Tooltip("rightclick to copy URL"));
-			hyperTmp.setOnContextMenuRequested(e -> {
-				final Clipboard clipboard = Clipboard.getSystemClipboard();
-				final ClipboardContent content = new ClipboardContent();
-				content.putString(hyperTmp.getText());
-				clipboard.setContent(content);
-			});
 			vboxRightCol.getChildren().add(hyperTmp);
 
 			gpAuthors.addRow(i, vboxLeftCol);
@@ -99,13 +110,23 @@ public class AboutWindow extends Stage {
 		gpAuthors.setPrefHeight(layout.getPrefHeight());
 		gpAuthors.setId("gpAuthors");
 
+		btnOk.setPrefSize(200, 40);
 		btnOk.setOnAction(e -> this.close());
 		hboxButtons.setAlignment(Pos.CENTER);
 		hboxButtons.getChildren().add(btnOk);
 		hboxButtons.setId("hboxButtons");
 
-		layout.getChildren().add(gpAuthors);
+		fpContent.getChildren().add(gpAuthors);
+
+		fpContent.setId("fpContent");
+		layout.getChildren().add(vboxProject);
+		layout.getChildren().add(fpContent);
 		layout.getChildren().add(hboxButtons);
+		/*
+		layout.addRow(0, vboxProject);
+		layout.addRow(1, gpAuthors);
+		layout.addRow(2, hboxButtons);
+		*/
 		Scene scene = new Scene(layout);
 		this.setScene(scene);
 	}

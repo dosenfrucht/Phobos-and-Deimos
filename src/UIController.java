@@ -31,6 +31,12 @@ public class UIController {
 			//noinspection unchecked
 			playerDisplay = (ListView<HBox>) root.lookup("#playerdisplay");
 			console = (InlineCssTextArea) root.lookup("#console");
+			console.setOnScroll(e -> {
+				System.err.println("console scrolled: " + e.getSource());
+			});
+			console.setOnScrollStarted(e -> {
+				System.err.println("console scroll started: " + e.getSource());
+			});
 		});
 	}
 
