@@ -18,8 +18,7 @@
 
 #console {
     -fx-background-color: rgba(0,0,0,0.60);
-    /*-fx-font-family: monospace;*/
-    -fx-font-family: minecraft;
+    -fx-font-family: monospace;
 }
 
 /************************************
