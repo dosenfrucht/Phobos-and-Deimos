@@ -9,7 +9,11 @@ import net.demus_intergalactical.phobos_and_deimos.scene.PropertiesWindow;
 import net.demus_intergalactical.serverman.Globals;
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Controller {
 
@@ -59,7 +63,13 @@ public class Controller {
 
 	public void onGetCurrentPath() {
 		Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-		a.setContentText("versions_home: " + Globals.getServerManConfig().get("versions_home").toString());
+
+		try {
+			a.setHeaderText("versions_home: " + Globals.getServerManConfig().get("versions_home"));
+			a.setContentText("getProtectionDomain(): " + new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getPath());
+		} catch(Exception ex) {
+			//lel
+		}
 
 		a.show();
 	}

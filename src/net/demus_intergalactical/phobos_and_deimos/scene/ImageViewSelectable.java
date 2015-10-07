@@ -29,6 +29,7 @@ public class ImageViewSelectable extends ImageView {
 			if (icon != null) {
 				if (icon.getName().endsWith(".png")) {
 					try {
+						imgFile = icon;
 						Image serverIcon = new Image(new FileInputStream(icon.getPath()));
 						if (serverIcon.getHeight() == SERVER_ICON_SIZE && serverIcon.getWidth() == SERVER_ICON_SIZE) {
 							setImage(serverIcon);
@@ -47,10 +48,11 @@ public class ImageViewSelectable extends ImageView {
 		});
 	}
 
-	public void setImageByFile(File f) {
-		imgFile = f;
-		super.setImage(new Image(f.getPath()));
-	}//public void setImageByFile(File f)
+	public void setImageFromResource(String filePath) {
+		imgFile = new File(filePath);
+		System.out.println("ImageViewSelectable > setImageByFile > filePath:" + filePath);
+		super.setImage(new Image(filePath));
+	}
 
 	public File getImageFile() {
 		return imgFile;
