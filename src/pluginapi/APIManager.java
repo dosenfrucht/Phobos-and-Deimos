@@ -88,9 +88,14 @@ public class APIManager {
 
 	public boolean queueChat(Object time, Object arg) {
 		return
-			chatListener.stream().map(e ->
-					e.call(null, time, arg)
-			).anyMatch(
+			chatListener.stream().filter(e -> e != null).map(e -> {
+				try {
+					return e.call(null, time, arg);
+				} catch (Exception ignored) {
+					System.err.println(ignored.getMessage());
+					return false;
+				}
+			}).anyMatch(
 				o -> !(o instanceof Boolean) || (Boolean) o
 				// any of them want to disable output?
 			);
@@ -98,9 +103,13 @@ public class APIManager {
 
 	public boolean queuePlayerLeft(Object time, Object arg) {
 		return
-			playerListenerLeft.stream().map(e ->
-					e.call(null, time, arg)
-			).anyMatch(
+			playerListenerLeft.stream().filter(e -> e != null).map(e -> {
+				try {
+					return e.call(null, time, arg);
+				} catch (Exception ignored) {
+					return false;
+				}
+			}).anyMatch(
 				o -> !(o instanceof Boolean) || (Boolean) o
 				// any of them want to disable output?
 			);
@@ -108,9 +117,14 @@ public class APIManager {
 
 	public boolean queuePlayerJoined(Object time, Object arg) {
 		return
-			playerListenerJoined.stream().map(e ->
-					e.call(null, time, arg)
-			).anyMatch(
+			playerListenerJoined.stream().filter(e -> e != null).map
+				(e -> {
+					try {
+						return e.call(null, time, arg);
+					} catch (Exception ignored) {
+						return false;
+					}
+				}).anyMatch(
 				o -> !(o instanceof Boolean) || (Boolean) o
 				// any of them want to disable output?
 			);
@@ -119,9 +133,14 @@ public class APIManager {
 	public boolean queue(String type, Object time, String thread,
 	                     String loglvl, Object arg) {
 		return
-			eventListener.stream().map(e ->
-					e.call(null, type, time, thread, loglvl, arg)
-			).anyMatch(
+			eventListener.stream().filter(e -> e != null).map(e -> {
+				try {
+					return e.call(null, type, time, thread,
+						loglvl, arg);
+				} catch (Exception ignored) {
+					return false;
+				}
+			}).anyMatch(
 				o -> !(o instanceof Boolean) || (Boolean) o
 				// any of them want to disable output?
 			);
@@ -165,5 +184,9 @@ public class APIManager {
 			}
 		});
 		ticker.start();
+	}
+
+	public void removePlugin(Plugin p) {
+		plugins.remove(p);
 	}
 }

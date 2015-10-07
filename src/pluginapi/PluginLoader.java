@@ -44,7 +44,9 @@ public class PluginLoader {
 		try {
 			p.load();
 		} catch (FileNotFoundException | NoSuchMethodException | ScriptException e) {
-			e.printStackTrace();
+			System.err.println("could not load plugin \"" + name
+				.getName() + "\"");
+			api.removePlugin(p);
 		}
 	}
 
