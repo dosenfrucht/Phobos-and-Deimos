@@ -60,17 +60,4 @@ public class Controller {
 		AboutWindow aw = new AboutWindow();
 		aw.show();
 	}//public void onAboutPressed()
-
-	public void onGetCurrentPath() {
-		Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-
-		try {
-			a.setHeaderText("versions_home: " + Globals.getServerManConfig().get("versions_home"));
-			a.setContentText("getProtectionDomain(): " + new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getPath());
-		} catch(Exception ex) {
-			//lel
-		}
-
-		a.show();
-	}
 }

@@ -48,7 +48,7 @@ public class CreateInstanceButton extends Button {
 			if (!ciw.tfNameInput.getText().equals("") && !ciw.tfServerJarFileInput.getText().equals("") && !ciw.tfVersionInput.getText().equals("")) {
 				if (ciw.checkEula.isSelected()) {
 					try {
-						FileUtils.writeStringToFile(new File(Globals.getServerManConfig().get("instances_home") + File.separator + ciw.tfNameInput.getText() + File.separator + "checkEula.txt"), "checkEula=true");
+						FileUtils.writeStringToFile(new File(Globals.getServerManConfig().get("instances_home") + File.separator + ciw.tfNameInput.getText() + File.separator + "eula.txt"), "eula=true");
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
