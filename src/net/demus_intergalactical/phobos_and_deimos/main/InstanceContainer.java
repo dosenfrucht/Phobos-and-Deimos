@@ -222,7 +222,6 @@ public class InstanceContainer {
 	public void onActivated() {
 		UIController.updateConsole(instanceLog.getDocument());
 		playerList = new PlayerList(this, UIController.playerDisplay);
-		System.out.println("playerList" + playerList);
 	}
 
 	public ServerInstance getInstance() {

@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Server_GUI_jar</output-path>
     <root id="archive" name="Server GUI.jar">
       <element id="module-output" name="Server GUI" />
-      <element id="dir-copy" path="$PROJECT_DIR$/resources" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/ServerMan.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/richtextfx-fat-0.6.8.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/ServerProperties.jar" path-in-jar="/" />

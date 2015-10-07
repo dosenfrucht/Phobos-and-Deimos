@@ -60,11 +60,7 @@ public class ManagerApplication extends Application {
 	}
 
 	public void closeProgram() {
-		for (String s : InstancePool.getAllInstanceIDs()) {
-			if (InstancePool.get(s).getInstance().getProcess() != null) {
-				InstancePool.get(s).getInstance().stop();
-			}
-		}
+		InstancePool.getAllInstanceIDs().stream().filter(s -> InstancePool.get(s).getInstance().getProcess() != null).forEach(s -> InstancePool.get(s).getInstance().stop());
 
 		WindowRegistry.closeAllStages();
 

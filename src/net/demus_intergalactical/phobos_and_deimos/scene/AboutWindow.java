@@ -13,6 +13,7 @@ import net.demus_intergalactical.phobos_and_deimos.main.Main;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 public class AboutWindow extends Stage {
 	private static final Map<String,String> listAuthorPictures;
@@ -60,11 +61,16 @@ public class AboutWindow extends Stage {
 		WindowRegistry.register(this);
 
 		this.setTitle("About");
-		String css = net.demus_intergalactical.phobos_and_deimos.main.Main.class.getClassLoader().getResource("assets/css/aboutWindow.css").toExternalForm();
+		String css = Main.class.getClassLoader().getResource("assets/css/aboutWindow.css").toExternalForm();
 		layout.getStylesheets().clear();
 		layout.getStylesheets().add(css);
 		layout.setPrefSize(900, 600);
 
+		Object obj = new Object();
+		Class clazz = obj.getClass();
+		if(obj.getClass().equals(clazz)) {
+			System.out.println(true);
+		}
 		lblProjectName.setId("lblProjectName");
 		vboxProjectDescription.getChildren().add(lblProjectName);
 		vboxProjectDescription.getChildren().add(lblProjectDescription);
@@ -79,10 +85,10 @@ public class AboutWindow extends Stage {
 		vboxProjectDescription.setId("vboxProjectDescription");
 		vboxProject.getChildren().add(vboxProjectDescription);
 
-		Iterator<String> keySetIterator = listAuthorDescriptions.keySet().iterator();
-		for(int i = 0; keySetIterator.hasNext(); i++) {
+		int i = 0;
+		Set<String> authorDescKeySet = listAuthorDescriptions.keySet();
+		for(String key : authorDescKeySet) {
 			VBox vboxLeftCol = new VBox();
-			String key = keySetIterator.next();
 			Label lblTmp = new Label(key);
 			vboxLeftCol.getChildren().add(lblTmp);
 
@@ -99,6 +105,8 @@ public class AboutWindow extends Stage {
 
 			gpAuthors.addRow(i, vboxLeftCol);
 			gpAuthors.addRow(i, vboxRightCol);
+
+			i++;
 		}
 		gpAuthors.setPrefWidth(layout.getPrefWidth());
 		gpAuthors.setPrefHeight(layout.getPrefHeight());
@@ -116,11 +124,7 @@ public class AboutWindow extends Stage {
 		layout.getChildren().add(vboxProject);
 		layout.getChildren().add(fpContent);
 		layout.getChildren().add(hboxButtons);
-		/*
-		layout.addRow(0, vboxProject);
-		layout.addRow(1, gpAuthors);
-		layout.addRow(2, hboxButtons);
-		*/
+
 		Scene scene = new Scene(layout);
 		this.setScene(scene);
 	}

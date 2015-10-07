@@ -66,13 +66,11 @@ public class CreateInstanceWindow extends Stage {
 
 		si = instCont.getInstance();
 
-		File serverIconFile = new File(Main.class.getClassLoader().getResource("assets/unknown_server.png").toString());
-
-		imgViewServer.setImageByFile(serverIconFile);
+		imgViewServer.setImageFromResource(Main.class.getClassLoader().getResource("assets/unknown_server.png").toString());
 		imgViewServer.initSelection(this);
 
 		init();
-	}//public net.demus_intergalactical.phobos_and_deimos.scene.CreateInstanceWindow() throws FileNotFoundException
+	}
 
 
 	private void init() {
@@ -128,10 +126,10 @@ public class CreateInstanceWindow extends Stage {
 		layout.getChildren().addAll(stackPnServer, vboxName, vboxServerJarFilePopup, version, checkEula, hboxButtonBox);
 
 		this.show();
-	}//private void display()
+	}
 
 	public void close() {
 		super.close();
 	}//public void close()
-}//public class net.demus_intergalactical.phobos_and_deimos.scene.CreateInstanceWindow extends Stage
+}
 
