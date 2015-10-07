@@ -1,4 +1,4 @@
-package pluginapi;
+package net.demus_intergalactical.phobos_and_deimos.pluginapi;
 
 import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
@@ -8,14 +8,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
 
 public class PluginLoader {
 
 	public static void loadAll(APIManager api, ServerInstance instance,
 	                           BiFunction<String, String, Void> writeFun)
 		throws FileNotFoundException, FileAlreadyExistsException {
-		String pathDir = ((String) Globals.getServerManConfig()
+		String pathDir = (Globals.getServerManConfig()
 					.get("instances_home"))
 			+ File.separator + instance.getServerInstanceID()
 			+ File.separator + "plugins" + File.separator;
@@ -31,7 +30,8 @@ public class PluginLoader {
 			throw new FileAlreadyExistsException("File " +
 				"\"plugins\" already exists.");
 		}
-		for (File name : dir.listFiles()) {
+		File[] files = dir.listFiles();
+		for (File name : files) {
 			load(api, instance, name, writeFun);
 		}
 	}

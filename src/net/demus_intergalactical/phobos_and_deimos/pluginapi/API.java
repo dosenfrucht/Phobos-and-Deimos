@@ -1,4 +1,4 @@
-package pluginapi;
+package net.demus_intergalactical.phobos_and_deimos.pluginapi;
 
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import net.demus_intergalactical.serverman.instance.ServerInstance;

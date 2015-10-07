@@ -1,4 +1,4 @@
-package pluginapi;
+package net.demus_intergalactical.phobos_and_deimos.pluginapi;
 
 import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
 
 public class Plugin {
 

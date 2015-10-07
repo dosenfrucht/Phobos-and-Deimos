@@ -1,3 +1,5 @@
+package net.demus_intergalactical.phobos_and_deimos.deprecated;
+
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -7,6 +9,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import net.demus_intergalactical.phobos_and_deimos.main.InstanceContainer;
+import net.demus_intergalactical.phobos_and_deimos.main.InstancePool;
+import net.demus_intergalactical.phobos_and_deimos.main.UIController;
 import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverproperties.ServerProperties;
 
@@ -17,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+@Deprecated
 public class EditPropertiesWindow extends Stage {
 
 	private ServerProperties properties;

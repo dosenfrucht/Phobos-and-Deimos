@@ -1,3 +1,5 @@
+package net.demus_intergalactical.phobos_and_deimos.scene;
+
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -6,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import net.demus_intergalactical.phobos_and_deimos.main.*;
 import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverproperties.ServerProperties;
 
@@ -170,7 +173,7 @@ public class PropertiesWindow extends Stage {
 
 		spContent.setPrefSize(700, 600);
 		spContent.setFitToWidth(true);
-		String css = Main.class.getResource("/assets/css/propertiesWindow.css").toExternalForm();
+		String css = net.demus_intergalactical.phobos_and_deimos.main.Main.class.getClassLoader().getResource("assets/css/propertiesWindow.css").toExternalForm();
 		layout.getStylesheets().clear();
 		layout.getStylesheets().add(css);
 
@@ -209,11 +212,10 @@ public class PropertiesWindow extends Stage {
 
 		init();
 
-		//UIController.editInstanceMenu = this;
+		//net.demus_intergalactical.phobos_and_deimos.main.UIController.editInstanceMenu = this;
 	}
 
 	public void init() {
-		Set<String> propertySet = properties.getAllKeys();
 		int rowIndex = 0;
 
 		Node tmpNode;

@@ -1,24 +1,18 @@
-import javafx.application.Application;
-import javafx.application.HostServices;
+package net.demus_intergalactical.phobos_and_deimos.scene;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.*;
-import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextFlow;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import net.demus_intergalactical.phobos_and_deimos.main.*;
+import net.demus_intergalactical.phobos_and_deimos.main.Main;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 public class AboutWindow extends Stage {
 	private static final Map<String,String> listAuthorPictures;
@@ -66,7 +60,7 @@ public class AboutWindow extends Stage {
 		WindowRegistry.register(this);
 
 		this.setTitle("About");
-		String css = Main.class.getResource("/assets/css/aboutWindow.css").toExternalForm();
+		String css = net.demus_intergalactical.phobos_and_deimos.main.Main.class.getClassLoader().getResource("assets/css/aboutWindow.css").toExternalForm();
 		layout.getStylesheets().clear();
 		layout.getStylesheets().add(css);
 		layout.setPrefSize(900, 600);
@@ -92,7 +86,7 @@ public class AboutWindow extends Stage {
 			Label lblTmp = new Label(key);
 			vboxLeftCol.getChildren().add(lblTmp);
 
-			Image imgTmp = new Image(Main.class.getResourceAsStream("/assets/" + listAuthorPictures.get(key)));
+			Image imgTmp = new Image(Main.class.getClassLoader().getResourceAsStream("assets/" + listAuthorPictures.get(key)));
 			ImageView imgViewTmp = new ImageView(imgTmp);
 			vboxLeftCol.getChildren().add(imgViewTmp);
 

@@ -7,7 +7,7 @@
 <?import org.fxmisc.richtext.*?>
 <?scenebuilder-classpath-element richtextfx-fat-0.6.8.jar?>
 
-<AnchorPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0" minWidth="0" prefHeight="595.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0" minWidth="0" prefHeight="595.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.demus_intergalactical.phobos_and_deimos.main.Controller">
    <children>
       <Button fx:id="btnSend" mnemonicParsing="false" onAction="#btnSendOnClick" prefHeight="40.0" prefWidth="100.0" text="Send" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="535.0">
          <!--<font>
@@ -39,7 +39,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Settings">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#onAboutPressed" text="About" />
+                <MenuItem mnemonicParsing="false" onAction="#onAboutPressed" text="About" />
+                <MenuItem mnemonicParsing="false" onAction="#onGetCurrentPath" text="GET CURRENT PATH" />
             </items>
           </Menu>
         </menus>
