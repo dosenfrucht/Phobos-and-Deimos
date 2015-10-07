@@ -1,3 +1,5 @@
+package net.demus_intergalactical.phobos_and_deimos.scene;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -9,15 +11,11 @@ public class ConfirmWindow extends Alert {
 		setTitle(title);
 		setHeaderText(null);
 		setContentText(msg);
-	}//public AlertWindow(String title, String msg)
+	}//public net.demus_intergalactical.phobos_and_deimos.scene.AlertWindow(String title, String msg)
 
 
 	public boolean waitAndGetResult() {
 		Optional<ButtonType> result = this.showAndWait();
-		if (result.get() == ButtonType.OK) {
-			return true;
-		} else {
-			return false;
-		}
+		return result.get() == ButtonType.OK;
 	}//public boolean waitAndGetResult()
-}//public class ConfirmWindow extends Alert
+}//public class net.demus_intergalactical.phobos_and_deimos.scene.ConfirmWindow extends Alert

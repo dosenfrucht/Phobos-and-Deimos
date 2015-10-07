@@ -1,4 +1,4 @@
-package pluginapi;
+package net.demus_intergalactical.phobos_and_deimos.pluginapi;
 
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;

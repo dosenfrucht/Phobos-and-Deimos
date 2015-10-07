@@ -1,3 +1,5 @@
+package net.demus_intergalactical.phobos_and_deimos.main;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,6 +9,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import net.demus_intergalactical.phobos_and_deimos.scene.PlayerList;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.StyledDocument;
 
@@ -31,12 +34,8 @@ public class UIController {
 			//noinspection unchecked
 			playerDisplay = (ListView<HBox>) root.lookup("#playerdisplay");
 			console = (InlineCssTextArea) root.lookup("#console");
-			console.setOnScroll(e -> {
-				System.err.println("console scrolled: " + e.getSource());
-			});
-			console.setOnScrollStarted(e -> {
-				System.err.println("console scroll started: " + e.getSource());
-			});
+			console.setOnScroll(e -> System.err.println("console scrolled: " + e.getSource()) );
+			console.setOnScrollStarted(e -> System.err.println("console scroll started: " + e.getSource()) );
 		});
 	}
 
@@ -49,7 +48,6 @@ public class UIController {
 			console.clear();
 			console.replace(consoleLog);
 		});
-
 	}
 
 	public static void appendToConsole(String color, String text) {
@@ -67,7 +65,7 @@ public class UIController {
 	public static void removeServer(BorderPane server) {
 		Platform.runLater(() -> {
 			serverList.remove(server);
-			if(serverList.size() == 0) {
+			if (serverList.size() == 0) {
 				editInstanceMenu.setDisable(true);
 			}
 			activeInstance = null;

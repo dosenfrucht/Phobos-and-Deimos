@@ -1,8 +1,7 @@
-import javafx.collections.ListChangeListener;
+package net.demus_intergalactical.phobos_and_deimos.scene;
+
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -12,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import net.demus_intergalactical.phobos_and_deimos.main.*;
 import net.demus_intergalactical.serverman.Globals;
 import org.apache.commons.io.FileUtils;
 
@@ -27,6 +27,7 @@ public class ListServerJarsWindow extends Stage {
 	private TableView<ServerInstanceVersion> tblView = new TableView<>();
 	private TableColumn<ServerInstanceVersion, String> tblColName = new TableColumn<>("Name");
 	private TableColumn<ServerInstanceVersion, String> tblColType = new TableColumn<>("Type");
+	private ServerInstanceVersion selectedItem = null;
 
 	private BorderPane bpBtnPanel = new BorderPane();
 	private FileChooser fileChooser = new FileChooser();
@@ -44,7 +45,7 @@ public class ListServerJarsWindow extends Stage {
 		WindowRegistry.register(this);
 
 		this.setTitle("Select server-jar");
-		String css = Main.class.getResource("/assets/css/listServerJarsWindow.css").toExternalForm();
+		String css = Main.class.getClassLoader().getResource("assets/css/listServerJarsWindow.css").toExternalForm();
 		layout.getStylesheets().clear();
 		layout.getStylesheets().add(css);
 		layout.setId("layout");
@@ -115,13 +116,17 @@ public class ListServerJarsWindow extends Stage {
 		bpBtnPanel.setRight(hboxRightBtns);
 
 		layout.getChildren().addAll(tblView, bpBtnPanel);
-	}//public ListServerJarsWindow()
+	}//public net.demus_intergalactical.phobos_and_deimos.scene.ListServerJarsWindow()
 
 
-	public File showAndGetFile() {
-		this.showAndWait();
-		return serverJar;
+	public File getFile() {
+		return this.serverJar;
 	}//public File showAndGetFile()
+
+	public ServerInstanceVersion getSelectedItem() {
+		return tblView.getSelectionModel().getSelectedItem();
+	}//public ServerInstanceVersion getServerInstanceVersion()
+
 
 	private void fillTable() {
 		ObservableList<ServerInstanceVersion> data = ServerInstanceVersion.getAllVersions();

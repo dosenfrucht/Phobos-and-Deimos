@@ -1,3 +1,5 @@
+package net.demus_intergalactical.phobos_and_deimos.main;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +23,7 @@ public class ServerInstanceVersion {
 		this.versionName = new SimpleStringProperty(versionName);
 		this.versionType = new SimpleStringProperty(versionType);
 		this.location = new SimpleStringProperty(location);
-	}//public ServerInstanceVersion(String versionName, String location)
+	}//public net.demus_intergalactical.phobos_and_deimos.main.ServerInstanceVersion(String versionName, String location)
 
 
 	public String getVersionName() {
@@ -52,21 +54,24 @@ public class ServerInstanceVersion {
 
 
 	public static ServerInstanceVersion getVersion(String versionName) {
-		Iterator<ServerInstanceVersion> iterator = versionRegistry.iterator();
 
-		while (iterator.hasNext()) {
-			ServerInstanceVersion siv = iterator.next();
-
+		for (ServerInstanceVersion siv : versionRegistry) {
 			if (siv.getVersionName().equals(versionName)) {
 				return siv;
 			}
 		}
 
 		return null;
-	}//public static ServerInstanceVersion getVersion(String versionName)
+	}//public static net.demus_intergalactical.phobos_and_deimos.main.ServerInstanceVersion getVersion(String versionName)
 
 
 	public static ObservableList<ServerInstanceVersion> getAllVersions() {
 		return versionRegistry;
-	}//public static ObservableList<ServerInstanceVersion> getAllVersions()
+	}//public static ObservableList<net.demus_intergalactical.phobos_and_deimos.main.ServerInstanceVersion> getAllVersions()
+
+
+	@Override
+	public String toString() {
+		return versionName.getValue();
+	}//public String toString()
 }

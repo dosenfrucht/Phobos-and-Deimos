@@ -1,6 +1,12 @@
+package net.demus_intergalactical.phobos_and_deimos.main;
+
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import net.demus_intergalactical.phobos_and_deimos.scene.AboutWindow;
+import net.demus_intergalactical.phobos_and_deimos.scene.CreateInstanceWindow;
+import net.demus_intergalactical.phobos_and_deimos.scene.PropertiesWindow;
+import net.demus_intergalactical.serverman.Globals;
 import org.fxmisc.richtext.InlineCssTextArea;
 
 import java.io.FileNotFoundException;
@@ -51,5 +57,10 @@ public class Controller {
 		aw.show();
 	}//public void onAboutPressed()
 
+	public void onGetCurrentPath() {
+		Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+		a.setContentText("versions_home: " + Globals.getServerManConfig().get("versions_home").toString());
 
+		a.show();
+	}
 }

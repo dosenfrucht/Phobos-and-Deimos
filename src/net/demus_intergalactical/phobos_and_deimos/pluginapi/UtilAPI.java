@@ -1,4 +1,4 @@
-package pluginapi;
+package net.demus_intergalactical.phobos_and_deimos.pluginapi;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;

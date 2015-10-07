@@ -1,8 +1,9 @@
+package net.demus_intergalactical.phobos_and_deimos.main;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import net.demus_intergalactical.serverman.Globals;
@@ -21,10 +22,10 @@ public class ManagerApplication extends Application {
 		primaryStage.setTitle("Phobos and Deimos - See Minecraft from another planet");
 		primaryStage.minHeightProperty().set(630);
 		primaryStage.minWidthProperty().set(1024);
-		Font.loadFont(getClass().getResourceAsStream("/assets/fonts/minecraft.ttf"), 10);
+		Font.loadFont(Main.class.getClassLoader().getResourceAsStream("assets/fonts/minecraft.ttf"), 10);
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("style.fxml"));
+			root = FXMLLoader.load(Main.class.getClassLoader().getResource("style.fxml"));
 		} catch (IOException e) {
 			System.err.println("Style not loaded");
 			e.printStackTrace();

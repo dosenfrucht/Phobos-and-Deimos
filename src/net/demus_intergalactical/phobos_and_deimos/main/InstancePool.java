@@ -1,3 +1,7 @@
+package net.demus_intergalactical.phobos_and_deimos.main;
+
+import net.demus_intergalactical.phobos_and_deimos.main.InstanceContainer;
+
 import java.util.HashMap;
 import java.util.Set;
 

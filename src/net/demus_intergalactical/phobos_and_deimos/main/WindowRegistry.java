@@ -1,3 +1,5 @@
+package net.demus_intergalactical.phobos_and_deimos.main;
+
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -9,7 +11,7 @@ public class WindowRegistry {
 	private static Map<String, Stage> registry = new HashMap<>();
 	private static Stage primaryStage = null;
 	private static Application application = null;
-	private static Image icon = new Image(Main.class.getResourceAsStream("/assets/project_icon_32x32.png"));
+	private static Image icon = new Image(Main.class.getClassLoader().getResourceAsStream("assets/project_icon_32x32.png"));
 
 
 	public static void closeAllStages() {
@@ -50,9 +52,9 @@ public class WindowRegistry {
 
 	public static void setApplication(Application application) {
 		WindowRegistry.application = application;
-	}//public static void setApplication(ManagerApplication application)
+	}//public static void setApplication(net.demus_intergalactical.phobos_and_deimos.main.ManagerApplication application)
 
 	public static Application getApplication() {
 		return application;
 	}//public static Application getApplication()
-}//public class WindowRegistry
+}//public class net.demus_intergalactical.phobos_and_deimos.main.WindowRegistry

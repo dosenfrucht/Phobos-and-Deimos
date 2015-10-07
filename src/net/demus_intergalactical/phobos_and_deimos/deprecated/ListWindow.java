@@ -1,3 +1,5 @@
+package net.demus_intergalactical.phobos_and_deimos.deprecated;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,6 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+@Deprecated
 public class ListWindow extends Dialog {
 
 	static Stage window;
