@@ -1,0 +1,61 @@
+.root {
+    -fx-background-image: url("/assets/dirt_console.png");
+    -fx-font-family: "minecraft";
+    -fx-font-size: 14;
+}
+#layout {
+    -fx-padding: 10 10 10 10;
+}
+#layout .label {
+   -fx-text-fill: white;
+   -fx-margin: 0 0 20 0;
+}
+.table-view {
+    -fx-effect: innershadow(three-pass-box, #000000, 15, 0.5, 0, 0);
+    -fx-background-image: url("/assets/dirt_console_dark.png");
+ }
+.column-header,
+.filler {
+    -fx-background-color: #A0A0A0;
+}
+.table-row-cell {
+    -fx-background-color: transparent;
+}
+.table-row-cell .text {
+    -fx-fill: white;
+}
+.table-row-cell:selected {
+    -fx-background-color: #CCCCCC;
+}
+
+#header {
+    -fx-padding: 0 0 10 0;
+}
+
+#bpButtons {
+    -fx-padding: 0 0 0 10;
+}
+
+#hboxButtons {
+    -fx-padding: 10 0 0 0;
+}
+
+/************************************
+*           Button                  *
+************************************/
+#layout .button {
+    -fx-background-image: url("/assets/button40_center.png"), url("/assets/button40_right.png"), url("/assets/button40_left.png");
+    -fx-background-position: center, right, left;
+    -fx-background-repeat: repeat-x, no-repeat, no-repeat;
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+}
+#layout .button:hover {
+    -fx-background-image: url("/assets/button40_center_hover.png"), url("/assets/button40_right_hover.png"), url("/assets/button40_left_hover.png");
+    -fx-background-position: center, right, left;
+    -fx-background-repeat: repeat-x, no-repeat, no-repeat;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-text-fill: #FFFFA0;
+}
