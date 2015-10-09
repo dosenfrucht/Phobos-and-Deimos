@@ -38,6 +38,8 @@ public class UIController {
 			console.setOnScroll(e -> System.err.println("console scrolled: " + e.getSource()) );
 			console.setOnScrollStarted(e -> System.err.println("console scroll started: " + e.getSource()) );
 			input = (TextField) root.lookup("#input");
+
+			AssetsParser ap = new AssetsParser();
 		});
 	}
 

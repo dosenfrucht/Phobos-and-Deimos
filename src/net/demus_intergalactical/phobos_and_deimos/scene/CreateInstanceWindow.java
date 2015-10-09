@@ -97,7 +97,13 @@ public class CreateInstanceWindow extends Stage {
 
 			try {
 				tfServerJarFileInput.setText(serverJarFile.getName());
-				tfVersionInput.setText(version.getVersionName());
+				String versionName;
+				if(version.getIsSupported()) {
+					versionName = version.getVersionName();
+				} else {
+					versionName = "unknown";
+				}
+				tfVersionInput.setText(versionName);
 			} catch (NullPointerException npEx) {
 				// i dont care about you muhahaha
 				System.err.println("Invalid serverJarFile file: " + serverJarFile);
