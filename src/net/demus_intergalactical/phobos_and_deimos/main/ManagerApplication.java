@@ -60,8 +60,18 @@ public class ManagerApplication extends Application {
 	}
 
 	public void closeProgram() {
-		InstancePool.getAllInstanceIDs().stream().filter(s -> InstancePool.get(s).getInstance().getProcess() != null).forEach(s -> InstancePool.get(s).getInstance().stop());
-
+		/*InstancePool.getAllInstanceIDs().stream()
+			.filter(s ->
+			InstancePool.get(s)
+			.getInstance().getProcess() != null).forEach(s -> InstancePool.get(s).getInstance().stop());
+		*/
+		InstancePool.getAllInstanceIDs().parallelStream()
+			.map(e -> InstancePool.get(e))
+			.filter(i -> i.getInstance() != null
+				&& i.getInstance().isLoaded())
+			.filter(i -> i.getInstance().getProcess() != null)
+			.filter(i -> i.getInstance().isRunning())
+			.forEach(i -> i.getInstance().stop());
 		WindowRegistry.closeAllStages();
 
 		try {

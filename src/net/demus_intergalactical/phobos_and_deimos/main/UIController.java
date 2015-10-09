@@ -7,9 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import net.demus_intergalactical.phobos_and_deimos.scene.PlayerList;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.StyledDocument;
 
@@ -17,6 +17,7 @@ public class UIController {
 
 	static ListView<HBox> playerDisplay;
 	static InlineCssTextArea console;
+	static TextField input;
 	static ObservableList<BorderPane> serverList = FXCollections.observableArrayList();
 	static ListView<BorderPane> serverDisplay;
 	static String activeInstance;
@@ -36,6 +37,7 @@ public class UIController {
 			console = (InlineCssTextArea) root.lookup("#console");
 			console.setOnScroll(e -> System.err.println("console scrolled: " + e.getSource()) );
 			console.setOnScrollStarted(e -> System.err.println("console scroll started: " + e.getSource()) );
+			input = (TextField) root.lookup("#input");
 		});
 	}
 
@@ -74,13 +76,16 @@ public class UIController {
 	}
 
 	public static void changeInstance(String instance) {
-		if (activeInstance != null) {
-			InstancePool.get(activeInstance).setActive(false);
-		}
-		InstancePool.get(instance).setActive(true);
-		activeInstance = instance;
-		InstancePool.get(instance).onActivated();
-		editInstanceMenu.setDisable(false);
+		Platform.runLater(() -> {
+			if (activeInstance != null) {
+				InstancePool.get(activeInstance).setActive(false);
+				InstancePool.get(activeInstance).setInputBuf(input.getText());
+			}
+			InstancePool.get(instance).setActive(true);
+			activeInstance = instance;
+			InstancePool.get(instance).onActivated();
+			editInstanceMenu.setDisable(false);
+		});
 	}
 
 	public static String getActiveInstance() {
@@ -108,6 +113,10 @@ public class UIController {
 				break;
 			}
 		}
+	}
+
+	public static void updateInput(String inputBuf) {
+		Platform.runLater(() -> input.setText(inputBuf));
 	}
 }
 

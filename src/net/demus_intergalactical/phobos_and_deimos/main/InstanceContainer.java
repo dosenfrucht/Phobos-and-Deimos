@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import net.demus_intergalactical.phobos_and_deimos.scene.InstanceContextMenu;
 import net.demus_intergalactical.phobos_and_deimos.scene.InstanceScriptManager;
@@ -36,6 +37,9 @@ public class InstanceContainer {
 	private Boolean isActive;
 	private InlineCssTextArea instanceLog;
 
+	private CompletionController completionController;
+	private ConsoleHistory consoleHistory;
+
 	private GridPane gridInstanceCenter = new GridPane();
 	private Label lblInstanceName = new Label("ERR");
 	private Label lblInstancePort = new Label("ERR");
@@ -47,6 +51,7 @@ public class InstanceContainer {
 	private VBox vboxInstanceRight = new VBox(10);
 	private HBox hboxInstanceTopRight = new HBox(10);
 	private InstanceScriptManager scriptManager;
+	private String inputBuf;
 
 
 	public InstanceContainer() {
@@ -55,6 +60,8 @@ public class InstanceContainer {
 		properties = new ServerProperties();
 		isActive = false;
 		instanceLog = new InlineCssTextArea();
+		completionController = new CompletionController(currentInstance);
+		consoleHistory = new ConsoleHistory();
 	}
 
 	public void init() {
@@ -120,6 +127,7 @@ public class InstanceContainer {
 		});
 		try {
 			currentInstance.load();
+			completionController = new CompletionController(currentInstance);
 		} catch (NoSuchMethodException | ScriptException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -183,7 +191,15 @@ public class InstanceContainer {
 		serverContainer.setCenter(gridInstanceCenter);
 		serverContainer.setRight(vboxInstanceRight);
 		serverContainer.setOnContextMenuRequested(e -> contextMenu.show(serverContainer, e.getScreenX(), e.getScreenY()));
-		serverContainer.setOnMouseClicked(e -> UIController.changeInstance(currentInstance.getServerInstanceID()));
+		serverContainer.setOnMouseClicked(e -> {
+			UIController.changeInstance(
+				currentInstance.getServerInstanceID()
+			);
+			if (e.getButton().equals(MouseButton.PRIMARY)
+				&& e.getClickCount() == 2) {
+				getInstance().run();
+			}
+		});
 		BorderPane.setMargin(gridInstanceCenter, new Insets(0, 10, 0, 10));
 		UIController.addServer(serverContainer);
 	}
@@ -221,6 +237,7 @@ public class InstanceContainer {
 
 	public void onActivated() {
 		UIController.updateConsole(instanceLog.getDocument());
+		UIController.updateInput(inputBuf);
 		playerList = new PlayerList(this, UIController.playerDisplay);
 	}
 
@@ -246,6 +263,18 @@ public class InstanceContainer {
 
 	public void send(String text) {
 		scriptManager.send(text);
+	}
+
+	public CompletionController getCompletionController() {
+		return completionController;
+	}
+
+	public ConsoleHistory getConsoleHistory() {
+		return consoleHistory;
+	}
+
+	public void setInputBuf(String inputBuf) {
+		this.inputBuf = inputBuf;
 	}
 }
 
