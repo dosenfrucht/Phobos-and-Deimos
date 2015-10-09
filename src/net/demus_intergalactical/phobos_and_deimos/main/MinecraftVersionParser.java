@@ -106,18 +106,20 @@ public class MinecraftVersionParser {
 			String versionType = (String) versionJson.get("type");
 
 			String versionLocation = "http://s3.amazonaws.com/Minecraft.Download/versions/" + versionId + "/";
-			if(versionType.equalsIgnoreCase("release") ||
-					versionType.equalsIgnoreCase("snapshot")) {
+
+			if(versionType.equalsIgnoreCase("release")) {
 				versionLocation += "minecraft_server." + versionId + ".jar";
 
-				if(versionType.equalsIgnoreCase("release")) {
-					Pattern filterPattern = Pattern.compile("^(1\\.[0-2](\\.[0-4])?)$");
-					Matcher filterMatcher = filterPattern.matcher(versionId);
+				Pattern filterPattern = Pattern.compile("^(1\\.[0-2](\\.[0-4])?)$");
+				Matcher filterMatcher = filterPattern.matcher(versionId);
 
-					if(!filterMatcher.find()) {
-						putData(versionId, versionLocation, versionType);
-					}
+				if(!filterMatcher.find()) {
+					putData(versionId, versionLocation, versionType);
 				}
+			} else if(versionType.equalsIgnoreCase("snapshot")) {
+				versionLocation += "minecraft_server." + versionId + ".jar";
+
+				putData(versionId, versionLocation, versionType);
 			}
 		}
 	}
