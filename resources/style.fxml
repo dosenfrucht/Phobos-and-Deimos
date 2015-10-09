@@ -34,12 +34,14 @@
           <Menu fx:id="editinstancemenu" mnemonicParsing="false" text="Edit instance" disable="true">
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#onInstanceSettingsPressed" text="Instance settings" />
+                <MenuItem mnemonicParsing="false" onAction="#onInstancePluginsPressed" text="Plugins" />
                 <MenuItem mnemonicParsing="false" onAction="#onServerPropertiesPressed" text="Server properties" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Settings">
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#onAboutPressed" text="About" />
+                <MenuItem mnemonicParsing="false" onAction="#onPathPressed" text="GET CURRENT PATHAS??!" />
             </items>
           </Menu>
         </menus>
