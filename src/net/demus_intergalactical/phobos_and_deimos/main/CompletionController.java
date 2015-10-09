@@ -3,6 +3,7 @@ package net.demus_intergalactical.phobos_and_deimos.main;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,10 +17,18 @@ public class CompletionController {
 
 	public CompletionController(ServerInstance i) {
 		this.instance = i;
+		completions = new ArrayList<>();
+		tmp = new HashSet<>();
 	}
 
 
 	public String complete(String text) {
+		if (text == null) {
+			text = "";
+			origCompleteText = text;
+			completions = new ArrayList<>();
+			tmp = instance.complete(text);
+		}
 		if (text.equals(lastCompletion)) {
 			return completeNext();
 		}
