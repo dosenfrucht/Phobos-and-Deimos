@@ -46,3 +46,43 @@
     -fx-background-radius: 0em;
     -fx-text-fill: #FFFFA0;
 }
+
+/************************************
+*           Scrollbar               *
+************************************/
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+	-fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 12 0 0;
+}
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-button {
+	-fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 0 12 0;
+}
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+	-fx-shape: " ";
+	-fx-padding:0;
+}
+.scroll-bar:horizontal,
+.scroll-bar:vertical {
+    -fx-background-color:transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: black;
+	-fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #C0C0C0;
+    -fx-effect: innershadow(three-pass-box, #808080, 0, 0, -2, -2);
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 0em;
+}
