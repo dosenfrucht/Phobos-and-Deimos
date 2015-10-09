@@ -28,6 +28,7 @@ The `unload` function is called when the server shuts down. (like a destructor)
 Currently there are these methods callable:
 * `api.registerEventListener(function(type, time, thread, loglvl, arg) {})`
 * `api.registerChatListener(function(time, arg) {})`
+* `api.registerCommandListener(command, function(time, player, args) {})`
 * `api.registerPlayerListener(function(time, arg) {}, function(time, arg) {})`
 * `api.registerInputListener(function(command) {})`
 * `api.registerTickListener(function() {})`

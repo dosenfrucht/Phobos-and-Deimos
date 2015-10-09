@@ -5,10 +5,7 @@ import net.demus_intergalactical.serverman.instance.ServerInstance;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class APIManager {
 
@@ -20,6 +17,7 @@ public class APIManager {
 	private List<ScriptObjectMirror> eventListener;
 	private List<ScriptObjectMirror> inputListener;
 	private List<ScriptObjectMirror> tickListener;
+	private Map<String, List<ScriptObjectMirror>> commandListener;
 	private Thread ticker;
 	private volatile boolean ticksRunning = true;
 
@@ -32,6 +30,7 @@ public class APIManager {
 		eventListener = new ArrayList<>();
 		inputListener = new ArrayList<>();
 		tickListener = new ArrayList<>();
+		commandListener = new HashMap<>();
 	}
 
 	public void registerInputListener(ScriptObjectMirror f) {
@@ -50,6 +49,22 @@ public class APIManager {
 			return;
 		}
 		chatListener.add(f);
+	}
+
+	public void registerCommandListener(String command,
+	                                    ScriptObjectMirror f) {
+		if (!f.isFunction()) {
+			System.err.println("expected function as command " +
+				"listener but got " + f.toString());
+			return;
+		}
+		List<ScriptObjectMirror> listeners = commandListener
+			.get(command);
+		if (listeners == null) {
+			listeners = new ArrayList<>();
+		}
+		listeners.add(f);
+		commandListener.put(command, listeners);
 	}
 
 	public void registerPlayerListener(ScriptObjectMirror joined,
@@ -99,6 +114,24 @@ public class APIManager {
 				o -> !(o instanceof Boolean) || (Boolean) o
 				// any of them want to disable output?
 			);
+	}
+
+	public void queueCommand(Object time, Object player,
+	                            Object command, Object args) {
+		List<ScriptObjectMirror> listeners = commandListener
+			.get(command);
+		if (listeners == null) {
+			return;
+		}
+		for (ScriptObjectMirror f : listeners) {
+			try {
+				f.call(null, time, player, args);
+			} catch (Exception e) {
+				//if (e instanceof ScriptException) {
+					System.err.println(e.getMessage());
+				//}
+			}
+		}
 	}
 
 	public boolean queuePlayerLeft(Object time, Object arg) {

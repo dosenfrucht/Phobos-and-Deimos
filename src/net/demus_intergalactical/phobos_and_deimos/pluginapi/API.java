@@ -35,6 +35,10 @@ public class API {
 		apiManager.registerChatListener(f);
 	}
 
+	public void registerCommandListener(String c, ScriptObjectMirror f) {
+		apiManager.registerCommandListener(c, f);
+	}
+
 	public void registerPlayerListener(ScriptObjectMirror joined,
 	                                   ScriptObjectMirror left) {
 		apiManager.registerPlayerListener(joined, left);

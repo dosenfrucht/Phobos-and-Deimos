@@ -7,7 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/CompletionController.java" afterPath="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/CompletionController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/API.java" afterPath="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/API.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/APIManager.java" afterPath="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/APIManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/InstanceContainer.java" afterPath="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/InstanceContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/PluginLoader.java" afterPath="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/PluginLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server GUI.iml" afterPath="$PROJECT_DIR$/Server GUI.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin_api.md" afterPath="$PROJECT_DIR$/plugin_api.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -68,44 +73,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="style.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/style.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.285715">
-              <caret line="41" column="92" selection-start-line="41" selection-start-column="92" selection-end-line="41" selection-end-column="92" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="58" column="17" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InstanceContainer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/InstanceContainer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="239" column="34" selection-start-line="239" selection-start-column="34" selection-end-line="239" selection-end-column="34" />
-              <folding>
-                <element signature="e#8772#8773#0" expanded="true" />
-                <element signature="e#8800#8801#0" expanded="true" />
-                <element signature="e#8845#8846#0" expanded="true" />
-                <element signature="e#8876#8877#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UIController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/UIController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -122,7 +89,80 @@
         <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/APIManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="5" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InstanceContainer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/InstanceContainer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="99" column="38" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PluginLoader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/PluginLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="51" column="48" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="match.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/instances/Vanilla 1.8/match.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/instances/Vanilla 1.8/plugins/calc/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.26384366">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plugin_api.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/plugin_api.md">
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.5">
+              <caret line="30" column="73" selection-start-line="30" selection-start-column="73" selection-end-line="30" selection-end-column="73" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NashornScriptEngine.class" pinned="false" current-in-tab="false">
+        <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/ext/nashorn.jar!/jdk/nashorn/api/scripting/NashornScriptEngine.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.8461537">
+              <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerInstanceRunner.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/lib/ServerMan.jar!/net/demus_intergalactical/serverman/instance/ServerInstanceRunner.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.5384617">
+              <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -132,39 +172,7 @@
         <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/API.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="75" column="30" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UtilAPI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/UtilAPI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompletionController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/CompletionController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35504887">
-              <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InstanceContextMenu.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/scene/InstanceContextMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <caret line="38" column="50" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -209,12 +217,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/style.fxml" />
-        <option value="$PROJECT_DIR$/src/AlertWindow.java" />
-        <option value="$PROJECT_DIR$/src/ConfirmWindow.java" />
-        <option value="$PROJECT_DIR$/src/ServerInstanceVersion.java" />
-        <option value="$PROJECT_DIR$/instances/1.6.4 jdkhgfkasejg/output.js" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/style.css" />
         <option value="$PROJECT_DIR$/config.json" />
         <option value="$PROJECT_DIR$/resources/assets/css/propertiesWindow.css" />
@@ -252,14 +254,20 @@
         <option value="$PROJECT_DIR$/resources/style.fxml" />
         <option value="$PROJECT_DIR$/resources/style.css" />
         <option value="$PROJECT_DIR$/lib/ServerMan.jar!/net/demus_intergalactical/serverman/ServerManConfig.class" />
-        <option value="$PROJECT_DIR$/lib/instances/Vanilla 1.8/completion.json" />
         <option value="$PROJECT_DIR$/lib/ServerMan.jar!/net/demus_intergalactical/serverman/instance/ServerInstanceProcess.class" />
         <option value="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/ConsoleHistory.java" />
         <option value="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/ManagerApplication.java" />
-        <option value="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/InstanceContainer.java" />
         <option value="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/Controller.java" />
         <option value="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/UIController.java" />
         <option value="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/CompletionController.java" />
+        <option value="$PROJECT_DIR$/lib/instances/Vanilla 1.8/completion.json" />
+        <option value="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/PluginLoader.java" />
+        <option value="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/InstanceContainer.java" />
+        <option value="$PROJECT_DIR$/lib/instances/Vanilla 1.8/match.js" />
+        <option value="$PROJECT_DIR$/plugin_api.md" />
+        <option value="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/API.java" />
+        <option value="$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/APIManager.java" />
+        <option value="$PROJECT_DIR$/lib/instances/Vanilla 1.8/plugins/calc/main.js" />
       </list>
     </option>
   </component>
@@ -275,10 +283,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
     <option name="y" value="31" />
-    <option name="width" value="1924" />
-    <option name="height" value="1051" />
+    <option name="width" value="1920" />
+    <option name="height" value="1049" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -331,8 +338,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -503,8 +508,66 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Phobos-and-Deimos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Phobos-and-Deimos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="instances" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Vanilla 1.8" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Phobos-and-Deimos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Phobos-and-Deimos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="instances" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Vanilla 1.8" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="calc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -542,6 +605,120 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Server GUI.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/style.fxml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/Controller.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/scene/InstancePluginsWindow.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/instances/instances.json</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunManager" selected="Application.Server GUI">
     <configuration default="false" name="Server GUI" type="Application" factoryName="Application" temporary="true">
@@ -909,14 +1086,20 @@
       <option name="project" value="LOCAL" />
       <updated>1444357387488</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Major bug fix in completion">
+      <created>1444363286097</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1444363286097</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="1302000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="31" width="1924" height="1051" extended-state="6" />
+    <frame x="0" y="31" width="1920" height="1049" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -926,7 +1109,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32845187" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3294979" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -961,7 +1144,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed  bugs" />
     <MESSAGE value="Added some CSS stuff for looks" />
     <MESSAGE value="More design and player list awesomeness" />
     <MESSAGE value="Added support for multiple instances !!!!!!!!!!!" />
@@ -986,7 +1168,8 @@
     <MESSAGE value="removed debug window and fixed minor issues" />
     <MESSAGE value="Added support for completing commands, a console history and double clicking on instances to start them." />
     <MESSAGE value="Doh. Forgot to push the most important new files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Doh. Forgot to push the most important new files." />
+    <MESSAGE value="Major bug fix in completion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Major bug fix in completion" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1016,73 +1199,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/style.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="92" selection-start-line="41" selection-start-column="92" selection-end-line="41" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/default/output.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/scene/CreateInstanceWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/scene/ImageViewSelectable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
-          <caret line="44" column="37" selection-start-line="44" selection-start-column="37" selection-end-line="44" selection-end-column="37" />
-          <caret line="43" column="72" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="72" />
-          <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
-          <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
-          <caret line="40" column="45" selection-start-line="40" selection-start-column="45" selection-end-line="40" selection-end-column="45" />
-          <caret line="39" column="56" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
-          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
-          <caret line="37" column="45" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
-          <caret line="36" column="72" selection-start-line="36" selection-start-column="72" selection-end-line="36" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/scene/AboutWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1090,7 +1210,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="68" column="149" selection-start-line="68" selection-start-column="149" selection-end-line="68" selection-end-column="149" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1098,12 +1220,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="233" column="0" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
-          <folding>
-            <element signature="e#8772#8773#0" expanded="true" />
-            <element signature="e#8800#8801#0" expanded="true" />
-            <element signature="e#8845#8846#0" expanded="true" />
-            <element signature="e#8876#8877#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1118,13 +1235,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="63" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/ServerMan.jar!/net/demus_intergalactical/serverman/instance/ServerInstanceRunner.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1188,18 +1298,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#119#120#0" expanded="true" />
-            <element signature="e#154#155#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/PluginLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1214,9 +1312,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38998958">
           <caret line="84" column="47" selection-start-line="84" selection-start-column="47" selection-end-line="84" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1224,7 +1319,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="38" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1232,7 +1326,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.51026857">
           <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1240,7 +1333,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1248,7 +1340,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5908373">
           <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1256,7 +1347,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.4233807">
           <caret line="87" column="34" selection-start-line="87" selection-start-column="34" selection-end-line="87" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1264,7 +1354,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23920266">
           <caret line="35" column="68" selection-start-line="35" selection-start-column="68" selection-end-line="35" selection-end-column="68" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1280,18 +1369,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="40.23077">
           <caret line="1987" column="0" selection-start-line="1987" selection-start-column="0" selection-end-line="1987" selection-end-column="0" />
-          <folding>
-            <element signature="e#98618#98619#0" expanded="true" />
-            <element signature="e#98688#98689#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/instances/Vanilla 1.8/completion.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.93867123">
-          <caret line="306" column="1" selection-start-line="306" selection-start-column="1" selection-end-line="306" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1299,7 +1376,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.959184">
           <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1307,10 +1383,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.0">
           <caret line="172" column="67" selection-start-line="172" selection-start-column="67" selection-end-line="172" selection-end-column="67" />
-          <folding>
-            <element signature="e#7316#7317#0" expanded="true" />
-            <element signature="e#7358#7359#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1318,7 +1390,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36394557">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1326,12 +1397,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35714287">
           <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
-          <folding>
-            <element signature="e#954#955#0" expanded="true" />
-            <element signature="e#1007#1008#0" expanded="true" />
-            <element signature="e#1385#1386#0" expanded="true" />
-            <element signature="e#1437#1438#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1350,7 +1415,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1375,9 +1439,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/style.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.285715">
-          <caret line="41" column="92" selection-start-line="41" selection-start-column="92" selection-end-line="41" selection-end-column="92" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="92" selection-start-line="43" selection-start-column="92" selection-end-line="43" selection-end-column="92" />
+          <folding>
+            <marker date="1444394283942" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444394283942" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
@@ -1387,21 +1454,67 @@
     <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="17" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
+          <caret line="65" column="17" selection-start-line="65" selection-start-column="17" selection-end-line="65" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar!/java/util/ArrayList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3469388">
+          <caret line="283" column="0" selection-start-line="283" selection-start-column="0" selection-end-line="283" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/CompletionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/scene/InstancePluginsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/InstanceContainer.java">
+    <entry file="file://$PROJECT_DIR$/lib/instances/Vanilla 1.8/completion.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.074074">
+          <caret line="267" column="5" selection-start-line="267" selection-start-column="5" selection-end-line="267" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/UtilAPI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="239" column="34" selection-start-line="239" selection-start-column="34" selection-end-line="239" selection-end-column="34" />
-          <folding>
-            <element signature="e#8772#8773#0" expanded="true" />
-            <element signature="e#8800#8801#0" expanded="true" />
-            <element signature="e#8845#8846#0" expanded="true" />
-            <element signature="e#8876#8877#0" expanded="true" />
-          </folding>
+          <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/ext/nashorn.jar!/jdk/nashorn/internal/runtime/ScriptObject.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3469388">
+          <caret line="1818" column="22" selection-start-line="1818" selection-start-column="22" selection-end-line="1818" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/ext/nashorn.jar!/jdk/nashorn/api/scripting/ScriptObjectMirror.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40816328">
+          <caret line="201" column="104" selection-start-line="201" selection-start-column="104" selection-end-line="201" selection-end-column="104" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1415,10 +1528,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/APIManager.java">
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/ext/nashorn.jar!/jdk/nashorn/api/scripting/NashornScriptEngine.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8461537">
+          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/ServerMan.jar!/net/demus_intergalactical/serverman/instance/ServerInstanceRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5384617">
+          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/InstanceContainer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="5" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <caret line="99" column="38" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/instances/Vanilla 1.8/match.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin_api.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.5">
+          <caret line="30" column="73" selection-start-line="30" selection-start-column="73" selection-end-line="30" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/PluginLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="48" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -1426,34 +1582,24 @@
     <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/API.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="75" column="30" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
+          <caret line="38" column="50" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/UtilAPI.java">
+    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/pluginapi/APIManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
+          <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar!/java/util/ArrayList.class">
+    <entry file="file://$PROJECT_DIR$/lib/instances/Vanilla 1.8/plugins/calc/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3469388">
-          <caret line="283" column="0" selection-start-line="283" selection-start-column="0" selection-end-line="283" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.26384366">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/demus_intergalactical/phobos_and_deimos/main/CompletionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35504887">
-          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

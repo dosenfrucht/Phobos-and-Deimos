@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
+import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import net.demus_intergalactical.phobos_and_deimos.scene.InstanceContextMenu;
 import net.demus_intergalactical.phobos_and_deimos.scene.InstanceScriptManager;
 import net.demus_intergalactical.phobos_and_deimos.scene.PlayerList;
@@ -87,6 +88,12 @@ public class InstanceContainer {
 			case "left":
 				dontShow = api.queuePlayerLeft(time, arg);
 				break;
+			case "command":
+				api.queueCommand(time,
+					((ScriptObjectMirror) arg).getSlot(0),
+					((ScriptObjectMirror) arg).getSlot(1),
+					((ScriptObjectMirror) arg).getSlot(2));
+				return;
 			default:
 				dontShow = api.queue(type, time, thread,
 					loglvl, arg);
