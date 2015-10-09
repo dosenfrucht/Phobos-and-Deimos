@@ -16,15 +16,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
-public class AssetsParser {
+public class MinecraftVersionParser {
 	private static final String supportedVersionsLocation = "http://serverman.demus-intergalactical.net/versions";
 	private static final String supportedVersionsName = "supported-versions.txt";
 
@@ -39,7 +37,7 @@ public class AssetsParser {
 	private Map<String, String> versionTypes = new TreeMap<>();
 	private Map<String, Boolean> supportedVersions = new TreeMap<>();
 
-	public AssetsParser() {
+	public MinecraftVersionParser() {
 		try {
 			String versionHome = Globals.getServerManConfig().get("versions_home").toString();
 
@@ -207,7 +205,7 @@ public class AssetsParser {
 	}
 
 	public static void main(String args[]) {
-		AssetsParser ap = new AssetsParser();
+		MinecraftVersionParser ap = new MinecraftVersionParser();
 
 		Map<String, String> versionLocations = ap.getVersionLocations();
 		Map<String, String> versionTypes = ap.getVersionTypes();

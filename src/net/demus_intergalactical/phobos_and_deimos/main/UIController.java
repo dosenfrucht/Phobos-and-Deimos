@@ -39,7 +39,7 @@ public class UIController {
 			console.setOnScrollStarted(e -> System.err.println("console scroll started: " + e.getSource()) );
 			input = (TextField) root.lookup("#input");
 
-			AssetsParser ap = new AssetsParser();
+			MinecraftVersionParser ap = new MinecraftVersionParser();
 		});
 	}
 
