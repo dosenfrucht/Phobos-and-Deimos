@@ -1,16 +1,12 @@
 function init() {
     api.util.require("math.js")
-    api.registerChatListener(chatListener)
+    api.registerCommandListener("calc", commandListener)
 }
 
 function unload() {
 }
 
-function chatListener(time, arg) {
-
-    if (arg[1].indexOf("#calc ") != 0) {
-        return false
-    }
-    api.command.send("say " + math.expr(arg[1].substring(5)))
+function commandListener(time, player, args) {
+    api.command.send("say " + math.expr(args.join(" ")))
     return false
 }

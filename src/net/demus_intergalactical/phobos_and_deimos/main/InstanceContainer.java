@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
+import net.demus_intergalactical.phobos_and_deimos.scene.CustomButton;
 import net.demus_intergalactical.phobos_and_deimos.scene.InstanceContextMenu;
 import net.demus_intergalactical.phobos_and_deimos.scene.InstanceScriptManager;
 import net.demus_intergalactical.phobos_and_deimos.scene.PlayerList;
@@ -21,6 +22,8 @@ import net.demus_intergalactical.serverproperties.ServerProperties;
 import org.apache.commons.io.FileUtils;
 import org.fxmisc.richtext.InlineCssTextArea;
 import net.demus_intergalactical.phobos_and_deimos.pluginapi.APIManager;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import javax.script.ScriptException;
 import java.io.*;
@@ -57,7 +60,7 @@ public class InstanceContainer {
 	private HBox hboxInstanceTopRight = new HBox(10);
 	private InstanceScriptManager scriptManager;
 	private String inputBuf;
-	private List<Button> customButtons = new ArrayList<>();
+	private List<CustomButton> customButtons = new ArrayList<>();
 
 
 	public InstanceContainer() {
@@ -68,6 +71,7 @@ public class InstanceContainer {
 		instanceLog = new InlineCssTextArea();
 		completionController = new CompletionController(currentInstance);
 		consoleHistory = new ConsoleHistory();
+		loadButtons();
 	}
 
 	public void init() {
@@ -157,6 +161,28 @@ public class InstanceContainer {
 			} catch (IOException ex) {
 				e.printStackTrace();
 			}
+		}
+		loadButtons();
+	}
+
+	private void loadButtons() {
+		JSONObject instanceSettings =
+			(JSONObject) Globals.getInstanceSettings()
+				.get(currentInstance.getName());
+		if (instanceSettings == null) {
+			return;
+		}
+		JSONArray buttons = (JSONArray) instanceSettings
+			.get("custom_buttons");
+		if (buttons == null) {
+			return;
+		}
+		customButtons.clear();
+		for (Object oTmp : buttons) {
+			JSONObject o = (JSONObject) oTmp;
+			String text = (String) o.get("text");
+			String command = (String) o.get("command");
+			customButtons.add(new CustomButton(text, command));
 		}
 	}
 
@@ -289,11 +315,11 @@ public class InstanceContainer {
 		this.inputBuf = inputBuf;
 	}
 
-	public void setCustomButtons(List<Button> customButtons) {
+	public void setCustomButtons(List<CustomButton> customButtons) {
 		this.customButtons = customButtons;
 	}
 
-	public List<Button> getCustomButtons() {
+	public List<CustomButton> getCustomButtons() {
 		return customButtons;
 	}
 }

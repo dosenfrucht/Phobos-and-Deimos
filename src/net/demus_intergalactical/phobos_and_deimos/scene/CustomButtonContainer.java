@@ -7,6 +7,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Pair;
 import net.demus_intergalactical.phobos_and_deimos.main.InstanceContainer;
+import net.demus_intergalactical.phobos_and_deimos.main.UIController;
+import net.demus_intergalactical.serverman.Globals;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,14 +20,14 @@ import java.util.Optional;
 public class CustomButtonContainer extends HBox {
 	private static final int MAX_BUTTONS = 5;
 
-	private List<Button> buttonList = new ArrayList<>();
-	private Button masterButton;
+	private List<CustomButton> buttonList = new ArrayList<>();
+	private CustomButton masterButton;
 	private InstanceContainer currIc;
 
 	public CustomButtonContainer() {
 		this.setSpacing(10);
 
-		masterButton = new Button("Create Button..");
+		masterButton = new CustomButton("Create Button..", "");
 		masterButton.setOnAction(e -> {
 			Dialog<Pair<String, String>> dialog = new Dialog<>();
 			dialog.setTitle("Create new Custom Button");
@@ -61,15 +65,16 @@ public class CustomButtonContainer extends HBox {
 			if (result.isPresent()) {
 				Pair<String, String> pair = result.get();
 				addButton(new CustomButton(pair.getKey(), pair.getValue()));
+				save();
 			}
 		});
 		/*
 		addButton(masterButton);
-
+		*/
 		Platform.runLater(() -> {
 			masterButton.setPrefHeight(this.getHeight());
 			updateSize();
-		});*/
+		});
 	}
 
 	public void changeInstance(InstanceContainer ic) {
@@ -79,11 +84,15 @@ public class CustomButtonContainer extends HBox {
 			return;
 		}
 
-		buttonList = ic.getCustomButtons();
+		// buttonList = ic.getCustomButtons();
+		buttonList.clear();
+		for (CustomButton b : ic.getCustomButtons()) {
+			addButton(b);
+		}
 
 		if(!buttonList.contains(masterButton)) {
-			buttonList.add(masterButton);
-			masterButton.setPrefHeight(this.getHeight());
+			//buttonList.add(masterButton);
+			addButton(masterButton);
 		}
 
 		currIc = ic;
@@ -91,34 +100,71 @@ public class CustomButtonContainer extends HBox {
 		if(buttonList.size() >= MAX_BUTTONS + 1) {
 			buttonList.remove(masterButton);
 		}
-		for(Button b : buttonList) {
-			System.out.println("b:" + b);
-			this.getChildren().add(b);
-		}
+		/* for(CustomButton b : ic.getCustomButtons()) {
+			//System.out.println("b:" + b);
+			//this.getChildren().add(b);
+			addButton(b);
+		}*/
 
 		updateSize();
 	}
 
-	public void addButton(Button b) {
+	public void addButton(CustomButton b) {
 		b.setPrefHeight(this.getHeight());
+
+		// TODO better deletion handling. But that is UI.. with users.
+		// And I don't like users. Period.   .
+
+		if (!b.equals(masterButton)) {
+			b.setOnContextMenuRequested(e -> removeButton(b));
+		}
 
 		this.getChildren().add(b);
 		buttonList.add(b);
 
 		if(buttonList.size() >= MAX_BUTTONS + 1) {
 			removeButton(masterButton);
-		} else if (!getChildren().contains(masterButton)) {
-			getChildren().add(masterButton);
+		}
+
+		if (buttonList.contains(masterButton)) {
+			buttonList.remove(masterButton);
+			getChildren().remove(masterButton);
 			buttonList.add(masterButton);
+			getChildren().add(masterButton);
+			// Jep, i really did that. I'm sorry.
 		}
 
 		updateSize();
 	}
 
-	public void removeButton(Button b) {
+	private void save() {
+		String activeInstanceName = UIController.getActiveInstance();
+		JSONObject instanceSettings =
+			(JSONObject) Globals.getInstanceSettings()
+				.get(activeInstanceName);
+		JSONArray jsonButtons = new JSONArray();
+		for (CustomButton b : buttonList) {
+			if (b == masterButton) {
+				continue;
+			}
+			JSONObject tmp = new JSONObject();
+			tmp.put("text", b.getText());
+			tmp.put("command", b.getCommand());
+			jsonButtons.add(tmp);
+		}
+		instanceSettings.put("custom_buttons", jsonButtons);
+		Globals.getInstanceSettings().saveConfig();
+	}
+
+	public void removeButton(CustomButton b) {
 		getChildren().remove(b);
 		buttonList.remove(b);
-
+		if (!getChildren().contains(masterButton)
+				&& buttonList.size() < MAX_BUTTONS) {
+			getChildren().add(masterButton);
+			buttonList.add(masterButton);
+		}
+		save();
 		updateSize();
 	}
 

@@ -1,6 +1,8 @@
 var pat
 var patJoined
 var patLeft
+var patCommandServer
+var patCommandClient
 var patChatServer
 var patChatPlayer
 
@@ -8,6 +10,8 @@ function init() {
 	pat = /\[([0-9\:]+)\] \[(.*)\/(.*)\]: (.*)/
 	patJoined = /\[([0-9\:]+)\] \[(.*)\/(.*)\]: ([a-zA-Z0-9\_]+) joined the game/
 	patLeft = /\[([0-9\:]+)\] \[(.*)\/(.*)\]: ([a-zA-Z0-9\_]+) left the game/
+	patCommandServer = /\[([0-9\:]+)\] \[(.*)\/(.*)\]: \[([a-zA-Z0-9\_]+)\] \#(.+)/
+	patCommandPlayer = /\[([0-9\:]+)\] \[(.*)\/(.*)\]: <([a-zA-Z0-9\_]+)> \#(.+)/
 	patChatServer = /\[([0-9\:]+)\] \[(.*)\/(.*)\]: \[([a-zA-Z0-9\_]+)\] (.*)/
 	patChatPlayer = /\[([0-9\:]+)\] \[(.*)\/(.*)\]: <([a-zA-Z0-9\_]+)> (.*)/
 }
@@ -30,6 +34,26 @@ function match(line) {
 		return
 	}
 
+	var mCommandServer = patCommandServer.exec(line)
+	if (mCommandServer !== null) {
+		var commandRaw = mCommandServer[5].split(" ")
+		log.send("command", d, mCommandServer[2], mCommandServer[3], [mCommandServer[4],
+		commandRaw[0], commandRaw.slice(1)])
+		log.send("chat", d, mCommandServer[2], mCommandServer[3],
+		[mCommandServer[4], "#" + mCommandServer[5]])
+		return
+	}
+
+	var mCommandPlayer = patCommandPlayer.exec(line)
+	if (mCommandPlayer !== null) {
+		var commandRaw = mCommandPlayer[5].split(" ")
+		log.send("command", d, mCommandPlayer[2], mCommandPlayer[3], [mCommandPlayer[4],
+		commandRaw[0], commandRaw.slice(1)])
+		log.send("chat", d, mCommandPlayer[2], mCommandPlayer[3],
+		[mCommandPlayer[4], "#" + mCommandPlayer[5]])
+		return
+	}
+
 	var mChatServer = patChatServer.exec(line)
 	if (mChatServer !== null) {
 		log.send("chat", d, mChatServer[2], mChatServer[3], [mChatServer[4],
@@ -49,4 +73,3 @@ function match(line) {
 		log.send("info", d, m[2], m[3], m[4])
 	}
 }
-

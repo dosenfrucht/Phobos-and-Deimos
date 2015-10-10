@@ -16,6 +16,7 @@ import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.StyledDocument;
 
 import javax.swing.border.Border;
+import java.util.Objects;
 
 public class UIController {
 
@@ -106,6 +107,10 @@ public class UIController {
 
 	public static void changeInstance(String instance) {
 		Platform.runLater(() -> {
+			if (activeInstance != null &&
+				activeInstance.equals(instance)) {
+				return;
+			}
 			if (activeInstance != null) {
 				InstancePool.get(activeInstance).setActive(false);
 				InstancePool.get(activeInstance).setInputBuf(input.getText());

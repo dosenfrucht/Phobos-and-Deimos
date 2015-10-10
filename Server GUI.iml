@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="ServerProperties" level="project" />
     <orderEntry type="library" name="hi" level="project" />
+    <orderEntry type="library" name="Librarys" level="project" />
   </component>
 </module>
