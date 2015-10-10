@@ -27,7 +27,8 @@ public class ListServerJarsWindow extends Stage {
 	private TableView<ServerInstanceVersion> tblView = new TableView<>();
 	private TableColumn<ServerInstanceVersion, String> tblColName = new TableColumn<>("Name");
 	private TableColumn<ServerInstanceVersion, String> tblColType = new TableColumn<>("Type");
-	private ServerInstanceVersion selectedItem = null;
+	private TableColumn<ServerInstanceVersion, String> tblColTimestamp = new TableColumn<>("Release Date");
+	private TableColumn<ServerInstanceVersion, String> tblColIsSupported = new TableColumn<>("Supported");
 
 	private BorderPane bpBtnPanel = new BorderPane();
 	private FileChooser fileChooser = new FileChooser();
@@ -56,11 +57,13 @@ public class ListServerJarsWindow extends Stage {
 		Scene scene = new Scene(layout);
 		this.setScene(scene);
 
-		tblView.setPrefSize(300, 350);
+		tblView.setPrefSize(510, 350);
 		fillTable();
 
 		//noinspection unchecked
-		tblView.getColumns().addAll(tblColName, tblColType);
+		tblView.getColumns().addAll(tblColName, tblColType, tblColTimestamp, tblColIsSupported);
+		tblColTimestamp.setSortType(TableColumn.SortType.DESCENDING);
+		tblView.getSortOrder().add(tblColTimestamp);
 
 		hboxLeftBtns.setAlignment(Pos.CENTER_LEFT);
 		btnRefresh.setPrefSize(110, 40);
@@ -116,33 +119,37 @@ public class ListServerJarsWindow extends Stage {
 		bpBtnPanel.setRight(hboxRightBtns);
 
 		layout.getChildren().addAll(tblView, bpBtnPanel);
-	}//public net.demus_intergalactical.phobos_and_deimos.scene.ListServerJarsWindow()
+	}
 
 
 	public File getFile() {
 		return this.serverJar;
-	}//public File showAndGetFile()
+	}
 
 	public ServerInstanceVersion getSelectedItem() {
 		return tblView.getSelectionModel().getSelectedItem();
-	}//public ServerInstanceVersion getServerInstanceVersion()
+	}
 
 
 	private void fillTable() {
 		ObservableList<ServerInstanceVersion> data = ServerInstanceVersion.getAllVersions();
 
 		tblColName.setCellValueFactory(new PropertyValueFactory<>("versionName"));
-		tblColName.setPrefWidth(208);
+		tblColName.setPrefWidth(125);
 		tblColType.setCellValueFactory(new PropertyValueFactory<>("versionType"));
-		tblColType.setPrefWidth(100);
-
+		tblColType.setPrefWidth(125);
+		tblColTimestamp.setCellValueFactory(new PropertyValueFactory<>("versionTimestamp"));
+		tblColTimestamp.setPrefWidth(150);
+		tblColIsSupported.setCellValueFactory(new PropertyValueFactory<>("isSupported"));
+		tblColIsSupported.setPrefWidth(100);
+		tblColIsSupported.setSortable(false);
 
 		tblView.setItems(data);
-	}//private void fillTable(TableColumn tblColName, TableColumn tblColType)
+	}
 
 
 	@Override
 	public void close() {
 		super.close();
-	}//public void close()
-}//public class ListServerJarsWindow extends Stage
+	}
+}

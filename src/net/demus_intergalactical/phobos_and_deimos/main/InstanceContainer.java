@@ -2,6 +2,7 @@ package net.demus_intergalactical.phobos_and_deimos.main;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,6 +24,9 @@ import net.demus_intergalactical.phobos_and_deimos.pluginapi.APIManager;
 
 import javax.script.ScriptException;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 public class InstanceContainer {
@@ -53,6 +57,7 @@ public class InstanceContainer {
 	private HBox hboxInstanceTopRight = new HBox(10);
 	private InstanceScriptManager scriptManager;
 	private String inputBuf;
+	private List<Button> customButtons = new ArrayList<>();
 
 
 	public InstanceContainer() {
@@ -282,6 +287,14 @@ public class InstanceContainer {
 
 	public void setInputBuf(String inputBuf) {
 		this.inputBuf = inputBuf;
+	}
+
+	public void setCustomButtons(List<Button> customButtons) {
+		this.customButtons = customButtons;
+	}
+
+	public List<Button> getCustomButtons() {
+		return customButtons;
 	}
 }
 

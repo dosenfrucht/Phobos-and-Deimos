@@ -21,6 +21,26 @@
     -fx-font-family: monospace;
 }
 
+#custombuttons {
+    -fx-background-color: rgba(192,192,192,0.50);
+}
+#custombuttons .button {
+    -fx-background-image: url("/assets/button40_center.png"), url("/assets/button40_right.png"), url("/assets/button40_left.png");
+    -fx-background-position: center, right, left;
+    -fx-background-repeat: repeat-x, no-repeat, no-repeat;
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+}
+#custombuttons .button:hover {
+    -fx-background-image: url("/assets/button40_center_hover.png"), url("/assets/button40_right_hover.png"), url("/assets/button40_left_hover.png");
+    -fx-background-position: center, right, left;
+    -fx-background-repeat: repeat-x, no-repeat, no-repeat;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-text-fill: #FFFFA0;
+}
+
 /************************************
 *           Scrollbar               *
 ************************************/

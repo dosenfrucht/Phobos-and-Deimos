@@ -1,17 +1,21 @@
 package net.demus_intergalactical.phobos_and_deimos.main;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import net.demus_intergalactical.phobos_and_deimos.scene.CustomButton;
+import net.demus_intergalactical.phobos_and_deimos.scene.CustomButtonContainer;
+import net.demus_intergalactical.serverman.Globals;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.StyledDocument;
+
+import javax.swing.border.Border;
 
 public class UIController {
 
@@ -23,6 +27,7 @@ public class UIController {
 	static String activeInstance;
 	static MenuBar menuBar;
 	static Menu editInstanceMenu;
+	static CustomButtonContainer customButtons;
 
 	public static void init(Parent root) {
 		Platform.runLater(() -> {
@@ -39,8 +44,23 @@ public class UIController {
 			console.setOnScrollStarted(e -> System.err.println("console scroll started: " + e.getSource()) );
 			input = (TextField) root.lookup("#input");
 
-			MinecraftVersionParser ap = new MinecraftVersionParser();
+			customButtons = (CustomButtonContainer) root.lookup("#custombuttons");
+
+			customButtons.getScene().widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
+				customButtons.updateSize(oldSceneWidth, newSceneWidth, null, null);
+			});
+			customButtons.getScene().heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
+				customButtons.updateSize(null, null, oldSceneHeight, newSceneHeight);
+			});
 		});
+
+		Thread t = new Thread() {
+			@Override
+			public void run() {
+				MinecraftVersionParser ap = new MinecraftVersionParser();
+			}
+		};
+		t.run();
 	}
 
 	public static void updatePlayerList(ObservableList<HBox> playerList) {
@@ -72,6 +92,13 @@ public class UIController {
 			if (serverList.size() == 0) {
 				editInstanceMenu.setDisable(true);
 			}
+
+			serverDisplay.getSelectionModel().clearSelection();
+
+			customButtons.changeInstance(null);
+			Globals.getInstanceSettings().remove(activeInstance);
+			InstancePool.remove(activeInstance);
+
 			activeInstance = null;
 		});
 
@@ -87,6 +114,7 @@ public class UIController {
 			activeInstance = instance;
 			InstancePool.get(instance).onActivated();
 			editInstanceMenu.setDisable(false);
+			customButtons.changeInstance(InstancePool.get(instance));
 		});
 	}
 

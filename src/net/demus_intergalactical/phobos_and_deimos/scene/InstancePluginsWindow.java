@@ -2,7 +2,6 @@ package net.demus_intergalactical.phobos_and_deimos.scene;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,16 +14,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.demus_intergalactical.phobos_and_deimos.main.*;
-import net.demus_intergalactical.phobos_and_deimos.pluginapi.APIManager;
 import net.demus_intergalactical.serverman.Globals;
-import net.demus_intergalactical.serverman.instance.ServerInstance;
 import org.apache.commons.io.FileUtils;
 
 import java.awt.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 
 
 public class InstancePluginsWindow extends Stage {

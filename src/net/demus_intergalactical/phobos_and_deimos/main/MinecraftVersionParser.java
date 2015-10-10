@@ -18,6 +18,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,6 +36,7 @@ public class MinecraftVersionParser {
 
 	private Map<String, String> versionLocations = new TreeMap<>();
 	private Map<String, String> versionTypes = new TreeMap<>();
+	private Map<String, Long> versionTimestamps = new TreeMap<>();
 	private Map<String, Boolean> supportedVersions = new TreeMap<>();
 
 	public MinecraftVersionParser() {
@@ -59,15 +61,7 @@ public class MinecraftVersionParser {
 			File assetsXML = new File(assetsXMLPath);
 			FileUtils.copyURLToFile(new URL(assetsXMLLocation), assetsXML);
 			readXML(new FileInputStream(assetsXML));
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
+		} catch (ParserConfigurationException | URISyntaxException | ParseException | SAXException | IOException | java.text.ParseException e) {
 			e.printStackTrace();
 		}
 
@@ -76,9 +70,10 @@ public class MinecraftVersionParser {
 		for(String versionId : versionKeys) {
 			String versionType = versionTypes.get(versionId);
 			String versionLocation = versionLocations.get(versionId);
+			long versionTimestamp = versionTimestamps.get(versionId);
 			Boolean versionSupported = supportedVersions.get(versionId);
 
-			ServerInstanceVersion sivTemp = new ServerInstanceVersion(versionId, versionType, versionLocation, versionSupported);
+			ServerInstanceVersion sivTemp = new ServerInstanceVersion(versionId, versionType, versionLocation, versionTimestamp, versionSupported);
 			alreadyPresentVersions.add(sivTemp);
 		}
 	}
@@ -92,7 +87,7 @@ public class MinecraftVersionParser {
 		}
 	}
 
-	private void readJSON(File json) throws IOException, ParseException, URISyntaxException {
+	private void readJSON(File json) throws IOException, ParseException, URISyntaxException, java.text.ParseException {
 		JSONParser parser = new JSONParser();
 
 		JSONObject a = (JSONObject) parser.parse(new FileReader(json));
@@ -104,6 +99,16 @@ public class MinecraftVersionParser {
 
 			String versionId = (String) versionJson.get("id");
 			String versionType = (String) versionJson.get("type");
+			String releaseTime = (String) versionJson.get("releaseTime");
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+			//"releaseTime": "2015-10-07T14:07:26+00:00",
+			//"releaseTime": "2015-10-07T13:19:53+00:00",
+			//"releaseTime": "2015-09-30T16:13:54+02:00",
+			java.util.Date lastModifiedDate = sdf.parse(releaseTime);
+
+
+			long versionTimestamp = lastModifiedDate.getTime();
 
 			String versionLocation = "http://s3.amazonaws.com/Minecraft.Download/versions/" + versionId + "/";
 
@@ -114,17 +119,17 @@ public class MinecraftVersionParser {
 				Matcher filterMatcher = filterPattern.matcher(versionId);
 
 				if(!filterMatcher.find()) {
-					putData(versionId, versionLocation, versionType);
+					putData(versionId, versionLocation, versionType, versionTimestamp);
 				}
 			} else if(versionType.equalsIgnoreCase("snapshot")) {
 				versionLocation += "minecraft_server." + versionId + ".jar";
 
-				putData(versionId, versionLocation, versionType);
+				putData(versionId, versionLocation, versionType, versionTimestamp);
 			}
 		}
 	}
 
-	public void readXML(InputStream xmlIS) throws ParserConfigurationException, IOException, SAXException {
+	public void readXML(InputStream xmlIS) throws ParserConfigurationException, IOException, SAXException, java.text.ParseException {
 		//Source: http://stackoverflow.com/a/7373596
 		Document dom;
 		// Make an  instance of the DocumentBuilderFactory
@@ -137,14 +142,18 @@ public class MinecraftVersionParser {
 			dom = db.parse(xmlIS);
 
 			Element doc = dom.getDocumentElement();
-			NodeList nl = dom.getElementsByTagName("Key");
+			NodeList nlKey = dom.getElementsByTagName("Key");
+			NodeList nlLastModified = dom.getElementsByTagName("LastModified");
 
-			for(int i = 0; i < nl.getLength(); i++) {
-				String value = nl.item(i).getFirstChild().getNodeValue();
-				if(value.endsWith("server.jar")) {
-					String versionId = value.substring(0, value.indexOf('/'));
+			for(int i = 0; i < nlKey.getLength(); i++) {
+				String keyValue = nlKey.item(i).getFirstChild().getNodeValue();
+
+				if(keyValue.endsWith("server.jar")) {
+					String lastModifiedValue = nlLastModified.item(i).getFirstChild().getNodeValue();
+
+					String versionId = keyValue.substring(0, keyValue.indexOf('/'));
 					versionId = versionId.replace("_", ".");
-					String versionLocation = "http://assets.minecraft.net/" + value;
+					String versionLocation = "http://assets.minecraft.net/" + keyValue;
 
 					String versionSnapRegEx = "^(\\d{2}w\\d{2})";
 					Pattern snapPattern = Pattern.compile(versionSnapRegEx);
@@ -160,8 +169,17 @@ public class MinecraftVersionParser {
 					} else if(preMatcher.find()) {
 						versionType = "Pre-Release";
 					}
+
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+					//<LastModified>2011-11-24T13:17:43.000Z</LastModified>
+					//<LastModified>2012-04-26T14:27:38.000Z</LastModified>
+					//<LastModified>2012-05-25T12:20:31.000Z</LastModified>
+					java.util.Date lastModifiedDate = sdf.parse(lastModifiedValue);
+
+
+					long versionTimestamp = lastModifiedDate.getTime();
 					if(versionType != null) {
-						putData(versionId, versionLocation, versionType);
+						putData(versionId, versionLocation, versionType, versionTimestamp);
 					}
 				}
 			}
@@ -174,24 +192,16 @@ public class MinecraftVersionParser {
 		}
 	}
 
-	private String getTextValue(String def, Element doc, String tag) {
-		//Source: http://stackoverflow.com/a/7373596
-		String value = def;
-		NodeList nl;
-		nl = doc.getElementsByTagName(tag);
-		if (nl.getLength() > 0 && nl.item(0).hasChildNodes()) {
-			value = nl.item(0).getFirstChild().getNodeValue();
-		}
-		return value;
-	}
-
-	public void putData(String versionId, String location, String type) {
+	public void putData(String versionId, String location, String type, long timestamp) {
 		if(!versionLocations.containsKey(versionId)) {
 			versionLocations.put(versionId, location);
 			type = type.substring(0, 1).toUpperCase() + type.substring(1);
 		}
 		if(!versionTypes.containsKey(versionId)) {
 			versionTypes.put(versionId, type);
+		}
+		if(!versionTimestamps.containsKey(versionId)) {
+			versionTimestamps.put(versionId, timestamp);
 		}
 		if(!supportedVersions.containsKey(versionId)) {
 			supportedVersions.put(versionId, false);

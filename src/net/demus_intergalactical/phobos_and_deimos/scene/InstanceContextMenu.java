@@ -58,12 +58,10 @@ public class InstanceContextMenu extends ContextMenu {
 				return;
 			}
 			UIController.removeServer(serverContainer);
-			Globals.getInstanceSettings().remove(ic.getInstance().getServerInstanceID());
-			InstancePool.remove(ic.getInstance().getServerInstanceID());
 			try {
 				FileUtils.deleteDirectory(new File(Globals.getServerManConfig().get("instances_home") + File.separator + ic.getInstance().getServerInstanceID()));
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			} catch (IOException ex) {
+				System.err.println(ex.getMessage() + "Is the server still running?");
 			}
 		});
 		

@@ -8,5 +8,5 @@ public class AlertWindow extends Alert {
 		setTitle(title);
 		setHeaderText(null);
 		setContentText(msg);
-	}//public net.demus_intergalactical.phobos_and_deimos.scene.AlertWindow(String title, String msg, Alert.AlertType type)
-}//public class net.demus_intergalactical.phobos_and_deimos.scene.AlertWindow extends Alert
+	}
+}

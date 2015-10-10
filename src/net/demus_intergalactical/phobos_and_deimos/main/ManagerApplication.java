@@ -20,7 +20,7 @@ public class ManagerApplication extends Application {
 		WindowRegistry.setApplication(this);
 		WindowRegistry.setPrimaryStage(primaryStage);
 		primaryStage.setTitle("Phobos and Deimos - See Minecraft from another planet");
-		primaryStage.minHeightProperty().set(630);
+		primaryStage.minHeightProperty().set(710);
 		primaryStage.minWidthProperty().set(1024);
 		Font.loadFont(Main.class.getClassLoader().getResourceAsStream("assets/fonts/minecraft.ttf"), 10);
 		Parent root;
