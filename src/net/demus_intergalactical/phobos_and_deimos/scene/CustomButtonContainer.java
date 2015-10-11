@@ -23,54 +23,22 @@ public class CustomButtonContainer extends HBox {
 	private List<CustomButton> buttonList = new ArrayList<>();
 	private CustomButton masterButton;
 	private InstanceContainer currIc;
+	private CustomButtonDialog cbDialog;
 
 	public CustomButtonContainer() {
 		this.setSpacing(10);
 
 		masterButton = new CustomButton("Create Button..", "");
-		masterButton.setOnAction(e -> {
-			Dialog<Pair<String, String>> dialog = new Dialog<>();
-			dialog.setTitle("Create new Custom Button");
-
-			Label label1 = new Label("Name: ");
-			Label label2 = new Label("Command: ");
-			TextField text1 = new TextField();
-			TextField text2 = new TextField();
-
-			GridPane grid = new GridPane();
-			grid.add(label1, 1, 1);
-			grid.add(text1, 2, 1);
-			grid.add(label2, 1, 2);
-			grid.add(text2, 2, 2);
-			dialog.getDialogPane().setContent(grid);
-
-			grid.setPadding(new Insets(20, 20, 20, 20));
-			grid.setHgap(10);
-			grid.setVgap(10);
-
-			ButtonType buttonTypeOk = new ButtonType("Okay", ButtonBar.ButtonData.OK_DONE);
-			dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
-			ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-			dialog.getDialogPane().getButtonTypes().add(buttonTypeCancel);
-
-			dialog.setResultConverter(b -> {
-				if (b == buttonTypeOk) {
-					return new Pair<>(text1.getText(), text2.getText());
-				}
-				return null;
-			});
-
-			// Traditional way to get the response value.
-			Optional<Pair<String, String>> result = dialog.showAndWait();
+		masterButton.setOnAction(e ->  {
+			cbDialog = new CustomButtonDialog("Create new Custom Button");
+			Optional<Pair<String, String>> result = cbDialog.showAndWait();
 			if (result.isPresent()) {
 				Pair<String, String> pair = result.get();
 				addButton(new CustomButton(pair.getKey(), pair.getValue()));
 				save();
 			}
 		});
-		/*
-		addButton(masterButton);
-		*/
+
 		Platform.runLater(() -> {
 			masterButton.setPrefHeight(this.getHeight());
 			updateSize();
@@ -78,48 +46,67 @@ public class CustomButtonContainer extends HBox {
 	}
 
 	public void changeInstance(InstanceContainer ic) {
-		this.getChildren().removeAll(buttonList);
+		save();
+
+		this.getChildren().clear();
 
 		if(ic == null) {
 			return;
 		}
 
-		// buttonList = ic.getCustomButtons();
-		buttonList.clear();
-		for (CustomButton b : ic.getCustomButtons()) {
-			addButton(b);
+		buttonList = ic.getCustomButtons();
+
+		for(CustomButton cb : buttonList) {
+			if(getChildren().size() < MAX_BUTTONS + 1) {
+				getChildren().add(cb);
+			} else {
+				System.err.println("could not add [" + cb + "], list is already at maximum");
+			}
 		}
 
 		if(!buttonList.contains(masterButton)) {
-			//buttonList.add(masterButton);
-			addButton(masterButton);
+			getChildren().add(masterButton);
+			buttonList.add(masterButton);
 		}
 
 		currIc = ic;
 
 		if(buttonList.size() >= MAX_BUTTONS + 1) {
-			buttonList.remove(masterButton);
+			removeButton(masterButton);
 		}
-		/* for(CustomButton b : ic.getCustomButtons()) {
-			//System.out.println("b:" + b);
-			//this.getChildren().add(b);
-			addButton(b);
-		}*/
 
+		save();
 		updateSize();
 	}
 
 	public void addButton(CustomButton b) {
-		b.setPrefHeight(this.getHeight());
-
-		// TODO better deletion handling. But that is UI.. with users.
-		// And I don't like users. Period.   .
-
-		if (!b.equals(masterButton)) {
-			b.setOnContextMenuRequested(e -> removeButton(b));
+		if(buttonList.size() >= MAX_BUTTONS + 1) {
+			return;
 		}
 
-		this.getChildren().add(b);
+		if (!b.equals(masterButton)) {
+			ContextMenu cMenu = new ContextMenu();
+			MenuItem miEdit = new MenuItem("Edit");
+			MenuItem miRemove = new MenuItem("Remove");
+			cMenu.getItems().addAll(miEdit, miRemove);
+
+			b.setOnContextMenuRequested(e -> cMenu.show(this, e.getScreenX(), e.getScreenY()));
+			miEdit.setOnAction(e -> {
+				cbDialog = new CustomButtonDialog("Change Custom Button");
+				Optional<Pair<String, String>> result = cbDialog.showAndWait();
+				if (result.isPresent()) {
+					Pair<String, String> pair = result.get();
+					b.setText(pair.getKey());
+					b.setCommand(pair.getValue());
+					save();
+				}
+			});
+			miRemove.setOnAction(e -> {
+				removeButton(b);
+			});
+		}
+
+		getChildren().add(b);
 		buttonList.add(b);
 
 		if(buttonList.size() >= MAX_BUTTONS + 1) {
@@ -138,7 +125,10 @@ public class CustomButtonContainer extends HBox {
 	}
 
 	private void save() {
-		String activeInstanceName = UIController.getActiveInstance();
+		if(currIc == null) {
+			return;
+		}
+		String activeInstanceName = currIc.getInstance().getName();
 		JSONObject instanceSettings =
 			(JSONObject) Globals.getInstanceSettings()
 				.get(activeInstanceName);
@@ -161,8 +151,7 @@ public class CustomButtonContainer extends HBox {
 		buttonList.remove(b);
 		if (!getChildren().contains(masterButton)
 				&& buttonList.size() < MAX_BUTTONS) {
-			getChildren().add(masterButton);
-			buttonList.add(masterButton);
+			addButton(masterButton);
 		}
 		save();
 		updateSize();
@@ -174,10 +163,11 @@ public class CustomButtonContainer extends HBox {
 		for(Button b : buttonList) {
 			b.setPrefWidth(width);
 			b.setMaxWidth(width);
+			b.setPrefHeight(this.getHeight());
 		}
 	}
 
-	public void updateSize(Number oldSceneWidth, Number newSceneWidth, Number oldSceneHeight, Number newSceneHeight) {
+	public void updateSize(Number oldSceneWidth, Number newSceneWidth) {
 		double width = this.getWidth();
 
 		if((oldSceneWidth != null) &&
@@ -192,6 +182,7 @@ public class CustomButtonContainer extends HBox {
 		for(Button b : buttonList) {
 			b.setPrefWidth(width);
 			b.setMaxWidth(width);
+			b.setPrefHeight(this.getHeight());
 		}
 	}
 }

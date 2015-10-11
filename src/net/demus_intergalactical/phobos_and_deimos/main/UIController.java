@@ -48,10 +48,7 @@ public class UIController {
 			customButtons = (CustomButtonContainer) root.lookup("#custombuttons");
 
 			customButtons.getScene().widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
-				customButtons.updateSize(oldSceneWidth, newSceneWidth, null, null);
-			});
-			customButtons.getScene().heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
-				customButtons.updateSize(null, null, oldSceneHeight, newSceneHeight);
+				customButtons.updateSize(oldSceneWidth, newSceneWidth);
 			});
 		});
 

@@ -71,7 +71,7 @@ public class InstanceContainer {
 		instanceLog = new InlineCssTextArea();
 		completionController = new CompletionController(currentInstance);
 		consoleHistory = new ConsoleHistory();
-		loadButtons();
+		//loadButtons();
 	}
 
 	public void init() {
