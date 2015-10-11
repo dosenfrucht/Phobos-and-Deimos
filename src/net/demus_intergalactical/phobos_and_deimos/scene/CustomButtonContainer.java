@@ -153,6 +153,8 @@ public class CustomButtonContainer extends HBox {
 		cb.setOnContextMenuRequested(e -> cMenu.show(this, e.getScreenX(), e.getScreenY()));
 		miEdit.setOnAction(e -> {
 			cbDialog = new CustomButtonDialog("Change Custom Button");
+			cbDialog.setText(cb.getText());
+			cbDialog.setCommand(cb.getCommand());
 			Optional<Pair<String, String>> result = cbDialog.showAndWait();
 			if (result.isPresent()) {
 				Pair<String, String> pair = result.get();

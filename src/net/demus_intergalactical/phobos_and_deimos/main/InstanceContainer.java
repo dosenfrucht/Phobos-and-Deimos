@@ -2,12 +2,14 @@ package net.demus_intergalactical.phobos_and_deimos.main;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import net.demus_intergalactical.phobos_and_deimos.scene.CustomButton;
 import net.demus_intergalactical.phobos_and_deimos.scene.InstanceContextMenu;
@@ -26,9 +28,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javax.script.ScriptException;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -38,7 +40,6 @@ public class InstanceContainer {
 
 	private ServerInstance currentInstance;
 	private ServerProperties properties;
-	//private ObservableList<HBox> playerList = FXCollections.observableArrayList();
 	private PlayerList playerList;
 	private int playerCount = 0;
 
@@ -313,10 +314,6 @@ public class InstanceContainer {
 
 	public void setInputBuf(String inputBuf) {
 		this.inputBuf = inputBuf;
-	}
-
-	public void setCustomButtons(List<CustomButton> customButtons) {
-		this.customButtons = customButtons;
 	}
 
 	public List<CustomButton> getCustomButtons() {

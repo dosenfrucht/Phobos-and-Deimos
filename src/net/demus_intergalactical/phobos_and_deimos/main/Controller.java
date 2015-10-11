@@ -7,19 +7,11 @@ import net.demus_intergalactical.phobos_and_deimos.scene.AboutWindow;
 import net.demus_intergalactical.phobos_and_deimos.scene.CreateInstanceWindow;
 import net.demus_intergalactical.phobos_and_deimos.scene.InstancePluginsWindow;
 import net.demus_intergalactical.phobos_and_deimos.scene.PropertiesWindow;
-import net.demus_intergalactical.serverman.Globals;
 import org.fxmisc.richtext.InlineCssTextArea;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Controller {
-
 	public TextField input;
 	public InlineCssTextArea console;
 	String instanceID;
@@ -98,27 +90,5 @@ public class Controller {
 	public void onAboutPressed() {
 		AboutWindow aw = new AboutWindow();
 		aw.show();
-	}//public void onAboutPressed()
-
-	public void onPathPressed() {
-		Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-
-		String userDirString = "user.dir:" + System.getProperty("user.dir");
-		a.setHeaderText(userDirString);
-		System.out.println(userDirString);
-		try {
-			File f =  new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
-			String fileSomethingPath = "getPath:" + f.getPath() +
-					" | canonical:" + f.getCanonicalPath() +
-					" | absolute:" + f.getAbsolutePath() +
-					" | version_home:" + Globals.getServerManConfig().get("version_home") +
-					" | instance_home:" + Globals.getServerManConfig().get("instance_home");
-			System.out.println(fileSomethingPath);
-			a.setContentText(fileSomethingPath);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		a.showAndWait();
 	}
 }

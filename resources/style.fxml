@@ -48,7 +48,6 @@
           <Menu mnemonicParsing="false" text="Settings">
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#onAboutPressed" text="About" />
-                <MenuItem mnemonicParsing="false" onAction="#onPathPressed" text="GET CURRENT PATHAS??!" />
             </items>
           </Menu>
         </menus>
