@@ -46,11 +46,14 @@ public class CustomButtonContainer extends HBox {
 	}
 
 	public void changeInstance(InstanceContainer ic) {
-		save();
+		if(currIc != null) {
+			save();
 
-		this.getChildren().clear();
+			this.getChildren().clear();
+		}
 
 		if(ic == null) {
+			currIc = null;
 			return;
 		}
 
@@ -59,6 +62,7 @@ public class CustomButtonContainer extends HBox {
 		for(CustomButton cb : buttonList) {
 			if(getChildren().size() < MAX_BUTTONS + 1) {
 				getChildren().add(cb);
+				addContextToButton(cb);
 			} else {
 				System.err.println("could not add [" + cb + "], list is already at maximum");
 			}
@@ -85,25 +89,7 @@ public class CustomButtonContainer extends HBox {
 		}
 
 		if (!b.equals(masterButton)) {
-			ContextMenu cMenu = new ContextMenu();
-			MenuItem miEdit = new MenuItem("Edit");
-			MenuItem miRemove = new MenuItem("Remove");
-			cMenu.getItems().addAll(miEdit, miRemove);
-
-			b.setOnContextMenuRequested(e -> cMenu.show(this, e.getScreenX(), e.getScreenY()));
-			miEdit.setOnAction(e -> {
-				cbDialog = new CustomButtonDialog("Change Custom Button");
-				Optional<Pair<String, String>> result = cbDialog.showAndWait();
-				if (result.isPresent()) {
-					Pair<String, String> pair = result.get();
-					b.setText(pair.getKey());
-					b.setCommand(pair.getValue());
-					save();
-				}
-			});
-			miRemove.setOnAction(e -> {
-				removeButton(b);
-			});
+			addContextToButton(b);
 		}
 
 		getChildren().add(b);
@@ -125,7 +111,8 @@ public class CustomButtonContainer extends HBox {
 	}
 
 	private void save() {
-		if(currIc == null) {
+		if(currIc == null ||
+				currIc.getInstance() == null) {
 			return;
 		}
 		String activeInstanceName = currIc.getInstance().getName();
@@ -155,6 +142,26 @@ public class CustomButtonContainer extends HBox {
 		}
 		save();
 		updateSize();
+	}
+
+	private void addContextToButton(CustomButton cb) {
+		ContextMenu cMenu = new ContextMenu();
+		MenuItem miEdit = new MenuItem("Edit");
+		MenuItem miRemove = new MenuItem("Remove");
+		cMenu.getItems().addAll(miEdit, miRemove);
+
+		cb.setOnContextMenuRequested(e -> cMenu.show(this, e.getScreenX(), e.getScreenY()));
+		miEdit.setOnAction(e -> {
+			cbDialog = new CustomButtonDialog("Change Custom Button");
+			Optional<Pair<String, String>> result = cbDialog.showAndWait();
+			if (result.isPresent()) {
+				Pair<String, String> pair = result.get();
+				cb.setText(pair.getKey());
+				cb.setCommand(pair.getValue());
+				save();
+			}
+		});
+		miRemove.setOnAction(e -> removeButton(cb));
 	}
 
 	public void updateSize() {
