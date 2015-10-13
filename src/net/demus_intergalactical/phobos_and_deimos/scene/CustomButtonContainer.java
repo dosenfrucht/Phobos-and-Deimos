@@ -115,7 +115,7 @@ public class CustomButtonContainer extends HBox {
 				currIc.getInstance() == null) {
 			return;
 		}
-		String activeInstanceName = currIc.getInstance().getName();
+		String activeInstanceName = currIc.getInstance().getServerInstanceID();
 		JSONObject instanceSettings =
 			(JSONObject) Globals.getInstanceSettings()
 				.get(activeInstanceName);

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class CreateInstanceButton extends Button {
 	public static final Map<String, String[]> defaultPlugins;
@@ -24,13 +25,6 @@ public class CreateInstanceButton extends Button {
 		defaultPlugins.put("auto-save", new String[] {"main.js"});
 		defaultPlugins.put("calc", new String[] {"math.js", "main.js"});
 		defaultPlugins.put("gm", new String[] {"main.js"});
-	}
-
-
-	public CreateInstanceButton() {
-		super();
-
-		init();
 	}
 
 	public CreateInstanceButton(String name) {
@@ -45,10 +39,24 @@ public class CreateInstanceButton extends Button {
 
 	public void initCreationListener(CreateInstanceWindow ciw) {
 		setOnAction(e -> {
-			if (!ciw.tfNameInput.getText().equals("") && !ciw.tfServerJarFileInput.getText().equals("") && !ciw.tfVersionInput.getText().equals("")) {
+			if (!ciw.tfIdInput.getText().isEmpty() &&
+					!ciw.tfNameInput.getText().isEmpty() &&
+					!ciw.tfServerJarFileInput.getText().isEmpty() &&
+					!ciw.tfVersionInput.getText().isEmpty()) {
+
+				String instanceID = (ciw.tfIdInput.getText()).toLowerCase();
+
+				File dirInstanceHome = new File(Globals.getServerManConfig().get("instances_home") +
+						File.separator + instanceID);
+				if(dirInstanceHome.exists()) {
+					AlertWindow aw = new AlertWindow("Wrong id", "Please enter a unique id or delete the folder!", Alert.AlertType.ERROR);
+					aw.showAndWait();
+					return;
+				}
+
 				if (ciw.checkEula.isSelected()) {
 					try {
-						FileUtils.writeStringToFile(new File(Globals.getServerManConfig().get("instances_home") + File.separator + ciw.tfNameInput.getText() + File.separator + "eula.txt"), "eula=true");
+						FileUtils.writeStringToFile(new File(dirInstanceHome + File.separator + "eula.txt"), "eula=true");
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -58,7 +66,7 @@ public class CreateInstanceButton extends Button {
 					return;
 				}
 				ciw.si.setName(ciw.tfNameInput.getText());
-				ciw.si.setServerInstanceID(ciw.tfNameInput.getText());
+				ciw.si.setServerInstanceID(instanceID);
 				ciw.si.setServerFile(ciw.serverJarFile.getName());
 				ciw.si.setServerVersion(ciw.tfVersionInput.getText());
 				File serverIconFIle = ciw.imgViewServer.getImageFile();

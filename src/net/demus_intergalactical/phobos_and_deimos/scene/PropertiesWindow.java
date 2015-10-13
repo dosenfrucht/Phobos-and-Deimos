@@ -173,7 +173,7 @@ public class PropertiesWindow extends Stage {
 
 		spContent.setPrefSize(700, 600);
 		spContent.setFitToWidth(true);
-		String css = Main.class.getClassLoader().getResource("assets/css/propertiesWindow.css").toExternalForm();
+		String css = Main.class.getClassLoader().getResource("css/propertiesWindow.css").toExternalForm();
 		layout.getStylesheets().clear();
 		layout.getStylesheets().add(css);
 

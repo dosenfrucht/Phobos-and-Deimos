@@ -50,7 +50,7 @@ public class ImageViewSelectable extends ImageView {
 
 	public void setImageFromResource(String filePath) {
 		imgFile = new File(filePath);
-		System.out.println("ImageViewSelectable > setImageByFile > filePath:" + filePath);
+		//System.out.println("ImageViewSelectable > setImageByFile > filePath:" + filePath);
 		super.setImage(new Image(filePath));
 	}
 

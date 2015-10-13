@@ -3,6 +3,7 @@
     -fx-font-family: "minecraft";
     -fx-font-size: 14;
     -fx-text-fill: #FFFFFF;
+    -fx-padding: 10 10 10 10;
 }
 #vboxProject,
 #vboxProjectImage,

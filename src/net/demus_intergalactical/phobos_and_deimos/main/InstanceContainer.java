@@ -72,7 +72,6 @@ public class InstanceContainer {
 		instanceLog = new InlineCssTextArea();
 		completionController = new CompletionController(currentInstance);
 		consoleHistory = new ConsoleHistory();
-		//loadButtons();
 	}
 
 	public void init() {
@@ -169,7 +168,7 @@ public class InstanceContainer {
 	private void loadButtons() {
 		JSONObject instanceSettings =
 			(JSONObject) Globals.getInstanceSettings()
-				.get(currentInstance.getName());
+				.get(currentInstance.getServerInstanceID());
 		if (instanceSettings == null) {
 			return;
 		}
@@ -318,6 +317,22 @@ public class InstanceContainer {
 
 	public List<CustomButton> getCustomButtons() {
 		return customButtons;
+	}
+
+	public void update() {
+		try {
+			imgViewIcon.setImage(new Image("file:" + currentInstance.getIcon().getPath()));
+		} catch (NullPointerException e) {
+			imgViewIcon.setImage(new Image(Main.class.getClassLoader().getResourceAsStream("assets/unknown_server.png"), 64, 64, true, true));
+		}
+
+		lblInstanceName.setText(currentInstance.getName());
+		try {
+			lblInstancePort.setText(properties.getInteger("server-port").toString());
+		} catch (NullPointerException npe) {
+			lblInstancePort.setText("ERR");
+			System.out.println();
+		}
 	}
 }
 

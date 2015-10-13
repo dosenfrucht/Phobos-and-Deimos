@@ -1,0 +1,39 @@
+.root {
+    -fx-background-image: url("/assets/dirt_console.png");
+    -fx-font-family: "minecraft";
+    -fx-font-size: 14;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 10 10 10 10;
+}
+.label,
+.label.content,
+.check-box {
+   -fx-text-fill: white;
+   -fx-margin: 0 0 20 0;
+}
+.text-field {
+    -fx-background-color: black;
+    -fx-border-color: #A0A0A0;
+    -fx-border-width: 2;
+    -fx-text-fill: #CCCCCC;
+}
+/************************************
+*           Button                  *
+************************************/
+.button {
+    -fx-background-image: url("/assets/button40_center.png"), url("/assets/button40_right.png"), url("/assets/button40_left.png");
+    -fx-background-position: center, right, left;
+    -fx-background-repeat: repeat-x, no-repeat, no-repeat;
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-padding: 20 20 20 20;
+}
+.button:hover {
+    -fx-background-image: url("/assets/button40_center_hover.png"), url("/assets/button40_right_hover.png"), url("/assets/button40_left_hover.png");
+    -fx-background-position: center, right, left;
+    -fx-background-repeat: repeat-x, no-repeat, no-repeat;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-text-fill: #FFFFA0;
+}

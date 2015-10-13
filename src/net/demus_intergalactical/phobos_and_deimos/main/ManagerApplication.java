@@ -23,7 +23,7 @@ public class ManagerApplication extends Application {
 		primaryStage.minHeightProperty().set(710);
 		primaryStage.minWidthProperty().set(1024);
 		primaryStage.setResizable(true);
-		Font.loadFont(Main.class.getClassLoader().getResourceAsStream("assets/fonts/minecraft.ttf"), 10);
+		Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/minecraft.ttf"), 10);
 		Parent root;
 		try {
 			root = FXMLLoader.load(Main.class.getClassLoader().getResource("style.fxml"));

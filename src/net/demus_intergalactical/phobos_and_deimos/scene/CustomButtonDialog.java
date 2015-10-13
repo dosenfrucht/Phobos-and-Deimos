@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
+import net.demus_intergalactical.phobos_and_deimos.main.Main;
 
 /**
  * Created by JapuDCret on 11.10.2015.
@@ -20,6 +21,11 @@ public class CustomButtonDialog extends Dialog {
 
 
 	public CustomButtonDialog(String title) {
+		String css = Main.class.getClassLoader().getResource("css/alertWindow.css").toExternalForm();
+		DialogPane dialogPane = this.getDialogPane();
+		dialogPane.getStylesheets().clear();
+		dialogPane.getStylesheets().add(css);
+
 		setTitle(title);
 
 		layout.add(lblName, 1, 1);

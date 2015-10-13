@@ -23,7 +23,7 @@ public class PluginLoader {
 			if (!dir.mkdir()) {
 				throw new FileNotFoundException("Could not " +
 					"create /plugins for instance " +
-					instance.getName());
+					instance.getServerInstanceID());
 			}
 		}
 		if (!dir.isDirectory()) {

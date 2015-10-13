@@ -11,33 +11,30 @@ import net.demus_intergalactical.phobos_and_deimos.main.*;
 import net.demus_intergalactical.phobos_and_deimos.main.Main;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 public class AboutWindow extends Stage {
 	private static final Map<String,String> listAuthorPictures;
-	static {
-		listAuthorPictures = new HashMap<>();
-		listAuthorPictures.put("Demus", "demus.png");
-		listAuthorPictures.put("Dosenfrucht", "dosenfrucht.jpg");
-		listAuthorPictures.put("Japu", "japu.jpg");
-	}
 	private static final Map<String,String> listAuthorDescriptions;
-	static {
-		listAuthorDescriptions = new HashMap<>();
-		listAuthorDescriptions.put("Demus", "sounds suspiciously like the name of the application....");
-		listAuthorDescriptions.put("Dosenfrucht", "Olen pingviini. Mokoma \\m/");
-		listAuthorDescriptions.put("Japu", "a panda for all your panda needs");
-	}
 	private static final Map<String, String> listAuthorWeblinks;
 	static {
+		listAuthorPictures = new HashMap<>();
+		listAuthorDescriptions = new HashMap<>();
 		listAuthorWeblinks = new HashMap<>();
+
+		listAuthorPictures.put("Demus", "demus.png");
+		listAuthorDescriptions.put("Demus", "sounds suspiciously like the name of the application....");
 		listAuthorWeblinks.put("Demus", "https://github.com/Nikman666/");
+
+		listAuthorPictures.put("Dosenfrucht", "dosenfrucht.jpg");
+		listAuthorDescriptions.put("Dosenfrucht", "Olen pingviini. Mokoma \\m/");
 		listAuthorWeblinks.put("Dosenfrucht", "https://github.com/ThomasHerzog");
+
+		listAuthorPictures.put("Japu", "japu.jpg");
+		listAuthorDescriptions.put("Japu", "a panda for all your panda needs");
 		listAuthorWeblinks.put("Japu", "https://github.com/JapuDCret");
 	}
-
 
 	private VBox layout = new VBox();
 
@@ -61,16 +58,12 @@ public class AboutWindow extends Stage {
 		WindowRegistry.register(this);
 
 		this.setTitle("About");
-		String css = Main.class.getClassLoader().getResource("assets/css/aboutWindow.css").toExternalForm();
+		this.setResizable(false);
+		String css = Main.class.getClassLoader().getResource("css/aboutWindow.css").toExternalForm();
 		layout.getStylesheets().clear();
 		layout.getStylesheets().add(css);
-		layout.setPrefSize(900, 600);
+		layout.setPrefSize(700, 450);
 
-		Object obj = new Object();
-		Class clazz = obj.getClass();
-		if(obj.getClass().equals(clazz)) {
-			System.out.println(true);
-		}
 		lblProjectName.setId("lblProjectName");
 		vboxProjectDescription.getChildren().add(lblProjectName);
 		vboxProjectDescription.getChildren().add(lblProjectDescription);

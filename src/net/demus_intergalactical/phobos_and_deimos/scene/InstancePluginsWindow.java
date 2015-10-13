@@ -54,7 +54,7 @@ public class InstancePluginsWindow extends Stage {
 
 		data = FXCollections.observableArrayList();
 
-		String css = Main.class.getClassLoader().getResource("assets/css/instancePluginsWindow.css").toExternalForm();
+		String css = Main.class.getClassLoader().getResource("css/instancePluginsWindow.css").toExternalForm();
 		layout.getStylesheets().clear();
 		layout.getStylesheets().add(css);
 		layout.setId("layout");

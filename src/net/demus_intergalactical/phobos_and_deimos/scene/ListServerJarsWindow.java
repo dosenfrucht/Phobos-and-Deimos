@@ -46,7 +46,7 @@ public class ListServerJarsWindow extends Stage {
 		WindowRegistry.register(this);
 
 		this.setTitle("Select server-jar");
-		String css = Main.class.getClassLoader().getResource("assets/css/listServerJarsWindow.css").toExternalForm();
+		String css = Main.class.getClassLoader().getResource("css/listServerJarsWindow.css").toExternalForm();
 		layout.getStylesheets().clear();
 		layout.getStylesheets().add(css);
 		layout.setId("layout");

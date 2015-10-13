@@ -3,10 +3,8 @@ package net.demus_intergalactical.phobos_and_deimos.main;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import net.demus_intergalactical.phobos_and_deimos.scene.AboutWindow;
-import net.demus_intergalactical.phobos_and_deimos.scene.CreateInstanceWindow;
-import net.demus_intergalactical.phobos_and_deimos.scene.InstancePluginsWindow;
-import net.demus_intergalactical.phobos_and_deimos.scene.PropertiesWindow;
+import net.demus_intergalactical.phobos_and_deimos.scene.*;
+import net.demus_intergalactical.serverman.Globals;
 import org.fxmisc.richtext.InlineCssTextArea;
 
 import java.io.FileNotFoundException;
@@ -26,6 +24,10 @@ public class Controller {
 	}
 
 	public void onInstanceSettingsPressed() {
+		InstanceContainer ic = InstancePool.get(UIController.getActiveInstance());
+		InstanceSettingsWindow isc = new InstanceSettingsWindow(ic);
+		isc.show();
+
 		System.out.println("someone wanted to use me! Yey ^_^");
 	}
 
