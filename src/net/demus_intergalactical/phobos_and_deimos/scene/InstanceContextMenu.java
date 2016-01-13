@@ -53,7 +53,8 @@ public class InstanceContextMenu extends ContextMenu {
 		miDeleteInstance = new MenuItem("Delete instance");
 		miDeleteInstance.setOnAction(e -> {
 			ConfirmWindow cw = new ConfirmWindow("Delete instance", "Are you sure you want to delete this instance?\nAll worlds, configs, etc. will be\ndeleted forever (a long time!)");
-			
+			cw.setWidth(500);
+
 			if (!cw.waitAndGetResult()) {
 				return;
 			}

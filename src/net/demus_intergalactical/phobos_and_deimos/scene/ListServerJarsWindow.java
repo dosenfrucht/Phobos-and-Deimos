@@ -1,5 +1,6 @@
 package net.demus_intergalactical.phobos_and_deimos.scene;
 
+import com.sun.corba.se.spi.activation.Server;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -28,7 +29,6 @@ public class ListServerJarsWindow extends Stage {
 	private TableColumn<ServerInstanceVersion, String> tblColName = new TableColumn<>("Name");
 	private TableColumn<ServerInstanceVersion, String> tblColType = new TableColumn<>("Type");
 	private TableColumn<ServerInstanceVersion, String> tblColTimestamp = new TableColumn<>("Release Date");
-	private TableColumn<ServerInstanceVersion, String> tblColIsSupported = new TableColumn<>("Supported");
 
 	private BorderPane bpBtnPanel = new BorderPane();
 	private FileChooser fileChooser = new FileChooser();
@@ -61,7 +61,7 @@ public class ListServerJarsWindow extends Stage {
 		fillTable();
 
 		//noinspection unchecked
-		tblView.getColumns().addAll(tblColName, tblColType, tblColTimestamp, tblColIsSupported);
+		tblView.getColumns().addAll(tblColName, tblColType, tblColTimestamp);
 		tblColTimestamp.setSortType(TableColumn.SortType.DESCENDING);
 		tblView.getSortOrder().add(tblColTimestamp);
 
@@ -130,6 +130,9 @@ public class ListServerJarsWindow extends Stage {
 		return tblView.getSelectionModel().getSelectedItem();
 	}
 
+	public ServerInstanceVersion getVersion(String version) {
+		return ServerInstanceVersion.getVersion(version);
+	}
 
 	private void fillTable() {
 		ObservableList<ServerInstanceVersion> data = ServerInstanceVersion.getAllVersions();
@@ -140,9 +143,6 @@ public class ListServerJarsWindow extends Stage {
 		tblColType.setPrefWidth(125);
 		tblColTimestamp.setCellValueFactory(new PropertyValueFactory<>("versionTimestamp"));
 		tblColTimestamp.setPrefWidth(150);
-		tblColIsSupported.setCellValueFactory(new PropertyValueFactory<>("isSupported"));
-		tblColIsSupported.setPrefWidth(100);
-		tblColIsSupported.setSortable(false);
 
 		tblView.setItems(data);
 	}

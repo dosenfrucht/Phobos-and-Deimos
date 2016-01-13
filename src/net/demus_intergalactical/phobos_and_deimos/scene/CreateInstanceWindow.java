@@ -1,5 +1,6 @@
 package net.demus_intergalactical.phobos_and_deimos.scene;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,15 +22,9 @@ public class CreateInstanceWindow extends Stage {
 	ServerInstance si;
 	ImageViewSelectable imgViewServer = new ImageViewSelectable();
 
-	private VBox vboxId = new VBox();
-	private Label lblIdInfo = new Label("Id(unique-lower case-unchan)");
-	TextField tfIdInput = new TextField();
-	private boolean idWritten = false;
-
 	private VBox vboxName = new VBox();
 	private Label lblNameInfo = new Label("Server Name");
 	TextField tfNameInput = new TextField();
-	private boolean nameWritten = false;
 
 	private StackPane stackPnServer = new StackPane(imgViewServer);
 
@@ -41,7 +36,7 @@ public class CreateInstanceWindow extends Stage {
 
 	private VBox version = new VBox();
 	private Label lblVersionInfo = new Label("Version");
-	TextField tfVersionInput = new TextField();
+	ComboBox tfVersionInput = new ComboBox();
 
 	CheckBox checkEula = new CheckBox();
 
@@ -75,43 +70,9 @@ public class CreateInstanceWindow extends Stage {
 	private void init() {
 		stackPnServer.setAlignment(Pos.CENTER);
 
-		tfIdInput.setOnKeyTyped(e -> {
-			if (!e.getCharacter().matches("[\\w\\.!\\?\\-\\+,&'#\\(\\)\\[\\]\\s]")) {
-				e.consume();
-			} else {
-				idWritten = true;
-
-				if (tfNameInput.getText().isEmpty()) {
-					nameWritten = false;
-				}
-				if (!nameWritten) {
-					int curPos = tfIdInput.getCaretPosition();
-					String inputStr = tfIdInput.getText();
-					String newStr1 = inputStr.substring(0, curPos);
-					String newStr2 = inputStr.substring(curPos);
-					tfNameInput.setText(newStr1 + e.getCharacter() + newStr2);
-				}
-			}
-		});
-		tfIdInput.setPrefSize(250, 30);
-		vboxId.getChildren().addAll(lblIdInfo, tfIdInput);
-
 		tfNameInput.setOnKeyTyped(e -> {
 			if (!e.getCharacter().matches("[\\w\\.!\\?\\-\\+,&'#\\(\\)\\[\\]\\s]")) {
 				e.consume();
-			} else {
-				nameWritten = true;
-
-				if(tfIdInput.getText().isEmpty()) {
-					idWritten = false;
-				}
-				if(!idWritten) {
-					int curPos = tfNameInput.getCaretPosition();
-					String inputStr = tfNameInput.getText();
-					String newStr1 = inputStr.substring(0, curPos);
-					String newStr2 = inputStr.substring(curPos);
-					tfIdInput.setText(newStr1 + e.getCharacter() + newStr2);
-				}
 			}
 		});
 		tfNameInput.setPrefSize(250, 30);
@@ -120,6 +81,14 @@ public class CreateInstanceWindow extends Stage {
 		tfServerJarFileInput.setEditable(false);
 		tfServerJarFileInput.setPromptText("Select jar");
 		tfServerJarFileInput.setPrefSize(170, 30);
+
+		String smallerThan17 = "<  1.7";
+		String greaterThan17 = ">= 1.7";
+		String custom        = "custom";
+		ObservableList<String> items = new ComboBox<String>().getItems();
+		items.add(smallerThan17);
+		items.add(greaterThan17);
+		items.add(custom);
 
 		btnServerJarFile.setOnAction(e -> {
 			ListServerJarsWindow lsjw = new ListServerJarsWindow();
@@ -130,15 +99,17 @@ public class CreateInstanceWindow extends Stage {
 
 			try {
 				tfServerJarFileInput.setText(serverJarFile.getName());
-				String versionName;
-				if(version.getIsSupported()) {
-					versionName = version.getVersionName();
+				long versionTime;
+				versionTime = version.getVersionTimestampLong();
+				if (versionTime < lsjw.getVersion("1.7.2").getVersionTimestampLong()) {
+					tfVersionInput.getSelectionModel().select(smallerThan17);
 				} else {
-					versionName = "unknown";
+					tfVersionInput.getSelectionModel().select(greaterThan17);
 				}
-				tfVersionInput.setText(versionName);
+
+
 			} catch (NullPointerException npEx) {
-				// i dont care about you muhahaha
+				// i dont care about you muhahaha<
 				System.err.println("Invalid serverJarFile file: " + serverJarFile);
 			}
 		});
@@ -146,7 +117,11 @@ public class CreateInstanceWindow extends Stage {
 		hboxServerJarFileSelect.getChildren().addAll(tfServerJarFileInput, btnServerJarFile);
 		vboxServerJarFilePopup.getChildren().addAll(lblServerJarFileInfo, hboxServerJarFileSelect);
 
-		//tfVersionInput.setPrefSize(100, 30);
+
+
+		tfVersionInput.setItems(items);
+		tfVersionInput.setPrefSize(275, 30);
+
 		version.getChildren().addAll(lblVersionInfo, tfVersionInput);
 
 		Hyperlink checkEulalink = new Hyperlink("https://account.mojang.com/documents/minecraft_checkEula");
@@ -161,7 +136,7 @@ public class CreateInstanceWindow extends Stage {
 		btnCreate.setPrefSize(100, 40);
 		hboxButtonBox.getChildren().addAll(btnCreate, btnCancel);
 
-		layout.getChildren().addAll(stackPnServer, vboxId, vboxName, vboxServerJarFilePopup, version, checkEula, hboxButtonBox);
+		layout.getChildren().addAll(stackPnServer, vboxName, vboxServerJarFilePopup, version, checkEula, hboxButtonBox);
 
 		this.show();
 	}

@@ -23,7 +23,7 @@ function write(type, time, thread, loglvl, arg) {
 
     if (loglvl == "INFO") {
         output.appendToConsole("#AAAAAA", logPrefix)
-    } else if (loglvl == "WARN") {
+    } else if (loglvl == "WARNING") {
         output.appendToConsole("#FFFF55", logPrefix)
     } else if (loglvl == "ERROR") {
         output.appendToConsole("#AA0000", logPrefix)
@@ -39,7 +39,7 @@ function write(type, time, thread, loglvl, arg) {
     } else if (type == "chat") {
         output.appendToConsole("#FFFF55", arg[0])
         output.appendToConsole("#FFFFFF", ": " + arg[1])
-    } else {
+    }else {
         output.appendToConsole("#FFFFFF", arg)
     }
     output.appendToConsole("#000000", "\n")

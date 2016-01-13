@@ -89,7 +89,9 @@ public class InstanceContainer {
 			boolean dontShow = false;
 			switch (type) {
 			case "chat":
-				dontShow = api.queueChat(time, arg);
+				dontShow = api.queueChat(time,
+					((ScriptObjectMirror) arg).getSlot(0),
+					((ScriptObjectMirror) arg).getSlot(1));
 				break;
 			case "joined":
 				dontShow = api.queuePlayerJoined(time, arg);
@@ -149,6 +151,7 @@ public class InstanceContainer {
 		} catch (IOException e) {
 			try {
 				System.out.println("could not load currentInstance");
+				e.printStackTrace();
 				String matchScriptPath = Globals.getServerManConfig()
 						.get("instances_home") + File.separator
 						+ currentInstance.getServerInstanceID() + File.separator + "match.js";

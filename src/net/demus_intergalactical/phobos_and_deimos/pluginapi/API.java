@@ -52,8 +52,8 @@ public class API {
 		apiManager.registerTickListener(f);
 	}
 
-	public boolean queueChat(Object time, Object arg) {
-		return apiManager.queueChat(time, arg);
+	public boolean queueChat(Object time, Object player, Object arg) {
+		return apiManager.queueChat(time, player, arg);
 	}
 
 	public boolean queuePlayerLeft(Object time, Object arg) {

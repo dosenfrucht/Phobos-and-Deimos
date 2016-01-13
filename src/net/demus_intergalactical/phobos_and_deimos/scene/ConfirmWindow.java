@@ -13,6 +13,7 @@ public class ConfirmWindow extends Alert {
 
 		String css = Main.class.getClassLoader().getResource("css/alertWindow.css").toExternalForm();
 		DialogPane dialogPane = this.getDialogPane();
+		dialogPane.setPrefSize(500, 200);
 		dialogPane.getStylesheets().clear();
 		dialogPane.getStylesheets().add(css);
 

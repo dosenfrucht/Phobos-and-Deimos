@@ -18,23 +18,14 @@ public class ServerInstanceVersion {
 	private SimpleStringProperty versionType;
 	private SimpleStringProperty location;
 	private SimpleLongProperty versionTimestamp;
-	private SimpleBooleanProperty isSupported;
 
 
-	public ServerInstanceVersion(String versionName, String versionType, long versionTimestamp, String location) {
+
+	public ServerInstanceVersion(String versionName, String versionType, String location, long versionTimestamp) {
 		this.versionName = new SimpleStringProperty(versionName);
 		this.versionType = new SimpleStringProperty(versionType);
 		this.location = new SimpleStringProperty(location);
 		this.versionTimestamp = new SimpleLongProperty(versionTimestamp);
-		this.isSupported = new SimpleBooleanProperty(false);
-	}
-
-	public ServerInstanceVersion(String versionName, String versionType, String location, long versionTimestamp, boolean isSupported) {
-		this.versionName = new SimpleStringProperty(versionName);
-		this.versionType = new SimpleStringProperty(versionType);
-		this.location = new SimpleStringProperty(location);
-		this.versionTimestamp = new SimpleLongProperty(versionTimestamp);
-		this.isSupported = new SimpleBooleanProperty(isSupported);
 	}
 
 
@@ -58,10 +49,6 @@ public class ServerInstanceVersion {
 
 	public long getVersionTimestampLong() {
 		return versionTimestamp.getValue();
-	}
-
-	public boolean getIsSupported() {
-		return isSupported.get();
 	}
 
 

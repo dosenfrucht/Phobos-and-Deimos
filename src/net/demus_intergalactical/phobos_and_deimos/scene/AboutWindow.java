@@ -6,6 +6,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import net.demus_intergalactical.phobos_and_deimos.main.*;
 import net.demus_intergalactical.phobos_and_deimos.main.Main;
@@ -28,8 +30,8 @@ public class AboutWindow extends Stage {
 		listAuthorWeblinks.put("Demus", "https://github.com/Nikman666/");
 
 		listAuthorPictures.put("Dosenfrucht", "dosenfrucht.jpg");
-		listAuthorDescriptions.put("Dosenfrucht", "Olen pingviini. Mokoma \\m/");
-		listAuthorWeblinks.put("Dosenfrucht", "https://github.com/ThomasHerzog");
+		listAuthorDescriptions.put("Dosenfrucht", "Olen pingviini. Pidän deathcore ja suomi \\m/");
+		listAuthorWeblinks.put("Dosenfrucht", "https://github.com/dosenfrucht");
 
 		listAuthorPictures.put("Japu", "japu.jpg");
 		listAuthorDescriptions.put("Japu", "a panda for all your panda needs");
@@ -67,7 +69,12 @@ public class AboutWindow extends Stage {
 		lblProjectName.setId("lblProjectName");
 		vboxProjectDescription.getChildren().add(lblProjectName);
 		vboxProjectDescription.getChildren().add(lblProjectDescription);
-		lblProjectWeblink.setOnAction(e -> WindowRegistry.getApplication().getHostServices().showDocument(lblProjectWeblink.getText()));
+		lblProjectWeblink.setOnAction(e -> {
+			WebView browser = new WebView();
+			WebEngine engine = browser.getEngine();
+			engine.load(lblProjectDescription.getText());
+			// WindowRegistry.getApplication().getHostServices().showDocument(lblProjectWeblink.getText())
+		});
 		vboxProjectDescription.getChildren().add(lblProjectWeblink);
 
 		imgViewProjectImg.setId("imgViewProjectImg");

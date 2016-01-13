@@ -27,7 +27,7 @@ The `unload` function is called when the server shuts down. (like a destructor)
 
 Currently there are these methods callable:
 * `api.registerEventListener(function(type, time, thread, loglvl, arg) {})`
-* `api.registerChatListener(function(time, arg) {})`
+* `api.registerChatListener(function(time, player, arg) {})`
 * `api.registerCommandListener(command, function(time, player, args) {})`
 * `api.registerPlayerListener(function(time, arg) {}, function(time, arg) {})`
 * `api.registerInputListener(function(command) {})`
@@ -45,22 +45,19 @@ Example
 
 main.js
 
-	function init() {
-		api.util.require("math.js")
-		api.registerChatListener(chatListener)
-	}
-	
-	function unload() {
-	}
-	
-	function chatListener(time, arg) {
-	
-		if (arg[1].indexOf("calc ") != 0) {
-			return false
-		}
-		api.command.send("say " + math.expr(arg[1].substring(5)))
-		return false
-	}
+
+    function init() {
+        api.util.require("math.js")
+        api.registerCommandListener("calc", commandListener)
+    }
+
+    function unload() {
+    }
+
+    function commandListener(time, player, args) {
+        api.command.send("say " + math.expr(args.join(" ")))
+        return false
+    }
         
 math.js
 

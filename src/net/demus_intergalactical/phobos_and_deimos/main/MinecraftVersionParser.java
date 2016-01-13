@@ -24,8 +24,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MinecraftVersionParser {
-	private static final String supportedVersionsLocation = "http://serverman.demus-intergalactical.net/versions";
-	private static final String supportedVersionsName = "supported-versions.txt";
+	// private static final String supportedVersionsLocation = "http://serverman.demus-intergalactical.net/versions";
+	// private static final String supportedVersionsName = "supported-versions.txt";
 
 	private static final String assetsXMLLocation = "http://assets.minecraft.net/";
 	private static final String assetsXMLName = "assets.minecraft.xml";
@@ -37,17 +37,17 @@ public class MinecraftVersionParser {
 	private Map<String, String> versionLocations = new TreeMap<>();
 	private Map<String, String> versionTypes = new TreeMap<>();
 	private Map<String, Long> versionTimestamps = new TreeMap<>();
-	private Map<String, Boolean> supportedVersions = new TreeMap<>();
+	// private Map<String, Boolean> supportedVersions = new TreeMap<>();
 
 	public MinecraftVersionParser() {
 		try {
 			String versionHome = Globals.getServerManConfig().get("versions_home").toString();
 
 
-			String supportedVersionTXTPath = versionHome + File.separator + supportedVersionsName;
-			File supportedVersionTXT = new File(supportedVersionTXTPath);
-			FileUtils.copyURLToFile(new URL(supportedVersionsLocation), supportedVersionTXT);
-			readTXT(supportedVersionTXT);
+			//String supportedVersionTXTPath = versionHome + File.separator + supportedVersionsName;
+			//File supportedVersionTXT = new File(supportedVersionTXTPath);
+			//FileUtils.copyURLToFile(new URL(supportedVersionsLocation), supportedVersionTXT);
+			//readTXT(supportedVersionTXT);
 
 
 
@@ -71,21 +71,21 @@ public class MinecraftVersionParser {
 			String versionType = versionTypes.get(versionId);
 			String versionLocation = versionLocations.get(versionId);
 			long versionTimestamp = versionTimestamps.get(versionId);
-			Boolean versionSupported = supportedVersions.get(versionId);
+			//Boolean versionSupported = supportedVersions.get(versionId);
 
-			ServerInstanceVersion sivTemp = new ServerInstanceVersion(versionId, versionType, versionLocation, versionTimestamp, versionSupported);
+			ServerInstanceVersion sivTemp = new ServerInstanceVersion(versionId, versionType, versionLocation, versionTimestamp);
 			alreadyPresentVersions.add(sivTemp);
 		}
 	}
 
-	private void readTXT(File txt) throws IOException {
+	/* private void readTXT(File txt) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(txt));
 
 		String temp;
 		while((temp = br.readLine()) != null) {
 			supportedVersions.put(temp, true);
 		}
-	}
+	} */
 
 	private void readJSON(File json) throws IOException, ParseException, URISyntaxException, java.text.ParseException {
 		JSONParser parser = new JSONParser();
@@ -203,9 +203,9 @@ public class MinecraftVersionParser {
 		if(!versionTimestamps.containsKey(versionId)) {
 			versionTimestamps.put(versionId, timestamp);
 		}
-		if(!supportedVersions.containsKey(versionId)) {
-			supportedVersions.put(versionId, false);
-		}
+		//if(!supportedVersions.containsKey(versionId)) {
+		//	supportedVersions.put(versionId, false);
+		//}
 	}
 
 	public Map<String, String> getVersionLocations() {

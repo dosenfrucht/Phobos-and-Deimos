@@ -64,7 +64,7 @@ public class InstanceScriptManager {
 				.get("instances_home") + File.separator
 				+ instanceID + File.separator + "output.js";
 		File outputScriptFile = new File(outputScriptPath);
-		if (!outputScriptFile.exists()) {
+		/*if (!outputScriptFile.exists()) {
 			String url = "http://serverman.demus-intergalactical.net/v/" +
 					ic.getInstance().getServerVersion() +
 					"/output.js";
@@ -78,7 +78,7 @@ public class InstanceScriptManager {
 					ex.printStackTrace();
 				}
 			}
-		}
+		}*/
 
 		ScriptEngineManager sem = new ScriptEngineManager();
 		jsEngine = sem.getEngineByName("JavaScript");

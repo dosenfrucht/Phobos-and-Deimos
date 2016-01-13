@@ -101,11 +101,11 @@ public class APIManager {
 		tickListener.add(f);
 	}
 
-	public boolean queueChat(Object time, Object arg) {
+	public boolean queueChat(Object time, Object player, Object arg) {
 		return
 			chatListener.stream().filter(e -> e != null).map(e -> {
 				try {
-					return e.call(null, time, arg);
+					return e.call(null, time, player, arg);
 				} catch (Exception ignored) {
 					System.err.println(ignored.getMessage());
 					return false;

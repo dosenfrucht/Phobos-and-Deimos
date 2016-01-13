@@ -1,0 +1,307 @@
+{
+  "archievement": {
+    "give": {
+      "§number": {
+        "§player": {}
+      }
+    }
+  },
+
+  "ban": {
+    "§player": {}
+  },
+
+  "ban-ip": {
+    "§player": {}
+  },
+
+  "banlist": {
+    "ips": {},
+    "players": {}
+  },
+
+  "clear": {
+    "§player": {
+      "§name": {
+        "§name": {}
+      }
+    }
+  },
+
+  "debug": {
+    "start": {},
+    "stop": {}
+  },
+
+  "defaultgamemode": {
+    "§name": {},
+    "§number": {}
+  },
+
+  "deop": {
+    "§player": {}
+  },
+
+  "difficulty": {
+    "§name": {},
+    "§number": {}
+  },
+
+  "effect": {
+    "§player": {
+      "§name": {
+        "§number": {
+          "§number": {}
+        }
+      }
+    }
+  },
+
+  "enchant": {
+    "§player": {
+      "§number": {
+        "§number": {}
+      }
+    }
+  },
+
+  "gamemode": {
+    "adventure": {
+      "§player": {}
+    },
+    "creative": {
+      "§player": {}
+    },
+    "spectator": {
+      "§player": {}
+    },
+    "survival": {
+      "§player": {}
+    },
+    "§number": {
+      "§player": {}
+    }
+  },
+
+  "gamerule": {
+    "§name": {
+      "true": {},
+      "false": {},
+      "§number": {}
+    }
+  },
+
+  "give": {
+    "§player": {
+      "§name": {
+        "§number": {
+          "§name": {
+            "§name": {}
+          }
+        }
+      },
+      "§number": {
+        "§number": {
+          "§name": {
+            "§name": {}
+          }
+        }
+      }
+    }
+  },
+
+  "help": {
+    "§name": {},
+    "§number": {}
+  },
+
+  "kick": {
+    "§player": {}
+  },
+
+  "kill": {},
+
+  "me": {},
+
+  "op": {
+    "§player": {}
+  },
+
+  "pardon": {
+    "§player": {}
+  },
+
+  "pardon-ip": {
+    "§player": {}
+  },
+
+
+
+  "playsound": {
+    "§name": {
+      "§player": {
+        "§number": {
+          "§number": {
+            "§number": {
+              "§number": {
+                "§number": {
+                  "§number": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "publish": {},
+
+  "save-all": {},
+
+  "save-off": {},
+
+  "save-on": {},
+
+  "say": {},
+
+  "scoreboard": {
+    "objectives": {},
+    "players": {},
+    "teams": {}
+  },
+
+  "seed": {},
+
+  "setblock": {
+    "§number": {
+      "§number": {
+        "§number": {
+          "§name": {
+            "§name": {
+              "destroy": {
+                "§name": {}
+              },
+              "keep": {
+                "§name": {}
+              },
+              "replace": {
+                "§name": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "setworldspawn": {
+    "§number": {
+      "§number": {
+        "§number": {}
+      }
+    }
+  },
+
+  "spawnpoint": {
+    "§player": {
+      "§number": {
+        "§number": {
+          "§number": {}
+        }
+      }
+    }
+  },
+
+  "spreadplayers": {
+    "§number": {
+      "§number": {
+        "§number": {
+          "§number": {
+            "true": {},
+            "false": {}
+          }
+        }
+      }
+    }
+  },
+
+  "stop": {},
+
+  "summon": {
+    "§name": {
+      "§number": {
+        "§number": {
+          "§number": {
+            "§name": {}
+          }
+        }
+      }
+    }
+  },
+
+  "tell": {
+    "§player": {}
+  },
+
+  "tellraw": {
+    "§player": {
+      "§name": {}
+    }
+  },
+
+  "testfor": {
+    "§player": {}
+  },
+
+  "testforblock": {
+    "§number": {
+      "§number": {
+        "§number": {
+          "§name": {
+            "§name": {
+              "§name": {}
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "time": {
+    "set": {
+      "day": {},
+      "night": {},
+      "§number": {}
+    },
+    "add": {
+      "§number": {}
+    }
+  },
+
+  "toggledownfall": {},
+
+  "tp": {
+    "§player": {
+      "§player": {},
+      "§number": {
+        "§number": {
+          "§number": {}
+        }
+      }
+    }
+  },
+
+  "weather": {
+    "clear": {},
+    "rain": {},
+    "thunder": {}
+  },
+
+  "xp": {
+    "§number": {
+      "§player": {}
+    }
+  }
+
+}

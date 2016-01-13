@@ -10,10 +10,7 @@ import net.demus_intergalactical.serverman.Globals;
 import net.demus_intergalactical.serverman.instance.ServerInstance;
 import org.apache.commons.io.FileUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -39,16 +36,14 @@ public class CreateInstanceButton extends Button {
 
 	public void initCreationListener(CreateInstanceWindow ciw) {
 		setOnAction(e -> {
-			if (!ciw.tfIdInput.getText().isEmpty() &&
-					!ciw.tfNameInput.getText().isEmpty() &&
-					!ciw.tfServerJarFileInput.getText().isEmpty() &&
-					!ciw.tfVersionInput.getText().isEmpty()) {
+			if (!ciw.tfNameInput.getText().isEmpty() && !ciw.tfServerJarFileInput.getText().isEmpty()) {
 
-				String instanceID = (ciw.tfIdInput.getText()).toLowerCase();
+				UUID uuid = UUID.randomUUID();
+				String instanceID = uuid.toString();
 
 				File dirInstanceHome = new File(Globals.getServerManConfig().get("instances_home") +
-						File.separator + instanceID);
-				if(dirInstanceHome.exists()) {
+					File.separator + instanceID);
+				if (dirInstanceHome.exists()) {
 					AlertWindow aw = new AlertWindow("Wrong id", "Please enter a unique id or delete the folder!", Alert.AlertType.ERROR);
 					aw.showAndWait();
 					return;
@@ -68,7 +63,17 @@ public class CreateInstanceButton extends Button {
 				ciw.si.setName(ciw.tfNameInput.getText());
 				ciw.si.setServerInstanceID(instanceID);
 				ciw.si.setServerFile(ciw.serverJarFile.getName());
-				ciw.si.setServerVersion(ciw.tfVersionInput.getText());
+				ciw.si.setServerVersion((String) ciw.tfVersionInput.getSelectionModel().getSelectedItem());
+
+				if (ciw.si.getServerVersion().equals("<  1.7")) {
+					ciw.si.setServerVersion("pre1.7");
+				} else if (ciw.si.getServerVersion().equals(">= 1.7")) {
+					ciw.si.setServerVersion("post1.7");
+				} else {
+					ciw.si.setServerVersion("custom");
+				}
+
+
 				File serverIconFIle = ciw.imgViewServer.getImageFile();
 				try {
 					ciw.si.setIcon(serverIconFIle);
@@ -82,43 +87,38 @@ public class CreateInstanceButton extends Button {
 					e1.printStackTrace();
 				}
 
-				try {
-					for(String key : defaultPlugins.keySet()) {
-						String[] files = defaultPlugins.get(key);
-						for(String currentFile : files) {
-							String currentDir = Globals.getServerManConfig().get("instances_home") +
-									File.separator + ciw.si.getServerInstanceID() +
-									File.separator + "plugins" +
-									File.separator + key +
-									File.separator + currentFile;
+				// copy match.js and output.js
+				String type = ciw.si.getServerVersion();
 
-							File f = new File(currentDir);
-							f.getParentFile().mkdirs();
+				String matchPath = Globals.getServerManConfig().get("instances_home") +
+					File.separator + ciw.si.getServerInstanceID() +
+					File.separator + "match.js";
 
-							System.out.println(f.getAbsoluteFile());
-							if(!f.exists()) {
-								FileOutputStream fos = null;
-								try {
-									f.createNewFile();
-									fos = new FileOutputStream(f.getAbsolutePath());
-									byte[] buf = new byte[2048];
+				String outputPath = Globals.getServerManConfig().get("instances_home") +
+					File.separator + ciw.si.getServerInstanceID() +
+					File.separator + "output.js";
 
-									InputStream is = Main.class.getClassLoader().getResourceAsStream("default/" + key + "/" + currentFile);
-									int r = is.read(buf);
-									while(r != -1) {
-										fos.write(buf, 0, r);
-										r = is.read(buf);
-									}
-								} finally {
-									if(fos != null) {
-										fos.close();
-									}
-								}
-							}
-						}
+				String completePath = Globals.getServerManConfig().get("instances_home") +
+					File.separator + ciw.si.getServerInstanceID() +
+					File.separator + "completion.json";
+
+				copyFileFromResourceTo("default/js/" + type + "/match.js", matchPath);
+				copyFileFromResourceTo("default/js/" + type + "/output.js", outputPath);
+				copyFileFromResourceTo("default/js/" + type + "/completion.json", completePath);
+
+
+				for (String key : defaultPlugins.keySet()) {
+					String[] files = defaultPlugins.get(key);
+					for (String currentFile : files) {
+
+						String currentDir = Globals.getServerManConfig().get("instances_home") +
+							File.separator + ciw.si.getServerInstanceID() +
+							File.separator + "plugins" +
+							File.separator + key +
+							File.separator + currentFile;
+
+						copyFileFromResourceTo("default/plugins/" + key + "/" + currentFile, currentDir);
 					}
-				} catch (IOException ioEx) {
-					ioEx.printStackTrace();
 				}
 				ciw.si.save();
 				InstancePool.set(ciw.si.getServerInstanceID(), ciw.instCont);
@@ -131,5 +131,38 @@ public class CreateInstanceButton extends Button {
 				aw.showAndWait();
 			}
 		});
+	}
+
+	private void copyFileFromResourceTo(String resourcePath, String to) {
+		File f = new File(to);
+		f.getParentFile().mkdirs();
+		FileOutputStream fos = null;
+
+		if (f.exists()) {
+			return;
+		}
+
+		try {
+			f.createNewFile();
+			fos = new FileOutputStream(f.getAbsolutePath());
+			byte[] buf = new byte[2048];
+
+			InputStream is = Main.class.getClassLoader().getResourceAsStream(resourcePath);
+			int r = is.read(buf);
+			while(r != -1) {
+				fos.write(buf, 0, r);
+				r = is.read(buf);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(fos != null) {
+				try {
+					fos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
