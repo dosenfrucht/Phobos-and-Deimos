@@ -13,9 +13,3 @@ Features
 * Download of recent server.jar files
 * Quickmanaging players (OP, Gamemode, Kick)
 * Buttons for quickcommands
-
-
-Planned Features
-----------------
-
-* Instance Settings window
