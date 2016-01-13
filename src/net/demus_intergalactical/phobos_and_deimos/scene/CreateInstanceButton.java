@@ -21,7 +21,6 @@ public class CreateInstanceButton extends Button {
 		defaultPlugins = new HashMap<>();
 		defaultPlugins.put("auto-save", new String[] {"main.js"});
 		defaultPlugins.put("calc", new String[] {"math.js", "main.js"});
-		defaultPlugins.put("gm", new String[] {"main.js"});
 	}
 
 	public CreateInstanceButton(String name) {
