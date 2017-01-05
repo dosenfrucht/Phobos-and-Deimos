@@ -8,9 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="ServerProperties" level="project" />
-    <orderEntry type="library" name="hi" level="project" />
-    <orderEntry type="library" name="Librarys" level="project" />
-    <orderEntry type="library" name="PaD" level="project" />
+    <orderEntry type="library" name="richtextfx-fat-0.6.8" level="project" />
+    <orderEntry type="library" name="jfxrt" level="project" />
+    <orderEntry type="library" name="commons-io-2.4" level="project" />
   </component>
 </module>

@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Phobos-and-Deimos:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Phobos_and_Deimos_jar</output-path>
+    <root id="archive" name="Phobos-and-Deimos.jar">
+      <element id="module-output" name="Phobos-and-Deimos" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-io-2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/org.json.simple-0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/richtextfx-fat-0.6.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/usr/lib/jvm/java-8-openjdk/jre/lib/ext/jfxrt.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

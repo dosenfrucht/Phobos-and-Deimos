@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Server GUI.iml" filepath="$PROJECT_DIR$/Server GUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Phobos-and-Deimos.iml" filepath="$PROJECT_DIR$/Phobos-and-Deimos.iml" />
     </modules>
   </component>
 </project>

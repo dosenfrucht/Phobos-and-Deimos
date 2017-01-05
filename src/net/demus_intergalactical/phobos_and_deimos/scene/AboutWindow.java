@@ -25,13 +25,13 @@ public class AboutWindow extends Stage {
 		listAuthorDescriptions = new HashMap<>();
 		listAuthorWeblinks = new HashMap<>();
 
-		listAuthorPictures.put("Demus", "demus.png");
-		listAuthorDescriptions.put("Demus", "sounds suspiciously like the name of the application....");
-		listAuthorWeblinks.put("Demus", "https://github.com/Nikman666/");
+		listAuthorPictures.put("GrumpyDemus", "demus.png");
+		listAuthorDescriptions.put("GrumpyDemus", "parts of the name sound suspiciously like the name of the application....");
+		listAuthorWeblinks.put("GrumpyDemus", "https://github.com/GrumpyDemus/");
 
-		listAuthorPictures.put("Dosenfrucht", "dosenfrucht.jpg");
-		listAuthorDescriptions.put("Dosenfrucht", "Olen pingviini. Pidän deathcore ja suomi \\m/");
-		listAuthorWeblinks.put("Dosenfrucht", "https://github.com/dosenfrucht");
+		listAuthorPictures.put("Karroffel", "karroffel.png");
+		listAuthorDescriptions.put("Karroffel", "I make stuff sometimes \\m/");
+		listAuthorWeblinks.put("Karroffel", "https://github.com/Karroffel");
 
 		listAuthorPictures.put("Japu", "japu.jpg");
 		listAuthorDescriptions.put("Japu", "a panda for all your panda needs");
@@ -46,7 +46,7 @@ public class AboutWindow extends Stage {
 	private ImageView imgViewProjectImg = new ImageView();
 	private Label lblProjectName = new Label("Phobos and Deimos");
 	private Label lblProjectDescription = new Label("This small application aims to help administrate and manage multiple minecraft servers, regardless of the version or type you are using.");
-	private Hyperlink lblProjectWeblink = new Hyperlink("https://github.com/Nikman666/Server-GUI");
+	private Hyperlink lblProjectWeblink = new Hyperlink("https://github.com/Karroffel/Phobos-and-Deimos");
 
 	private FlowPane fpContent = new FlowPane();
 	private GridPane gpAuthors = new GridPane();
