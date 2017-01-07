@@ -1,6 +1,9 @@
 Plugin API
 ==========
 
+*Note: check out the [wiki page](https://github.com/karroffel/Phobos-and-Deimos/wiki) for more detailed information*
+
+
 It is possible to use custom scripts to add functionality to the server manager.
 
 Possible uses:
@@ -44,43 +47,43 @@ Example
 -------
 
 main.js
+```js
+function init() {
+	api.util.require("math.js")
+	api.registerCommandListener("calc", commandListener)
+}
 
+function unload() {
+}
 
-    function init() {
-        api.util.require("math.js")
-        api.registerCommandListener("calc", commandListener)
-    }
-
-    function unload() {
-    }
-
-    function commandListener(time, player, args) {
-        api.command.send("say " + math.expr(args.join(" ")))
-        return false
-    }
-        
+function commandListener(time, player, args) {
+	api.command.send("say " + math.expr(args.join(" ")))
+	return false
+}
+```
 math.js
-
-	var math = {}
 	
-	// Thanks to Andy E on http://stackoverflow.com/questions/5066824/safe-evaluation-of-arithmetic-expressions-in-javascript
-	math.expr = function (exp) {
-		var reg = /(?:[a-z$_][a-z0-9$_]*)|(?:[;={}\[\]"'!&<>^\\?:])/ig
-		valid = true
-		
-		// Detect valid JS identifier names and replace them
-		exp = exp.replace(reg, function ($0) {
-			// If the name is a direct member of Math, allow
-			if (Math.hasOwnProperty($0))
-				return "Math."+$0
-			// Otherwise the expression is invalid
-			else
-				valid = false;
-		});
-		
-		// Don't eval if our replace function flagged as invalid
-		if (!valid)
-			return "Invalid arithmetic expression"
+```js
+var math = {}
+// Thanks to Andy E on http://stackoverflow.com/questions/5066824/safe-evaluation-of-arithmetic-expressions-in-javascript
+math.expr = function (exp) {
+	var reg = /(?:[a-z$_][a-z0-9$_]*)|(?:[;={}\[\]"'!&<>^\\?:])/ig
+	valid = true
+	
+	// Detect valid JS identifier names and replace them
+	exp = exp.replace(reg, function ($0) {
+		// If the name is a direct member of Math, allow
+		if (Math.hasOwnProperty($0))
+			return "Math."+$0
+		// Otherwise the expression is invalid
 		else
-			return eval(exp).toString()
-	}
+			valid = false;
+	});
+		
+	// Don't eval if our replace function flagged as invalid
+	if (!valid)
+		return "Invalid arithmetic expression"
+	else
+		return eval(exp).toString()
+}
+```
