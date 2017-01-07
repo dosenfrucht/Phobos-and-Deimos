@@ -1,6 +1,9 @@
 Plugin API
 ==========
 
+*Note: check out the [wiki page](https://github.com/karroffel/Phobos-and-Deimos/wiki) for more detailed information*
+
+
 It is possible to use custom scripts to add functionality to the server manager.
 
 Possible uses:
